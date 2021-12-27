@@ -1,7 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.SmarTT" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/silverchalice</item>
         <item name="colorOnPrimary">@color/remindiBlack</item>
@@ -10,14 +9,13 @@
         <item name="colorSurface">@color/white</item>
         <item name="colorOnSurface">@color/remindiBlack</item>
         <item name="android:windowBackground">@color/remindiBackgroundColor</item>
+        <item name="backgroundColor">@color/remindiBackgroundColor</item>
+        <item name="colorOnBackground">@color/remindiBlack</item>
         <item name="actionBarTheme">@style/RemindiActionBar</item>
-        <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/remindiBlack</item>
         <item name="colorSecondaryVariant">@color/black</item>
         <item name="colorOnSecondary">@color/white</item>
-        <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
         <item name="elevation">0dp</item>
         <item name="colorError">@color/red_orange</item>
     </style>
