@@ -3,7 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/tanay/AndroidStudioProjects/SmarTT/app/src/main/res/layout/activity_main.xml" value="0.16354166666666667" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/drawable-anydpi/FloatingButton_Weekday.xml" value="0.3828125" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/drawable-anydpi/floating_button_weekday.xml" value="0.3828125" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/drawable/Floating_Button_weekday_foreground.xml" value="0.3828125" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/drawable/add_weekday.xml" value="0.18518518518518517" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/drawable/curved_toolbar.xml" value="0.3828125" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/drawable/empty_rec_img_weekday.xml" value="0.3828125" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/drawable/floating_button_weekday.xml" value="0.3828125" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/drawable/ic_group_15.xml" value="0.1527777777777778" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/drawable/ic_group_64.xml" value="0.3828125" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/drawable/ripple_oval.xml" value="0.31296296296296294" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/drawable/weekday_add_floating.xml" value="0.3828125" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/AppDev/GDC/ASJ_2021/app/src/main/res/layout/activity_weekday.xml" value="0.33" />
       </map>
     </option>
   </component>

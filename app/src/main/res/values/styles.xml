@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Monday" parent="android:Widget.Toolbar">
+        <item name="backgroundTint">@color/monday</item>
+    </style>
+    <style name="Tuesday">
+        <item name="background">@color/tuesday</item>
+    </style>
+    <style name="Wednesday">
+        <item name="background">@color/wednesday</item>
+    </style>
+    <style name="Thursday">
+        <item name="background">@color/thursday</item>
+    </style>
+    <style name="Friday">
+        <item name="background">@color/friday</item>
+    </style>
+    <style name="Saturday">
+        <item name="background">@color/saturday</item>
+    </style>
+
+
+</resources>
