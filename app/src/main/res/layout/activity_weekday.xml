@@ -15,7 +15,6 @@
         android:background="@drawable/curved_toolbar"
         android:backgroundTint="@color/saturday"
         android:padding="0dp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -33,7 +32,7 @@
                 android:paddingLeft="0dp"
                 android:text="Monday"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/DayLecture"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -47,7 +46,7 @@
                 android:layout_marginBottom="20dp"
                 android:text="0 Lectures"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -62,22 +61,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <Button
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Yo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        android:backgroundTint="@color/purple_200"
-        />
     <!--WeekDay Screen Empty image view-->
     <ImageView
         android:id="@+id/imageView"

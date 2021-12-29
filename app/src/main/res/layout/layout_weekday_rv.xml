@@ -11,10 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="15dp"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:paddingHorizontal="5dp"
         android:paddingVertical="10dp"
-        android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="10dp">
 
@@ -22,34 +22,33 @@
             android:id="@+id/clockImg"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_weight="0.5"
             android:layout_gravity="center"
+            android:layout_weight="0.5"
             android:src="@drawable/ic_baseline_access_time_24" />
 
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="10dp"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
             android:layout_weight="1"
             android:gravity="left|center"
-            android:textColor="@color/black"
             android:text="10:00 - 12:30"
-            android:textSize="17sp"
-            />
+            android:textColor="@color/black"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/Subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:maxWidth="70dp"
-            android:minWidth="65dp"
+            android:layout_gravity="center"
             android:layout_weight="2"
             android:gravity="center|right"
-            android:layout_gravity="center"
+            android:maxWidth="70dp"
+            android:minWidth="65dp"
             android:text="Biology"
+            android:textColor="@color/black"
             android:textSize="21sp" />
     </LinearLayout>
 

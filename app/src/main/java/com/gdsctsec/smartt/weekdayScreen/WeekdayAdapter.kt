@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
 import javax.security.auth.Subject
 
-class WeekdayAdapter(val time : List<String>, val subjects: List<String>) : RecyclerView.Adapter<WeekdayAdapter.WeekdayViewHolder>(){
-
+class WeekdayAdapter(val time: List<String>, val subjects: List<String>) :
+    RecyclerView.Adapter<WeekdayAdapter.WeekdayViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeekdayViewHolder {
-        return WeekdayViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_weekday_rv, parent , false))
+        return WeekdayViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.layout_weekday_rv, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: WeekdayViewHolder, position: Int) {
@@ -24,10 +26,10 @@ class WeekdayAdapter(val time : List<String>, val subjects: List<String>) : Recy
     override fun getItemCount() = time.size
 
 
-    class WeekdayViewHolder(val view: View) : RecyclerView.ViewHolder(view){
+    class WeekdayViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-        val timeLec : TextView = view.findViewById(R.id.time)
-        val subject : TextView = view.findViewById(R.id.Subject)
+        val timeLec: TextView = view.findViewById(R.id.time)
+        val subject: TextView = view.findViewById(R.id.Subject)
 
     }
 
