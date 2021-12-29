@@ -5,7 +5,12 @@
       <map>
         <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/drawable/bottom_nav_bg.xml" value="0.18796296296296297" />
         <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/drawable/bottom_nav_icon.xml" value="0.18796296296296297" />
+        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.18425925925925926" />
+        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.18425925925925926" />
         <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/fragment_home_screen.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/fragment_t_t_scheduling_screen.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/menu/bottom_nav_menu.xml" value="0.14166666666666666" />
       </map>
     </option>
   </component>

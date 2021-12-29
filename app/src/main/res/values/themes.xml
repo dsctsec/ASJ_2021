@@ -3,16 +3,16 @@
     <style name="Theme.SmarTT" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/silverchalice</item>
-        <item name="colorOnPrimary">@color/remindiBlack</item>
-        <item name="android:textColorPrimary">@color/remindiBlack</item>
-        <item name="android:textColor">@color/remindiBlack</item>
+        <item name="colorOnPrimary">@color/remindi_black</item>
+        <item name="android:textColorPrimary">@color/remindi_black</item>
+        <item name="android:textColor">@color/remindi_black</item>
         <item name="colorSurface">@color/white</item>
-        <item name="colorOnSurface">@color/remindiBlack</item>
-        <item name="android:windowBackground">@color/remindiBackgroundColor</item>
-        <item name="backgroundColor">@color/remindiBackgroundColor</item>
-        <item name="colorOnBackground">@color/remindiBlack</item>
+        <item name="colorOnSurface">@color/remindi_black</item>
+        <item name="android:windowBackground">@color/remindi_background_color</item>
+        <item name="backgroundColor">@color/remindi_background_color</item>
+        <item name="colorOnBackground">@color/remindi_black</item>
         <item name="actionBarTheme">@style/RemindiActionBar</item>
-        <item name="colorSecondary">@color/remindiBlack</item>
+        <item name="colorSecondary">@color/remindi_black</item>
         <item name="colorSecondaryVariant">@color/black</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
@@ -22,7 +22,7 @@
 
     <style name="RemindiActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/white</item>
-        <item name="android:textColorPrimary">@color/remindiBlack</item>
+        <item name="android:textColorPrimary">@color/remindi_black</item>
         <item name="elevation">0dp</item>
     </style>
 </resources>
