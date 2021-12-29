@@ -1,10 +1,10 @@
-package com.gdsctsec.smartt.ui.adapters
+package com.gdsctsec.smartt.ui.main.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.gdsctsec.smartt.HomeScreen
-import com.gdsctsec.smartt.ui.MainActivity
-import com.gdsctsec.smartt.TTSchedulingScreen
+import com.gdsctsec.smartt.ui.main.HomeScreenFragment
+import com.gdsctsec.smartt.ui.main.MainActivity
+import com.gdsctsec.smartt.ui.main.TTSchedulingScreenFragment
 
 class ViewPagerAdapter(activity: MainActivity) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {
@@ -13,9 +13,9 @@ class ViewPagerAdapter(activity: MainActivity) : FragmentStateAdapter(activity) 
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> HomeScreen()
-            1 -> TTSchedulingScreen()
-            else -> HomeScreen()
+            0 -> HomeScreenFragment()
+            1 -> TTSchedulingScreenFragment()
+            else -> HomeScreenFragment()
         }
     }
 
