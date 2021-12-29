@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmarTT">
-        <activity android:name=".weekdayScreen.WeekdayActivity"></activity>
+        <activity android:name=".weekdayScreen.WeekdayActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            ></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -19,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
