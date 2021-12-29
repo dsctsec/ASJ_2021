@@ -1,17 +1,12 @@
-package com.gdsctsec.smartt
+package com.gdsctsec.smartt.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import androidx.core.view.MenuProvider
 import androidx.core.view.get
-import androidx.fragment.app.Fragment
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.gdsctsec.smartt.Adapters.ViewPagerAdapter
+import com.gdsctsec.smartt.R
+import com.gdsctsec.smartt.ui.adapters.ViewPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity(){
 
@@ -28,7 +23,7 @@ class MainActivity : AppCompatActivity(){
         bottomNavigationView.menu.get(1).isEnabled=false;
 
         //setting up the viewPager for bottom nav
-        viewPager=findViewById(R.id.viewpager)
+        viewPager=findViewById(R.id.view_pager)
         val adapter=ViewPagerAdapter(this)
         viewPager.adapter=adapter
 
@@ -39,11 +34,11 @@ class MainActivity : AppCompatActivity(){
 
     bottomNavigationView.setOnItemSelectedListener {
         when(it.itemId){
-                R.id.home_button-> {
+                R.id.home_button -> {
                     viewPager.currentItem=0
                     true
                 }
-            R.id.calender_button->{
+            R.id.calender_button ->{
                 viewPager.currentItem=1
                 true
             }
