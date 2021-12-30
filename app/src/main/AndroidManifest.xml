@@ -13,10 +13,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-
-            <activity
-                android:name=".AddLectureActivity"
-                android:exported="true"/>
                 <activity
                     android:name=".EditScreenActivity"
                     android:exported="true">
