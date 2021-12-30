@@ -96,6 +96,8 @@ class EditScreenActivity : AppCompatActivity() {
    private fun onTimeSet( hourOfDay: Int, minute: Int) : String {
         // Set a variable to hold the current time AM PM Status
         // Initially we set the variable value to AM
+
+
         var status = "am"
         if (hourOfDay > 11) {
             // If the hour is greater than or equal to 12
@@ -117,8 +119,15 @@ class EditScreenActivity : AppCompatActivity() {
         // Get the calling activity TextView reference
 
         // Display the 12 hour format time in app interface
-        val time = "$hour_of_12_hour_format:$minute $status"
-        return time
+       if(minute >= 1 && minute <= 9){
+           val time = "$hour_of_12_hour_format:0$minute $status"
+           return time
+       }
+       else{
+           val time = "$hour_of_12_hour_format:$minute $status"
+           return time
+       }
+
     }
 
 
