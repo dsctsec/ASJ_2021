@@ -3,12 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Hriday/Desktop/ASJ_2021/app/src/main/res/drawable/dotted_border.xml" value="0.26205128205128203" />
         <entry key="..\:/Users/Hriday/Desktop/ASJ_2021/app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Hriday/Desktop/ASJ_2021/app/src/main/res/drawable/ic_baseline_event_note_24.xml" value="0.1" />
         <entry key="..\:/Users/Hriday/Desktop/ASJ_2021/app/src/main/res/layout/activity_main.xml" value="0.24351851851851852" />
         <entry key="..\:/Users/Hriday/Desktop/ASJ_2021/app/src/main/res/layout/fragment_home_screen.xml" value="0.22685185185185186" />
         <entry key="..\:/Users/Hriday/Desktop/ASJ_2021/app/src/main/res/layout/fragment_t_t_scheduling_screen.xml" value="0.25" />
-        <entry key="..\:/Users/Hriday/Desktop/ASJ_2021/app/src/main/res/layout/home_fragment_list_item.xml" value="0.25" />
+        <entry key="..\:/Users/Hriday/Desktop/ASJ_2021/app/src/main/res/layout/home_fragment_list_item.xml" value="0.2" />
         <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/drawable/bottom_nav_bg.xml" value="0.18796296296296297" />
         <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/drawable/bottom_nav_icon.xml" value="0.18796296296296297" />
         <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.18425925925925926" />
