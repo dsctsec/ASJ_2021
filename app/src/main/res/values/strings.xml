@@ -2,4 +2,12 @@
     <string name="app_name">SmarTT</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="remindi">Remindi</string>
+    <string name="monday">Monday</string>
+    <string name="lectures_scheduled">5 lectures</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
 </resources>

@@ -1,15 +1,383 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".TTSchedulingScreen">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="TT Scheduling Screen"
-        android:gravity="center"/>
+        android:paddingBottom="60dp"
+        >
 
-</FrameLayout>
+
+        <!-- TODO: Update blank fragment layout -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/remindi_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/remindi"
+            android:textSize="20sp" />
+
+        <com.google.android.material.card.MaterialCardView
+       android:id="@+id/monday_card_view"
+       android:layout_width="184dp"
+       android:layout_height="231dp"
+       android:layout_marginTop="79dp"
+       android:layout_marginLeft="15dp"
+       android:backgroundTint="@color/remindi_monday_card"
+       app:cardCornerRadius="10dp"
+       >
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="202dp">
+
+           <com.google.android.material.textview.MaterialTextView
+               android:id="@+id/monday_title"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerHorizontal="true"
+               android:layout_marginTop="49dp"
+               android:fontFamily="@font/poppins_semibold"
+               android:text="@string/monday"
+               android:textColor="@color/white"
+               android:textSize="20sp" />
+
+
+           <com.google.android.material.card.MaterialCardView
+               android:layout_width="43dp"
+               android:layout_height="37dp"
+               android:layout_alignParentEnd="true"
+               android:backgroundTint="@color/remindi_add_icon_card">
+
+               <com.google.android.material.imageview.ShapeableImageView
+                   android:id="@+id/add_icon"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:src="@drawable/ic_baseline_add_24" />
+
+
+           </com.google.android.material.card.MaterialCardView>
+
+           <com.google.android.material.textview.MaterialTextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/monday_title"
+               android:layout_centerHorizontal="true"
+               android:layout_marginTop="40dp"
+               android:fontFamily="@font/poppins"
+               android:text="@string/lectures_scheduled"
+               android:textColor="@color/white" />
+
+
+       </RelativeLayout>
+   </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+       android:id="@+id/tuesday_card_view"
+       android:layout_width="184dp"
+       android:layout_height="231dp"
+       android:layout_marginTop="79dp"
+        android:layout_marginStart="15dp"
+        android:layout_toRightOf="@id/monday_card_view"
+       android:backgroundTint="@color/remindi_tuesday_card"
+       app:cardCornerRadius="10dp"
+       >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tuesday_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="49dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/tuesday"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="43dp"
+                android:layout_height="37dp"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="@color/remindi_add_icon_card">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/add_icon_tuesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_add_24" />
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tuesday_title"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/lectures_scheduled"
+                android:textColor="@color/white" />
+
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/wednesday_card_view"
+            android:layout_width="184dp"
+            android:layout_height="231dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_below="@id/monday_card_view"
+            android:backgroundTint="@color/remindi_wednesday_card"
+            app:cardCornerRadius="10dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/wednesday_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="49dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/wednesday"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="43dp"
+                    android:layout_height="37dp"
+                    android:layout_alignParentEnd="true"
+                    android:backgroundTint="@color/remindi_add_icon_card"
+                    >
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/add_icon_wednesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_add_24"
+                        android:layout_gravity="center"
+                        />
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/wednesday_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/lectures_scheduled"
+                    android:textColor="@color/white"
+                    />
+
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/thursday_card_view"
+            android:layout_width="184dp"
+            android:layout_height="231dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_below="@id/monday_card_view"
+            android:layout_toRightOf="@id/wednesday_card_view"
+            android:backgroundTint="@color/remindi_thursday_card"
+            app:cardCornerRadius="10dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/thursday_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="49dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/thursday"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="43dp"
+                    android:layout_height="37dp"
+                    android:layout_alignParentEnd="true"
+                    android:backgroundTint="@color/remindi_add_icon_card"
+                    >
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/add_icon_thursday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_add_24"
+                        android:layout_gravity="center"
+                        />
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/thursday_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/lectures_scheduled"
+                    android:textColor="@color/white"
+                    />
+
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/friday_card_view"
+            android:layout_width="184dp"
+            android:layout_height="231dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_below="@id/wednesday_card_view"
+            android:backgroundTint="@color/remindi_friday_card"
+            app:cardCornerRadius="10dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/friday_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="49dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/friday"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="43dp"
+                    android:layout_height="37dp"
+                    android:layout_alignParentEnd="true"
+                    android:backgroundTint="@color/remindi_add_icon_card">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/add_icon_friday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_baseline_add_24" />
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/friday_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/lectures_scheduled"
+                    android:textColor="@color/white" />
+
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/saturday_card_view"
+            android:layout_width="184dp"
+            android:layout_height="231dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_below="@id/wednesday_card_view"
+            android:layout_toRightOf="@id/friday_card_view"
+            android:backgroundTint="@color/remindi_saturday_card"
+            app:cardCornerRadius="10dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/saturday_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="49dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/saturday"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="43dp"
+                    android:layout_height="37dp"
+                    android:layout_alignParentEnd="true"
+                    android:backgroundTint="@color/remindi_add_icon_card"
+                    >
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/add_icon_saturday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_add_24"
+                        android:layout_gravity="center"
+                        />
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/saturday_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/lectures_scheduled"
+                    android:textColor="@color/white"
+                    />
+
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
+
+
+
+
+
+
+</ScrollView>

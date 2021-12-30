@@ -13,5 +13,13 @@
     <color name="silverchalice">#FFB0B0B0</color>
     <color name="red_orange">#FF2424</color>
     <color name="remindi_disbaled_icon">#8E8888</color>
+    <color name="remindi_monday_card">#4BB1F8</color>
+    <color name="remindi_tuesday_card">#53DB89</color>
+    <color name="remindi_wednesday_card">#F98A4B</color>
+    <color name="remindi_thursday_card">#FF5E5E</color>
+    <color name="remindi_friday_card">#838FA4</color>
+    <color name="remindi_saturday_card">#634BFA</color>
+    <color name="remindi_add_icon_card">#6EFFFFFF</color>
+    <color name="remindi_icon_i">#00E7D9</color>
 </resources>
 
