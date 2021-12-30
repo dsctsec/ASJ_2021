@@ -10,12 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmarTT">
 
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+
                 <activity
                     android:name=".EditScreenActivity"
-                    android:exported="true">
+                    android:exported="true"/>
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
