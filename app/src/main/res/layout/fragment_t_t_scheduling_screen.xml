@@ -3,8 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".TTSchedulingScreen">
+=======
+    tools:context=".ui.main.TTSchedulingScreenFragment">
+>>>>>>> 96f382ddc8fc2fdf170a678b5d3ed3987eea877d
 
     <RelativeLayout
         android:layout_width="match_parent"

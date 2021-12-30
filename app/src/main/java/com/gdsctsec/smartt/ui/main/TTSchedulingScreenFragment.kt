@@ -1,4 +1,5 @@
-package com.gdsctsec.smartt
+package com.gdsctsec.smartt.ui.main
+
 
 import android.graphics.Color
 import android.os.Build
@@ -11,11 +12,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+<<<<<<< HEAD:app/src/main/java/com/gdsctsec/smartt/TTSchedulingScreen.kt
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+=======
+import com.gdsctsec.smartt.R
+>>>>>>> 96f382ddc8fc2fdf170a678b5d3ed3987eea877d:app/src/main/java/com/gdsctsec/smartt/ui/main/TTSchedulingScreenFragment.kt
 
 
-class TTSchedulingScreen : Fragment() {
+class TTSchedulingScreenFragment : Fragment() {
     // TODO: Rename and change types of parameters
 
 
