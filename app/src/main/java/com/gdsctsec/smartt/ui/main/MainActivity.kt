@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
-import com.gdsctsec.smartt.EditScreenActivity
+import com.gdsctsec.smartt.ui.edit.EditScreenActivity
 import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.ui.main.adapter.ViewPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         fab_gotoeditscreen.setOnClickListener{
-            startActivity(Intent(applicationContext,EditScreenActivity::class.java))
+            startActivity(Intent(applicationContext, EditScreenActivity::class.java))
         }
 
         supportActionBar?.hide()

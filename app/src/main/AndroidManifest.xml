@@ -12,7 +12,7 @@
 
 
                 <activity
-                    android:name=".EditScreenActivity"
+                    android:name=".ui.edit.EditScreenActivity"
                     android:exported="true"/>
         <activity
             android:name=".ui.main.MainActivity"

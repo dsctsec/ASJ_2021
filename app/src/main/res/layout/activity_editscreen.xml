@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundcolor"
-    tools:context=".EditScreenActivity">
+    tools:context=".ui.edit.EditScreenActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rectangle_7"
@@ -26,6 +26,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
             android:background="@null"
+            android:text = "@null"
             android:fontFamily="@font/poppins_light"
             android:hint="Add Lecture"
             android:minHeight="48dp"
@@ -98,9 +99,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="80dp"
-
+            android:hint="10:00 am"
             android:fontFamily="@font/poppins_light"
-            android:text="10:30 am"
             android:textColor="@color/Textcolor"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView6"
@@ -118,7 +118,8 @@
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/poppins_light"
-            android:text="1:00 pm"
+
+            android:hint="12:00 am"
             android:textColor="@color/Textcolor"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -188,7 +189,7 @@
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_light"
-                android:text="Monday"
+                android:text="Select day"
                 android:textColor="@color/Textcolor"
                 android:textSize="18sp"
                 tools:ignore="TouchTargetSizeCheck" />
@@ -205,7 +206,7 @@
         android:fontFamily="@font/poppins_light"
         android:text="Cancel"
         android:textColor="@color/Cancelsavecolor"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textView_save"
         app:layout_constraintEnd_toStartOf="@+id/textView_save"
@@ -219,11 +220,12 @@
         android:id="@+id/textView_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="30dp"
+        android:enabled="false"
         android:fontFamily="@font/poppins_light"
         android:text="Save"
-        android:textColor="@color/Cancelsavecolor"
-        android:textSize="16sp"
+        android:textColor="#5D1BAACA"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
