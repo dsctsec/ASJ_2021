@@ -1,4 +1,4 @@
-package com.gdsctsec.smartt.ui.main.weekday.adapter
+package com.gdsctsec.smartt.ui.weekday.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -18,8 +18,8 @@ class WeekdayAdapter(val timeList: List<String>, val subjectList: List<String>) 
     }
 
     override fun onBindViewHolder(holder: WeekdayViewHolder, position: Int) {
-        holder.timeLecHolder.text = timeList[position]
-        holder.subjectHolder.text = subjectList[position]
+        holder.timeLecTextView.text = timeList[position]
+        holder.subjectTextView.text = subjectList[position]
     }
 
     override fun getItemCount() = timeList.size
@@ -27,8 +27,8 @@ class WeekdayAdapter(val timeList: List<String>, val subjectList: List<String>) 
 
     class WeekdayViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-        val timeLecHolder: TextView = view.findViewById(R.id.time)
-        val subjectHolder: TextView = view.findViewById(R.id.subject)
+        val timeLecTextView: TextView = view.findViewById(R.id.time)
+        val subjectTextView: TextView = view.findViewById(R.id.subject)
 
     }
 

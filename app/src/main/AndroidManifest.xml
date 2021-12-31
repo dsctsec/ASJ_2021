@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmarTT">
         <activity
-            android:name="com.gdsctsec.smartt.ui.main.weekday.WeekdayActivity"
+            android:name="com.gdsctsec.smartt.ui.weekday.WeekdayActivity"
             android:exported="true"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity

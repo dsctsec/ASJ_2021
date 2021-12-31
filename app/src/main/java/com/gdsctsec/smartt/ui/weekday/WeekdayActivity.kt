@@ -1,4 +1,4 @@
-package com.gdsctsec.smartt.ui.main.weekday
+package com.gdsctsec.smartt.ui.weekday
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
-import com.gdsctsec.smartt.ui.main.weekday.adapter.WeekdayAdapter
+import com.gdsctsec.smartt.ui.weekday.adapter.WeekdayAdapter
 import com.gdsctsec.smartt.viewmode.WeekdayActivityViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -23,7 +23,7 @@ class WeekdayActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weekday)
 
-        val imageViewWhenEmpty: ImageView = findViewById(R.id.empty_list_image_view)
+        val imageViewCalendarImageWhenEmpty: ImageView = findViewById(R.id.empty_list_image_view)
         val lecturesRecyclerView: RecyclerView = findViewById(R.id.lecture_recycler_view)
         val lecNumberCountTextView: TextView = findViewById(R.id.lecture_number_text_view)
         val addNewLectureEventFloatingActionButton: FloatingActionButton = findViewById(R.id.lecture_add_floating_action_button)
@@ -44,8 +44,8 @@ class WeekdayActivity : AppCompatActivity() {
         lecNumberCountTextView.text = timeListRecyclerView.size.toString() + " Lectures"
 
         //Image visibility
-        if (timeListRecyclerView.isNotEmpty()) imageViewWhenEmpty.visibility =
-            View.GONE else imageViewWhenEmpty.visibility =
+        if (timeListRecyclerView.isNotEmpty()) imageViewCalendarImageWhenEmpty.visibility =
+            View.GONE else imageViewCalendarImageWhenEmpty.visibility =
             View.GONE
 
         //ViewModel
