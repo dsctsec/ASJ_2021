@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
@@ -19,7 +19,7 @@
         tools:layout_editor_absoluteX="10dp">
 
         <ImageView
-            android:id="@+id/clockImg"
+            android:id="@+id/clock_img"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
@@ -39,7 +39,7 @@
             android:textSize="17sp" />
 
         <TextView
-            android:id="@+id/Subject"
+            android:id="@+id/subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

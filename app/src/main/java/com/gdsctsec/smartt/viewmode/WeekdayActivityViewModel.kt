@@ -1,6 +1,5 @@
-package com.gdsctsec.smartt.weekdayScreen
+package com.gdsctsec.smartt.viewmode
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 
 class WeekdayActivityViewModel : ViewModel() {

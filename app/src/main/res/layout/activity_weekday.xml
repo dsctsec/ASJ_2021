@@ -4,28 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f6fafb"
-    tools:context=".weekdayScreen.WeekdayActivity">
+    android:background="@color/weekday_background_white_color"
+    tools:context=".ui.main.weekday.WeekdayActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/weekday_activity_toolbar_top_card_view"
         android:layout_width="match_parent"
         android:layout_height="125dp"
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/curved_toolbar"
-        android:backgroundTint="@color/saturday"
+        android:backgroundTint="@color/color_monday"
         android:padding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <!--WeekDay Screen Top Toolbar-->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/textfields"
+            android:id="@+id/toolbar_constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/DayTextView"
+                android:id="@+id/day_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -34,12 +34,12 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/DayLecture"
+                app:layout_constraintEnd_toStartOf="@+id/lecture_number_text_view"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/DayLecture"
+                android:id="@+id/lecture_number_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
@@ -53,9 +53,8 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.Toolbar>
-    <!--WeekDay Screen Recycler View-->
 
-    <!--Test Button-->
+    <!--WeekDay Screen Recycler View-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -64,23 +63,23 @@
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/weekday_activity_toolbar_top_card_view" />
 
     <!--WeekDay Screen Empty image view-->
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/empty_list_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_group_64"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="@+id/weekday_activity_toolbar_top_card_view" />
 
     <!--WeekDay Screen Floating Action Button-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/AddLec"
+        android:id="@+id/lecture_add_floating_action_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
