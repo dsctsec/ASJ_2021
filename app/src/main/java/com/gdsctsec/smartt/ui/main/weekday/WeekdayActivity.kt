@@ -23,10 +23,10 @@ class WeekdayActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weekday)
 
-        val imageView: ImageView = findViewById(R.id.empty_list_image_view)
+        val imageViewWhenEmpty: ImageView = findViewById(R.id.empty_list_image_view)
         val lecturesRecyclerView: RecyclerView = findViewById(R.id.lecture_recycler_view)
-        val lecNumber: TextView = findViewById(R.id.lecture_number_text_view)
-        val timeList: FloatingActionButton = findViewById(R.id.lecture_add_floating_action_button)
+        val lecNumberCountTextView: TextView = findViewById(R.id.lecture_number_text_view)
+        val addNewLectureEventFloatingActionButton: FloatingActionButton = findViewById(R.id.lecture_add_floating_action_button)
 
         //recycler View Adapter
         val timeListRecyclerView: List<String> = listOf(
@@ -41,11 +41,11 @@ class WeekdayActivity : AppCompatActivity() {
         lecturesRecyclerView.adapter = WeekdayAdapter(timeListRecyclerView, subjectListRecyclerView)
         lecturesRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        lecNumber.text = timeListRecyclerView.size.toString() + " Lectures"
+        lecNumberCountTextView.text = timeListRecyclerView.size.toString() + " Lectures"
 
         //Image visibility
-        if (timeListRecyclerView.isNotEmpty()) imageView.visibility =
-            View.GONE else imageView.visibility =
+        if (timeListRecyclerView.isNotEmpty()) imageViewWhenEmpty.visibility =
+            View.GONE else imageViewWhenEmpty.visibility =
             View.GONE
 
         //ViewModel
@@ -53,16 +53,16 @@ class WeekdayActivity : AppCompatActivity() {
 
 
         //Floating Button OnClick
-        timeList.setOnClickListener(View.OnClickListener {
+        addNewLectureEventFloatingActionButton.setOnClickListener(View.OnClickListener {
             //Code to add a lec
         })
     }
 
     fun dayColor(day: Int) {
-        val dayColor: Toolbar = findViewById(R.id.weekday_activity_toolbar_top_card_view)
+        val dayColorChangingToolbar: Toolbar = findViewById(R.id.weekday_activity_toolbar_top_card_view)
         val dayTextView: TextView = findViewById(R.id.day_text_view)
 
-        val backgroundTintAwareDrawable = DrawableCompat.wrap(dayColor.background)
+        val backgroundTintAwareDrawable = DrawableCompat.wrap(dayColorChangingToolbar.background)
 
         when (day) {
             1 -> {
