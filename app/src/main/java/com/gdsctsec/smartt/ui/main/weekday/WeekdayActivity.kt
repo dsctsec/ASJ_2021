@@ -24,9 +24,9 @@ class WeekdayActivity : AppCompatActivity() {
         setContentView(R.layout.activity_weekday)
 
         val imageView: ImageView = findViewById(R.id.empty_list_image_view)
-        val lecturesRecyclerView : RecyclerView = findViewById(R.id.recyclerView)
+        val lecturesRecyclerView: RecyclerView = findViewById(R.id.lecture_recycler_view)
         val lecNumber: TextView = findViewById(R.id.lecture_number_text_view)
-        var timeList: FloatingActionButton = findViewById(R.id.lecture_add_floating_action_button)
+        val timeList: FloatingActionButton = findViewById(R.id.lecture_add_floating_action_button)
 
         //recycler View Adapter
         val timeListRecyclerView: List<String> = listOf(
@@ -36,14 +36,16 @@ class WeekdayActivity : AppCompatActivity() {
             "16:00 - 18:00",
             "08:00 - 10:00"
         )
-        val subjectListRecyclerView: List<String> = listOf("Biology", "Math", "Java", "Science", "Python")
-        lecturesRecyclerView .adapter = WeekdayAdapter(timeListRecyclerView, subjectListRecyclerView)
-        lecturesRecyclerView .layoutManager = LinearLayoutManager(this)
+        val subjectListRecyclerView: List<String> =
+            listOf("Biology", "Math", "Java", "Science", "Python")
+        lecturesRecyclerView.adapter = WeekdayAdapter(timeListRecyclerView, subjectListRecyclerView)
+        lecturesRecyclerView.layoutManager = LinearLayoutManager(this)
 
         lecNumber.text = timeListRecyclerView.size.toString() + " Lectures"
 
         //Image visibility
-        if (timeListRecyclerView.isNotEmpty()) imageView.visibility = View.GONE else imageView.visibility =
+        if (timeListRecyclerView.isNotEmpty()) imageView.visibility =
+            View.GONE else imageView.visibility =
             View.GONE
 
         //ViewModel
@@ -64,31 +66,49 @@ class WeekdayActivity : AppCompatActivity() {
 
         when (day) {
             1 -> {
-                DrawableCompat.setTint(backgroundTintAwareDrawable, ContextCompat.getColor(this, R.color.color_monday))
+                DrawableCompat.setTint(
+                    backgroundTintAwareDrawable,
+                    ContextCompat.getColor(this, R.color.color_monday)
+                )
                 dayTextView.text = "Monday"
             }
-            2->{
-                DrawableCompat.setTint(backgroundTintAwareDrawable, ContextCompat.getColor(this, R.color.color_tuesday))
+            2 -> {
+                DrawableCompat.setTint(
+                    backgroundTintAwareDrawable,
+                    ContextCompat.getColor(this, R.color.color_tuesday)
+                )
                 dayTextView.text = "Tuesday"
             }
-            3->{
-                DrawableCompat.setTint(backgroundTintAwareDrawable, ContextCompat.getColor(this, R.color.color_wednesday))
+            3 -> {
+                DrawableCompat.setTint(
+                    backgroundTintAwareDrawable,
+                    ContextCompat.getColor(this, R.color.color_wednesday)
+                )
                 dayTextView.text = "Wednesday"
             }
-            4->{
-                DrawableCompat.setTint(backgroundTintAwareDrawable, ContextCompat.getColor(this, R.color.color_thursday))
+            4 -> {
+                DrawableCompat.setTint(
+                    backgroundTintAwareDrawable,
+                    ContextCompat.getColor(this, R.color.color_thursday)
+                )
                 dayTextView.text = "Thursday"
             }
-            5->{
-                DrawableCompat.setTint(backgroundTintAwareDrawable, ContextCompat.getColor(this, R.color.color_friday))
+            5 -> {
+                DrawableCompat.setTint(
+                    backgroundTintAwareDrawable,
+                    ContextCompat.getColor(this, R.color.color_friday)
+                )
                 dayTextView.text = "Friday"
             }
-            6->{
-                DrawableCompat.setTint(backgroundTintAwareDrawable, ContextCompat.getColor(this, R.color.color_saturday))
+            6 -> {
+                DrawableCompat.setTint(
+                    backgroundTintAwareDrawable,
+                    ContextCompat.getColor(this, R.color.color_saturday)
+                )
                 dayTextView.text = "Saturday"
             }
-            else ->{
-                    Log.d("WeekdayActivity error","unforeseen error occurred in when(x)")
+            else -> {
+                Log.d("WeekdayActivity error", "unforeseen error occurred in when(x)")
             }
         }
     }

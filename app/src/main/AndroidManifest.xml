@@ -11,9 +11,8 @@
         android:theme="@style/Theme.SmarTT">
         <activity
             android:name="com.gdsctsec.smartt.ui.main.weekday.WeekdayActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-            android:exported="true">
-        </activity>
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">

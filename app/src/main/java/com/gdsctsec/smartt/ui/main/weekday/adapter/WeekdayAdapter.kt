@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
 
-class WeekdayAdapter(val time: List<String>, val subjects: List<String>) :
+class WeekdayAdapter(val timeList: List<String>, val subjectList: List<String>) :
     RecyclerView.Adapter<WeekdayAdapter.WeekdayViewHolder>() {
 
 
@@ -18,17 +18,17 @@ class WeekdayAdapter(val time: List<String>, val subjects: List<String>) :
     }
 
     override fun onBindViewHolder(holder: WeekdayViewHolder, position: Int) {
-        holder.timeLec.text = time[position]
-        holder.subject.text = subjects[position]
+        holder.timeLecHolder.text = timeList[position]
+        holder.subjectHolder.text = subjectList[position]
     }
 
-    override fun getItemCount() = time.size
+    override fun getItemCount() = timeList.size
 
 
     class WeekdayViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-        val timeLec: TextView = view.findViewById(R.id.time)
-        val subject: TextView = view.findViewById(R.id.subject)
+        val timeLecHolder: TextView = view.findViewById(R.id.time)
+        val subjectHolder: TextView = view.findViewById(R.id.subject)
 
     }
 
