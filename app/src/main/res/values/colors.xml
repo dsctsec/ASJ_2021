@@ -7,11 +7,17 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="color_monday">#4BB1F8</color>
+    <color name="color_tuesday">#53DB89</color>
+    <color name="color_wednesday">#f98a4b</color>
+    <color name="color_thursday">#FF5E5E</color>
+    <color name="color_friday">#838FA4</color>
+    <color name="color_saturday">#634BFA</color>
     <color name="remindi_background_color">#FFF6FAFB</color>
     <color name="remindi_black">#FF3E3E3E</color>
     <color name="whitesmoke">#FFF5F5F5</color>
     <color name="silverchalice">#FFB0B0B0</color>
     <color name="red_orange">#FF2424</color>
     <color name="remindi_disbaled_icon">#8E8888</color>
+    <color name="weekday_background_white_color">#f6fafb</color>
 </resources>
-
