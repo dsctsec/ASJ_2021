@@ -29,22 +29,22 @@ class WeekdayActivity : AppCompatActivity() {
         val addNewLectureEventFloatingActionButton: FloatingActionButton = findViewById(R.id.lecture_add_floating_action_button)
 
         //recycler View Adapter
-        val timeListRecyclerView: List<String> = listOf(
+        val timeList: List<String> = listOf(
             "10:00 - 12:00",
             "12:00 - 14:00",
             "14:00 - 16:00",
             "16:00 - 18:00",
             "08:00 - 10:00"
         )
-        val subjectListRecyclerView: List<String> =
+        val subjectList: List<String> =
             listOf("Biology", "Math", "Java", "Science", "Python")
-        lecturesRecyclerView.adapter = WeekdayAdapter(timeListRecyclerView, subjectListRecyclerView)
+        lecturesRecyclerView.adapter = WeekdayAdapter(timeList, subjectList)
         lecturesRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        lecNumberCountTextView.text = timeListRecyclerView.size.toString() + " Lectures"
+        lecNumberCountTextView.text = timeList.size.toString() + " Lectures"
 
         //Image visibility
-        if (timeListRecyclerView.isNotEmpty()) imageViewCalendarImageWhenEmpty.visibility =
+        if (timeList.isNotEmpty()) imageViewCalendarImageWhenEmpty.visibility =
             View.GONE else imageViewCalendarImageWhenEmpty.visibility =
             View.GONE
 
