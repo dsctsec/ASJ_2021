@@ -80,7 +80,7 @@ class EditScreenActivity : AppCompatActivity() {
 
 
         cancelTextView.setOnClickListener {
-
+           finish()
         }
     }
 
