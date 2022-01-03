@@ -14,6 +14,14 @@ import android.widget.*
 import com.gdsctsec.smartt.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import android.content.Intent
+
+import android.app.Activity
+
+import android.R.attr.name
+
+
+
 
 
 class EditScreenActivity : AppCompatActivity() {
@@ -155,8 +163,6 @@ class EditScreenActivity : AppCompatActivity() {
             var endtime : String? = binding.textviewEndtime.text.toString()
             if (lecture != "" && day != "Select day" && starttime != "" && endtime != "") {
                 ViewEnabled(binding.textViewSave)
-
-
             }
             else{
                 ViewDisabled(binding.textViewSave)
