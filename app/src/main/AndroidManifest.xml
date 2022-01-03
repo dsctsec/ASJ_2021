@@ -15,6 +15,10 @@
                     android:name=".ui.edit.EditScreenActivity"
                     android:exported="true"/>
         <activity
+            android:name="com.gdsctsec.smartt.ui.weekday.WeekdayActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
