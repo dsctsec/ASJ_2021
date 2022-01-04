@@ -14,25 +14,28 @@ class HomeScreenFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binder = inflater.inflate(R.layout.fragment_home_screen, container, false)
-
-        val time: List<String> = listOf("10:00 - 12:00", "12:00 - 14:00", "14:00 - 16:00", "16:00 - 18:00", "08:00 - 10:00")
-        val subject: List<String> = listOf("Biology", "Math", "Java", "Science", "Python")
-        recyclerView = binder.findViewById(R.id.fragment_home_recyclerView)
-        recyclerView.adapter = SubjectsAdapter(subject,time)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        return binder
-        return inflater.inflate(R.layout.fragment_home_screen, container, false)
+        val view = inflater.inflate(R.layout.fragment_home_screen, container, false)
+        return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        val timeList: List<String> = listOf(
+            "10:00 - 12:00",
+            "12:00 - 14:00",
+            "14:00 - 16:00",
+            "16:00 - 18:00",
+            "08:00 - 10:00"
+        )
+        val subjectList: List<String> = listOf("Biology", "Math", "Java", "Science", "Python")
+        recyclerView = view.findViewById(R.id.home_recyclerView)
+        recyclerView.adapter = SubjectsAdapter(subjectList, timeList)
+        recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+
+        super.onViewCreated(view, savedInstanceState)
+    }
 }

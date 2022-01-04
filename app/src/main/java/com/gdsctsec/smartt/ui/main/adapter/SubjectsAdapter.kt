@@ -5,11 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
 
 class SubjectsAdapter(val subjects: List<String>, val time: List<String>) :
     RecyclerView.Adapter<SubjectsAdapter.SubjectViewHolder>() {
+
+    class SubjectViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        val subjectTextView: TextView = view.findViewById(R.id.home_lecture_name)
+        val timeTextView: TextView = view.findViewById(R.id.home_lecture_timing)
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
         return SubjectViewHolder(
@@ -18,45 +25,68 @@ class SubjectsAdapter(val subjects: List<String>, val time: List<String>) :
         )
     }
 
-    override fun onBindViewHolder(holder: SubjectViewHolder, position: Int) {
-        //val layt:ConstraintLayout = holder.itemView.findViewById(R.id.list_item)
-        holder.subject.text = subjects[position]
-        holder.time.text = time[position]
-        //val border = DrawableCompat.wrap(layt.background)
-
-        when (position % 6) {
-            0 -> {
-                holder.itemView.background.setTint(Color.parseColor("#33FD50C2"))
-            }
-
-            1 -> {
-                holder.itemView.background.setTint(Color.parseColor("#33ECDA35"))
-            }
-
-            2 -> {
-                holder.itemView.background.setTint(Color.parseColor("#3347EFE5"))
-            }
-
-            3 -> {
-                holder.itemView.background.setTint(Color.parseColor("#333D27C6"))
-            }
-
-            4 -> {
-                holder.itemView.background.setTint(Color.parseColor("#332694AC"))
-            }
-
-            5 -> {
-                holder.itemView.background.setTint(Color.parseColor("#33DB2B2B"))
-            }
-        }
-    }
-
     override fun getItemCount(): Int {
         return subjects.size
     }
 
-    class SubjectViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val subject: TextView = view.findViewById(R.id.list_item_day_lecture)
-        val time: TextView = view.findViewById(R.id.list_item_lecture_time)
+    override fun onBindViewHolder(holder: SubjectViewHolder, position: Int) {
+        holder.subjectTextView.text = subjects[position]
+        holder.timeTextView.text = time[position]
+
+        when (position % 6) {
+            0 -> {
+                holder.itemView.background.setTint(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.faint_pink
+                    )
+                )
+            }
+
+            1 -> {
+                holder.itemView.background.setTint(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.faint_yellow
+                    )
+                )
+            }
+
+            2 -> {
+                holder.itemView.background.setTint(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.faint_neon_blue
+                    )
+                )
+            }
+
+            3 -> {
+                holder.itemView.background.setTint(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.faint_dark_blue
+                    )
+                )
+            }
+
+            4 -> {
+                holder.itemView.background.setTint(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.faint_blue
+                    )
+                )
+            }
+
+            5 -> {
+                holder.itemView.background.setTint(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.faint_red
+                    )
+                )
+            }
+        }
     }
 }
