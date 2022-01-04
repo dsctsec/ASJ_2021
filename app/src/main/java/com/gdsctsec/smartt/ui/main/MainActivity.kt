@@ -2,16 +2,20 @@ package com.gdsctsec.smartt.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
 import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.ui.main.adapter.ViewPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewPager: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
