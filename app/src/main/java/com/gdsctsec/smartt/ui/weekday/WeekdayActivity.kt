@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.ui.weekday.adapter.WeekdayAdapter
-import com.gdsctsec.smartt.viewmode.WeekdayActivityViewModel
+import com.gdsctsec.smartt.viewmodel.WeekdayActivityViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WeekdayActivity : AppCompatActivity() {
