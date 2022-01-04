@@ -1,4 +1,4 @@
-package com.gdsctsec.smartt.viewmode
+package com.gdsctsec.smartt.viewmodel
 
 import androidx.lifecycle.ViewModel
 
