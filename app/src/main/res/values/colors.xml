@@ -24,5 +24,12 @@
     <color name="Cancelsavecolor">#1BAACA</color>
     <color name="button_before_change_color">#5D1BAACA</color>
     <color name="weekday_background_white_color">#f6fafb</color>
+    <color name="off_white">#DDD</color>
+    <color name="faint_red">#33DB2B2B</color>
+    <color name="faint_blue">#332694AC</color>
+    <color name="faint_dark_blue">#333D27C6</color>
+    <color name="faint_neon_blue">#3347EFE5</color>
+    <color name="faint_yellow">#33ECDA35</color>
+    <color name="faint_pink">#33FD50C2</color>
 </resources>
 
