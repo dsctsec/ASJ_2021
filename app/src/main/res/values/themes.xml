@@ -19,12 +19,13 @@
         <item name="elevation">0dp</item>
         <item name="colorError">@color/red_orange</item>
     </style>
-
     <style name="RemindiActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/white</item>
         <item name="android:textColorPrimary">@color/remindi_black</item>
         <item name="elevation">0dp</item>
     </style>
-
-
+    <style name="HomeFragmentProgressBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/home_circle</item>
+    </style>
 </resources>
