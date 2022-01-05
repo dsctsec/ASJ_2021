@@ -30,7 +30,7 @@ class EditScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editscreen)
 
-        lectureEditText = findViewById(R.id.textinputAddlecture)
+        lectureEditText = findViewById(R.id.add_lecture_edit_text)
         starttimeTextView = findViewById(R.id.textview_starttime)
         endtimeTextView = findViewById(R.id.textview_endtime)
         dayTextInputEditText = findViewById(R.id.textfield_day)
