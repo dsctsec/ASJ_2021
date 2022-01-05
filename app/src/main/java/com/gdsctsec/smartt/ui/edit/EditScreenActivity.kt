@@ -3,53 +3,43 @@ package com.gdsctsec.smartt.ui.edit
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.Editable
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.gdsctsec.smartt.databinding.ActivityEditscreenBinding
+
 import java.util.*
 import android.graphics.Color
 
 import android.text.TextWatcher
 import android.widget.*
 import com.gdsctsec.smartt.R
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import android.content.Intent
 
-import android.app.Activity
-
-import android.R.attr.name
 
 
 
 
 
 class EditScreenActivity : AppCompatActivity() {
-
-    private lateinit var binding : ActivityEditscreenBinding
-    // Initializing
-
+    private lateinit var lectureEditText : EditText
+    private lateinit var starttimeTextView : TextView
+    private lateinit var endtimeTextView : TextView
+    private lateinit var dayTextInputEditText : AutoCompleteTextView
+    private lateinit var saveTextview : TextView
+    private lateinit var cancelTextView : TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEditscreenBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-        val lectureEditText : EditText = binding.textinputAddlecture
-        val starttimeTextView : TextView = binding.textviewStarttime
-        val EndtimeTextView : TextView = binding.textviewEndtime
-        val dayTextInputEditText : AutoCompleteTextView = binding.textfieldDay
-        val SaveTextview : TextView = binding.textViewSave
-        val cancelTextView : TextView  = binding.textViewCancel
+        setContentView(R.layout.activity_editscreen)
 
-
-
-
+        lectureEditText = findViewById(R.id.textinputAddlecture)
+        starttimeTextView = findViewById(R.id.textview_starttime)
+        endtimeTextView = findViewById(R.id.textview_endtime)
+        dayTextInputEditText = findViewById(R.id.textfield_day)
+        saveTextview = findViewById(R.id.textView_save)
+        cancelTextView = findViewById(R.id.textView_cancel)
         // dropdown
         var days = resources.getStringArray(com.gdsctsec.smartt.R.array.days)
         val ArrayAdapter = ArrayAdapter(
-            applicationContext,
+           applicationContext,
             com.gdsctsec.smartt.R.layout.dropdown, days
         )
         dayTextInputEditText.setAdapter(ArrayAdapter)
@@ -57,24 +47,24 @@ class EditScreenActivity : AppCompatActivity() {
         // adding Textwatcher
         lectureEditText.addTextChangedListener(textWatcher)
         starttimeTextView.addTextChangedListener(textWatcher)
-        EndtimeTextView.addTextChangedListener(textWatcher)
+        endtimeTextView.addTextChangedListener(textWatcher)
         dayTextInputEditText.addTextChangedListener(textWatcher)
 
 
         starttimeTextView.setOnClickListener {
             timePick(starttimeTextView)
         }
-       EndtimeTextView.setOnClickListener {
-            timePick(EndtimeTextView)
+       endtimeTextView.setOnClickListener {
+            timePick(endtimeTextView)
 
         }
-        SaveTextview.setOnClickListener {
+        saveTextview.setOnClickListener {
             // wil require all strings for saving in database
             var lecture: String? = lectureEditText.text.toString()
-            var day : String? = binding.textfieldDay.text.toString()
-            var starttime : String? = binding.textviewStarttime.text.toString()
-            var endtime : String? = binding.textviewEndtime.text.toString()
-            ViewDisabled(SaveTextview)
+            var day : String? = dayTextInputEditText.text.toString()
+            var starttime : String? = starttimeTextView.text.toString()
+            var endtime : String? = endtimeTextView.text.toString()
+            ViewDisabled(saveTextview)
 
         }
 
@@ -85,7 +75,7 @@ class EditScreenActivity : AppCompatActivity() {
     }
 
 
-    private fun ViewEnabled(v: TextView) {
+    private fun viewEnabled(v: TextView) {
         v.isEnabled = true
         v.setTextColor(Color.parseColor("#1BAACA"))
 
@@ -157,15 +147,15 @@ class EditScreenActivity : AppCompatActivity() {
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            var lecture: String? = binding.textinputAddlecture.text.toString()
-            var day : String? = binding.textfieldDay.text.toString()
-            var starttime : String? = binding.textviewStarttime.text.toString()
-            var endtime : String? = binding.textviewEndtime.text.toString()
+            var lecture: String? = lectureEditText.text.toString()
+            var day : String? = dayTextInputEditText.text.toString()
+            var starttime : String? = starttimeTextView.text.toString()
+            var endtime : String? = endtimeTextView.text.toString()
             if (lecture != "" && day != "Select day" && starttime != "" && endtime != "") {
-                ViewEnabled(binding.textViewSave)
+                viewEnabled(saveTextview)
             }
             else{
-                ViewDisabled(binding.textViewSave)
+                ViewDisabled(saveTextview)
             }
         }
     }
