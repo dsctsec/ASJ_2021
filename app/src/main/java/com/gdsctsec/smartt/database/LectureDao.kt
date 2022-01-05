@@ -1,9 +1,9 @@
-package com.gdsctsec.smartt.ui.main
+package com.gdsctsec.smartt.database
 
 import androidx.room.*
 
 @Dao
-interface DataDao {
+interface LectureDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun saveLecture(lec: TimeTable)
@@ -12,7 +12,7 @@ interface DataDao {
     suspend fun updateLecture(lec: TimeTable)
 
     @Query("SELECT * FROM timeTable WHERE weekday = :weekday")
-    suspend fun getLectureByWeekday(weekday: Int): List<TimeTable>
+    suspend fun getLectureByWeekday(weekday: Weekday): List<TimeTable>
 
     @Query("DELETE FROM timeTable WHERE id = :id")
     suspend fun deleteLecture(id: Int)

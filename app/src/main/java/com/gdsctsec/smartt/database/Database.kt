@@ -1,14 +1,14 @@
-package com.gdsctsec.smartt.ui.main
+package com.gdsctsec.smartt.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [TimeTable::class], version=1, exportSchema = false)
+@Database(entities = [TimeTable::class], version = 1, exportSchema = false)
 abstract class LectureDatabase : RoomDatabase(){
 
-    abstract fun datadao(): DataDao
+    abstract fun lectureDao(): LectureDao
 
     companion object{
         @Volatile
