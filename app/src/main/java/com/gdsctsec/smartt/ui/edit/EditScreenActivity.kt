@@ -39,7 +39,7 @@ class EditScreenActivity : AppCompatActivity() {
         // dropdown
         var days = resources.getStringArray(com.gdsctsec.smartt.R.array.days)
         val ArrayAdapter = ArrayAdapter(
-           applicationContext,
+           this,
             com.gdsctsec.smartt.R.layout.dropdown, days
         )
         dayTextInputEditText.setAdapter(ArrayAdapter)
