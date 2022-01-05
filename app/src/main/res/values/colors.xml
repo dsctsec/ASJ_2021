@@ -19,6 +19,10 @@
     <color name="silverchalice">#FFB0B0B0</color>
     <color name="red_orange">#FF2424</color>
     <color name="remindi_disbaled_icon">#8E8888</color>
+    <color name="textcolor_editscreen_attributes">#3E3E3E</color>
+    <color name="backgroundcolor">#F6FAFB</color>
+    <color name="Cancelsavecolor">#1BAACA</color>
+    <color name="button_before_change_color">#5D1BAACA</color>
     <color name="weekday_background_white_color">#f6fafb</color>
     <color name="off_white">#DDD</color>
     <color name="faint_red">#33DB2B2B</color>
@@ -28,3 +32,4 @@
     <color name="faint_yellow">#33ECDA35</color>
     <color name="faint_pink">#33FD50C2</color>
 </resources>
+

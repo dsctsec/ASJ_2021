@@ -1,16 +1,17 @@
 package com.gdsctsec.smartt.ui.main
 
+import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "timeTable")
 data class TimeTable(
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
-    var lec: String,
-    var startTime: Long,
-    var endTime: Long,
-    var weekday: Int
+    @NonNull var id: Int = 0,
+    @NonNull var lec: String,
+    @NonNull var startTime: Long,
+    @NonNull var endTime: Long,
+    @NonNull var weekday: Int
 )
 
 enum class Weekday {
