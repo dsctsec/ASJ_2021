@@ -9,13 +9,13 @@ import com.gdsctsec.smartt.data.Weekday
 interface LectureDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun saveLecture(lec: TimeTable)
+    suspend fun addLecture(lec: TimeTable)
 
     @Update
     suspend fun updateLecture(lec: TimeTable)
 
     @Query("SELECT * FROM timeTable WHERE weekday = :weekday")
-    fun getLectureByWeekday(weekday: Weekday): LiveData<List<TimeTable>>
+    fun getLecturesByWeekday(weekday: Weekday = Weekday.Monday): LiveData<List<TimeTable>>
 
     @Query("DELETE FROM timeTable WHERE id = :id")
     suspend fun deleteLecture(id: Int)
