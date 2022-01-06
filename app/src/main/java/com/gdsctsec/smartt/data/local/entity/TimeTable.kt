@@ -1,4 +1,4 @@
-package com.gdsctsec.smartt.database
+package com.gdsctsec.smartt.data
 
 import androidx.annotation.NonNull
 import androidx.room.Entity
