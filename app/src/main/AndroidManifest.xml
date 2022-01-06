@@ -9,6 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmarTT">
+
+
+                <activity
+                    android:name=".ui.edit.EditScreenActivity"
+                    android:exported="true"/>
         <activity
             android:name="com.gdsctsec.smartt.ui.weekday.WeekdayActivity"
             android:exported="true"
