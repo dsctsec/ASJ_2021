@@ -6,22 +6,22 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [TimeTable::class], version = 1, exportSchema = false)
-abstract class LectureDatabase : RoomDatabase(){
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun lectureDao(): LectureDao
 
-    companion object{
+    companion object {
         @Volatile
-        private var INSTANCE: LectureDatabase? = null
+        private var INSTANCE: AppDatabase? = null
 
-        fun getInstance(context: Context): LectureDatabase {
+        fun getInstance(context: Context): AppDatabase {
             synchronized(this) {
                 var instance = INSTANCE
 
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        LectureDatabase::class.java,
+                        AppDatabase::class.java,
                         "database"
                     )
                         .fallbackToDestructiveMigration()

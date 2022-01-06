@@ -1,5 +1,6 @@
 package com.gdsctsec.smartt.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -12,7 +13,7 @@ interface LectureDao {
     suspend fun updateLecture(lec: TimeTable)
 
     @Query("SELECT * FROM timeTable WHERE weekday = :weekday")
-    suspend fun getLectureByWeekday(weekday: Weekday): List<TimeTable>
+    suspend fun getLectureByWeekday(weekday: Weekday): LiveData<List<TimeTable>>
 
     @Query("DELETE FROM timeTable WHERE id = :id")
     suspend fun deleteLecture(id: Int)
