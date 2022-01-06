@@ -28,7 +28,8 @@
 
     <style name="MyTimePickerTheme" parent="android:Widget.Material.Light.TimePicker">
         <item name="android:timePickerMode">spinner</item>
-       </style>
+    </style>
+
     <style name="HomeFragmentProgressBar">
         <item name="android:indeterminateOnly">false</item>
         <item name="android:progressDrawable">@drawable/home_circle</item>

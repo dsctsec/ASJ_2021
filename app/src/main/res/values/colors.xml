@@ -14,6 +14,7 @@
     <color name="color_friday">#838FA4</color>
     <color name="color_saturday">#634BFA</color>
     <color name="remindi_background_color">#FFF6FAFB</color>
+    <color name="remindi_icon_i">#00E7D9</color>
     <color name="remindi_black">#FF3E3E3E</color>
     <color name="whitesmoke">#FFF5F5F5</color>
     <color name="silverchalice">#FFB0B0B0</color>
@@ -31,5 +32,6 @@
     <color name="faint_neon_blue">#3347EFE5</color>
     <color name="faint_yellow">#33ECDA35</color>
     <color name="faint_pink">#33FD50C2</color>
+    <color name="plus_icon_bg">#ABFFFFFF</color>
 </resources>
 

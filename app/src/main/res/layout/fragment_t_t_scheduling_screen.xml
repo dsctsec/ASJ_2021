@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.TTSchedulingScreenFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="TT Scheduling Screen"
-        android:gravity="center"/>
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/remindi_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/poppins"
+            android:text="Remindi"
+            android:textSize="20sp" />
+
+
+        <!-- TODO: Update blank fragment layout -->
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tt_items_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="25dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="50dp"
+            tools:listitem="@layout/tt_scheduling_item" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
