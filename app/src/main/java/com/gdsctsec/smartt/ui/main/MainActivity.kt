@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
-        val fabgotoEditscreen : FloatingActionButton =  findViewById(R.id.fab_editTTscreen)
+        val fabgotoEditscreen: FloatingActionButton = findViewById(R.id.fab_editTTscreen)
         bottomNavigationView.menu.get(1).isEnabled = false;
         //setting up the viewPager for bottom nav
         viewPager = findViewById(R.id.view_pager)
@@ -41,12 +41,9 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
-        fabgotoEditscreen.setOnClickListener{
+        fabgotoEditscreen.setOnClickListener {
             startActivity(Intent(this, EditScreenActivity::class.java))
         }
-
-        supportActionBar?.hide()
-
     }
 
 
