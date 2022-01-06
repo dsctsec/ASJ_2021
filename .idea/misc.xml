@@ -47,18 +47,11 @@
         <entry key="..\:/Users/KRISHANA/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/dropdown.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/KRISHANA/AndroidStudioProjects/ASJ_2021/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/KRISHANA/AppData/Local/Android/Sdk/platforms/android-31/data/res/drawable/btn_dropdown.xml" value="0.14791666666666667" />
-        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/drawable/add_weekday.xml" value="0.1962962962962963" />
-        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/drawable/app_logo.xml" value="0.1962962962962963" />
-        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/activity_main.xml" value="0.12360688956433637" />
-        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/activity_weekday.xml" value="0.21875" />
-        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/fragment_home_screen.xml" value="0.12360688956433637" />
-        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/fragment_t_t_scheduling_screen.xml" value="0.12360688956433637" />
-        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/home_fragment_list_item.xml" value="0.21875" />
-        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/lecture_item.xml" value="0.19519927536231885" />
-        <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/tt_scheduling_item.xml" value="0.19519927536231885" />
+        <entry key="..\:/Users/tanay/AndroidStudioProjects/SmarTT/app/src/main/res/layout/fragment_t_t_scheduling_screen.xml" value="0.1585144927536232" />
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

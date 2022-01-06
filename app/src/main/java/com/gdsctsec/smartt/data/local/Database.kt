@@ -1,9 +1,10 @@
-package com.gdsctsec.smartt.database
+package com.gdsctsec.smartt.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.gdsctsec.smartt.data.local.dao.LectureDao
 
 @Database(entities = [TimeTable::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
@@ -29,7 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
                     INSTANCE = instance
                 }
                 return instance
+            }
         }
     }
-}
 }
