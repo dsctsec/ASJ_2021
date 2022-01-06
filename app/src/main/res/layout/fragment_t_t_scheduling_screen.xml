@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
             android:text="Remindi"
             android:textSize="20sp" />
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingTop="25dp"
+            android:paddingTop="5dp"
             android:paddingRight="16dp"
             android:paddingBottom="50dp"
             tools:listitem="@layout/tt_scheduling_item" />
