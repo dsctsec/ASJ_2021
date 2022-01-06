@@ -32,5 +32,6 @@
     <color name="faint_neon_blue">#3347EFE5</color>
     <color name="faint_yellow">#33ECDA35</color>
     <color name="faint_pink">#33FD50C2</color>
+    <color name="plus_icon_bg">#ABFFFFFF</color>
 </resources>
 

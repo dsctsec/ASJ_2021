@@ -14,24 +14,26 @@ import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.ui.main.model.TTScreendata
 import com.google.android.material.card.MaterialCardView
 
-class TTScreenAdapter(val context: Context,val list:List<TTScreendata>): RecyclerView.Adapter<TTScreenAdapter.TTScreenViewHolder>() {
+class TTScreenAdapter(val context: Context, val list: List<TTScreendata>) :
+    RecyclerView.Adapter<TTScreenAdapter.TTScreenViewHolder>() {
     class TTScreenViewHolder(val itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val weekdayText:TextView=itemView.findViewById(R.id.weekday_textview);
-            val lectures:TextView=itemView.findViewById(R.id.lectures_textview);
-            val card:CardView=itemView.findViewById(R.id.card_view)
+        val weekdayTextView: TextView = itemView.findViewById(R.id.weekday_textview);
+        val lecturesTextView: TextView = itemView.findViewById(R.id.lectures_textview);
+        val card: CardView = itemView.findViewById(R.id.tt_scheduling_item_card_view)
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TTScreenViewHolder {
-        val view:View=LayoutInflater.from(parent.context).inflate(R.layout.tt_scheduling_item,parent,false)
+        val view: View =
+            LayoutInflater.from(parent.context).inflate(R.layout.tt_scheduling_item, parent, false)
         return TTScreenViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: TTScreenViewHolder, position: Int) {
-        val data:TTScreendata=list[position]
-        holder.weekdayText.text= context.resources.getString(data.weekDay)
-        holder.lectures.text=context.resources.getString(data.lecturesNum)
-        holder.card.background.setTint(ContextCompat.getColor(context,data.colorId))
+        val data: TTScreendata = list[position]
+        holder.weekdayTextView.text = context.resources.getString(data.weekDay)
+        holder.lecturesTextView.text = context.resources.getString(data.lecturesNum)
+        holder.card.background.setTint(ContextCompat.getColor(context, data.colorId))
     }
 
     override fun getItemCount(): Int {
