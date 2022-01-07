@@ -35,7 +35,12 @@ class HomeScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val titleTextView = view.findViewById<TextView>(R.id.remindi_header)
+        val dayDateTextView = view.findViewById<TextView>(R.id.home_day_textview)
 
+        dayDateTextView.text = HomeScreenViewModel(requireActivity()).getMonthDate()
+
+        /*Remindi header code*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
         val word: Spannable = SpannableString("Rem")
         word.setSpan(
             ForegroundColorSpan(Color.BLACK),
@@ -65,6 +70,8 @@ class HomeScreenFragment : Fragment() {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         titleTextView.append(wordThree)
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 
         val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
         val subjectList: MutableList<String> = mutableListOf("No Lectures as of now")
