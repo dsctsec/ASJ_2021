@@ -11,10 +11,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.ui.main.adapter.SubjectsAdapter
+import com.gdsctsec.smartt.viewmodel.HomeScreenViewModel
 
 class HomeScreenFragment : Fragment() {
 
@@ -62,14 +66,20 @@ class HomeScreenFragment : Fragment() {
         )
         titleTextView.append(wordThree)
 
-        val timeList: List<String> = listOf(
-            "10:00 - 12:00",
-            "12:00 - 14:00",
-            "14:00 - 16:00",
-            "16:00 - 18:00",
-            "08:00 - 10:00"
-        )
-        val subjectList: List<String> = listOf("Biology", "Math", "Java", "Science", "Python")
+        val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
+        val subjectList: MutableList<String> = mutableListOf("No Lectures as of now")
+
+        val viewModel = HomeScreenViewModel(requireActivity())
+
+        viewModel.getLiveLectureData().observe(requireActivity(), Observer {
+            if(it.size!=0){
+                for(i in 0..it.size-1){
+                    subjectList.add(i, it.get(i).lec)
+                    timeList.add(i, (it.get(i).startTime+" - "+it.get(i).endTime))
+                }
+            }
+        })
+        //mutableListOf("subjects")
         recyclerView = view.findViewById(R.id.home_recyclerView)
         recyclerView.adapter = SubjectsAdapter(subjectList, timeList)
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())

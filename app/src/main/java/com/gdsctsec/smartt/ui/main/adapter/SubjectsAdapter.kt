@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
 
-class SubjectsAdapter(val subjects: List<String>, val time: List<String>) :
+class SubjectsAdapter(val subjects: MutableList<String>, val time: MutableList<String>) :
     RecyclerView.Adapter<SubjectsAdapter.SubjectViewHolder>() {
 
     class SubjectViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
@@ -30,8 +30,9 @@ class SubjectsAdapter(val subjects: List<String>, val time: List<String>) :
     }
 
     override fun onBindViewHolder(holder: SubjectViewHolder, position: Int) {
-        holder.subjectTextView.text = subjects[position]
-        holder.timeTextView.text = time[position]
+
+        holder.subjectTextView.text = subjects.get(position)
+        holder.timeTextView.text = time.get(position)
 
         when (position % 6) {
             0 -> {
@@ -88,5 +89,7 @@ class SubjectsAdapter(val subjects: List<String>, val time: List<String>) :
                 )
             }
         }
+
+
     }
 }
