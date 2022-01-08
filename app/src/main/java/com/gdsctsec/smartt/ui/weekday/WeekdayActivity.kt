@@ -17,7 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.ui.weekday.adapter.WeekdayAdapter
-import com.gdsctsec.smartt.viewmodel.WeekdayActivityViewModel
+import com.gdsctsec.smartt.viewmodel.WeekdayActivityViewModelFactory
+import com.gdsctsec.smartt.viewmodel.WeekdayActvityViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WeekdayActivity : AppCompatActivity() {
@@ -35,8 +36,10 @@ class WeekdayActivity : AppCompatActivity() {
         val weekDay=intent.getStringExtra("weekday")
         val weekNum=intent.getStringExtra("weeknum")
 
-        val viewModelFactory= weekDay?.let { WeekdayActivityViewModel(this, it) }
-        val viewModel= ViewModelProvider(this,viewModelFactory).get(WeekdayActivityViewModel::class.java)
+        val viewModelFactory= WeekdayActivityViewModelFactory(this, weekDay.toString())
+        val viewModel= ViewModelProvider(this,viewModelFactory).get(WeekdayActvityViewModel::class.java)
+
+
 
 
         //recycler View Adapter
@@ -50,16 +53,14 @@ class WeekdayActivity : AppCompatActivity() {
         val subjectList: MutableList<String> =
             mutableListOf("Biology", "Math", "Java", "Science", "Python")
 
-        if (viewModel != null) {
-            viewModel.getLiveLecturesData().observe(this, Observer {
-                if (it.size!=0){
-                    for (i in it.indices){
-                        timeList.add(i,it.get(i).startTime+"-"+it.get(i).endTime)
-                        subjectList.add(i,it.get(i).lec)
-                    }
+        viewModel.getLiveLecturesData().observe(this, Observer {
+            if (it.size!=0){
+                for (i in it.indices){
+                    timeList.add(i,it.get(i).startTime+"-"+it.get(i).endTime)
+                    subjectList.add(i,it.get(i).lec)
                 }
-            })
-        }
+            }
+        })
 
 
 
