@@ -47,11 +47,13 @@ class EditScreenActivity : AppCompatActivity() {
                 val startTime = intent.getStringExtra("Lecture_start_Time").toString()
                 val endTime = intent.getStringExtra("Lecture_End_time").toString()
                 val lecture = intent.getStringExtra("Lecture_Choosen_subject").toString()
+                val weekDay = intent.getStringExtra("HomeScreenFragment").toString()
 
                 Toast.makeText(this, "$startTime $endTime $lecture", Toast.LENGTH_SHORT).show()
                 lectureEditText.setText(lecture)
                 starttimeTextView.setText(startTime)
                 endtimeTextView.setText(endTime)
+                dayTextInputEditText.setText(weekDay)
             }
 
 

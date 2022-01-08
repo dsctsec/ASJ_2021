@@ -9,15 +9,16 @@ import com.gdsctsec.smartt.data.repository.LectureRepository
 import java.util.*
 
 class HomeScreenViewModel(private val context: Context) : ViewModel() {
-    private lateinit var lectureRepository : LectureRepository
-    private lateinit var lecturesOfTheDayLiveList: LiveData<List<TimeTable>>
+    private  var repository: LectureRepository
+    private  var lecturesOfTheDayLiveList: LiveData<List<TimeTable>>
     private lateinit var weekday: Weekday
     private lateinit var monthDate: String
- init {
-     lecturesOfTheDayLiveList =
-        lectureRepository.getLecturesByWeekday(getWeekday())
- }
 
+    init {
+        repository = LectureRepository(context, getWeekday())
+        lecturesOfTheDayLiveList =
+            repository.getLecturesByWeekday(getWeekday())
+    }
 
 
     public fun getLiveLectureData(): LiveData<List<TimeTable>> {
@@ -25,7 +26,7 @@ class HomeScreenViewModel(private val context: Context) : ViewModel() {
     }
 
     public fun getMonthDate(): String {
-        monthDate=""
+        monthDate = ""
         when (Calendar.MONTH) {
             2 -> {
                 monthDate = "January, " + (Calendar.DAY_OF_MONTH + 2)
@@ -94,6 +95,7 @@ class HomeScreenViewModel(private val context: Context) : ViewModel() {
         }
         return weekday
     }
+
     public fun getWeekDayString(): String {
         var day = ""
         when (Calendar.DAY_OF_WEEK) {
