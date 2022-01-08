@@ -97,6 +97,9 @@ class HomeScreenFragment : Fragment() {
         viewModel.getLiveLectureData().observe(requireActivity(), Observer {
             if (it.size != 0) {
                 dataIsThere = 1
+                subjectList.clear()
+                timeList.clear()
+                lectureObjectList.clear()
                 for (i in 0..it.size - 1) {
                     subjectList.add(i, it.get(i).lec)
                     timeList.add(i, (it.get(i).startTime + " - " + it.get(i).endTime))
