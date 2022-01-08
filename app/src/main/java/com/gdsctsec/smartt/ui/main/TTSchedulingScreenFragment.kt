@@ -12,13 +12,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
+import com.gdsctsec.smartt.data.Weekday
 import com.gdsctsec.smartt.ui.main.adapter.TTScreenAdapter
 
 import com.gdsctsec.smartt.ui.main.model.TTScreendata
+import com.gdsctsec.smartt.viewmodel.TTScreenViewModel
+import com.gdsctsec.smartt.viewmodel.TTScreenViewModelFactory
+import java.security.acl.Owner
 
 
 class TTSchedulingScreenFragment : Fragment() {
@@ -26,6 +33,7 @@ class TTSchedulingScreenFragment : Fragment() {
     lateinit var ttScreenRecyclerView: RecyclerView;
     lateinit var dataList: List<TTScreendata>
     lateinit var titleTextView: TextView
+    lateinit var viewModel:TTScreenViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +53,10 @@ class TTSchedulingScreenFragment : Fragment() {
 
 
         titleTextView = view.findViewById(R.id.remindi_header)
+
+        val viewModelFactory=TTScreenViewModelFactory(requireContext())
+         viewModel=ViewModelProvider(requireActivity(),viewModelFactory).get(TTScreenViewModel::class.java)
+
 
 
         return view;
@@ -84,14 +96,54 @@ class TTSchedulingScreenFragment : Fragment() {
         titleTextView.append(wordThree)
 
 
+
+
+        val noOfLectures= mutableListOf(0,0,0,0,0,0)
         dataList = listOf(
-            TTScreendata(R.string.monday, R.string._5_lectures, R.color.color_monday),
-            TTScreendata(R.string.tuesday, R.string._5_lectures, R.color.color_tuesday),
-            TTScreendata(R.string.wednesday, R.string._5_lectures, R.color.color_wednesday),
-            TTScreendata(R.string.thursday, R.string._5_lectures, R.color.color_thursday),
-            TTScreendata(R.string.friday, R.string._5_lectures, R.color.color_friday),
-            TTScreendata(R.string.saturday, R.string._5_lectures, R.color.color_saturday)
+            TTScreendata(R.string.monday, noOfLectures[0], R.color.color_monday),
+            TTScreendata(R.string.tuesday, noOfLectures[1], R.color.color_tuesday),
+            TTScreendata(R.string.wednesday, noOfLectures[2], R.color.color_wednesday),
+            TTScreendata(R.string.thursday, noOfLectures[3], R.color.color_thursday),
+            TTScreendata(R.string.friday, noOfLectures[4], R.color.color_friday),
+            TTScreendata(R.string.saturday,noOfLectures[5], R.color.color_saturday)
         )
+
+        viewModel.getLiveLectures().observe(requireActivity(), Observer {
+            if (it.size!=0){
+                for (i in it.indices){
+                    val weekDay=it.get(i).weekday.name
+
+                    if (weekDay.equals("Monday"))
+                        noOfLectures[0]++
+
+                    else if(weekDay.equals("Tuesday"))
+                        noOfLectures[1]++
+
+                    else if(weekDay.equals("Wednesday"))
+                        noOfLectures[2]++
+                    else if(weekDay.equals("Thursday"))
+                        noOfLectures[3]++
+                    else if(weekDay.equals("Friday"))
+                        noOfLectures[4]++
+                    else
+                        noOfLectures[5]++
+                }
+            }
+        })
+
+        val adapter=TTScreenAdapter(requireContext(),dataList)
+
+        dataList = listOf(
+            TTScreendata(R.string.monday, noOfLectures[0], R.color.color_monday),
+            TTScreendata(R.string.tuesday, noOfLectures[1], R.color.color_tuesday),
+            TTScreendata(R.string.wednesday, noOfLectures[2], R.color.color_wednesday),
+            TTScreendata(R.string.thursday, noOfLectures[3], R.color.color_thursday),
+            TTScreendata(R.string.friday, noOfLectures[4], R.color.color_friday),
+            TTScreendata(R.string.saturday,noOfLectures[5], R.color.color_saturday)
+        )
+
+
+        adapter.notifyDataSetChanged()
 
         ttScreenRecyclerView.layoutManager = GridLayoutManager(context, 2)
         ttScreenRecyclerView.adapter = TTScreenAdapter(requireContext(), dataList)

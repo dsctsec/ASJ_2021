@@ -1,5 +1,6 @@
 package com.gdsctsec.smartt.ui.weekday
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
+import com.gdsctsec.smartt.ui.edit.EditScreenActivity
 import com.gdsctsec.smartt.ui.weekday.adapter.WeekdayAdapter
 import com.gdsctsec.smartt.viewmodel.WeekdayActivityViewModelFactory
 import com.gdsctsec.smartt.viewmodel.WeekdayActvityViewModel
@@ -82,7 +84,11 @@ class WeekdayActivity : AppCompatActivity() {
 
         //Floating Button OnClick
         addNewLectureEventFloatingActionButton.setOnClickListener(View.OnClickListener {
-            //Code to add a lec
+            val intent=Intent(this,EditScreenActivity::class.java).apply {
+                putExtra("weekday",weekDay)
+            }
+
+            startActivity(intent)
         })
     }
 
@@ -92,7 +98,6 @@ class WeekdayActivity : AppCompatActivity() {
         val dayTextView: TextView = findViewById(R.id.day_text_view)
 
         val backgroundTintAwareDrawable = DrawableCompat.wrap(dayColorChangingToolbar.background)
-
 
 
         when (day) {
