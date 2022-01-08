@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.ui.main.adapter.SubjectsAdapter
 import com.gdsctsec.smartt.viewmodel.HomeScreenViewModel
+import com.gdsctsec.smartt.viewmodel.HomeScreenViewModelFactory
 
 class HomeScreenFragment : Fragment() {
 
@@ -34,10 +35,13 @@ class HomeScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        super.onViewCreated(view, savedInstanceState)
+
         val titleTextView = view.findViewById<TextView>(R.id.remindi_header)
         val dayDateTextView = view.findViewById<TextView>(R.id.home_day_textview)
 
         dayDateTextView.text = HomeScreenViewModel(requireActivity()).getMonthDate()
+        val viewModelFactory = HomeScreenViewModelFactory(requireActivity())
 
         /*Remindi header code*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -76,21 +80,22 @@ class HomeScreenFragment : Fragment() {
         val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
         val subjectList: MutableList<String> = mutableListOf("No Lectures as of now")
 
-        val viewModel = HomeScreenViewModel(requireActivity())
+        val adapter = SubjectsAdapter(subjectList, timeList)
 
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(HomeScreenViewModel::class.java)
         viewModel.getLiveLectureData().observe(requireActivity(), Observer {
             if(it.size!=0){
                 for(i in 0..it.size-1){
                     subjectList.add(i, it.get(i).lec)
                     timeList.add(i, (it.get(i).startTime+" - "+it.get(i).endTime))
                 }
+                adapter!!.notifyDataSetChanged()
             }
         })
+
         //mutableListOf("subjects")
         recyclerView = view.findViewById(R.id.home_recyclerView)
-        recyclerView.adapter = SubjectsAdapter(subjectList, timeList)
+        recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
-
-        super.onViewCreated(view, savedInstanceState)
     }
 }

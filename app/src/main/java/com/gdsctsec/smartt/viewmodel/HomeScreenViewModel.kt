@@ -8,10 +8,11 @@ import com.gdsctsec.smartt.data.Weekday
 import com.gdsctsec.smartt.data.repository.LectureRepository
 import java.util.*
 
-class HomeScreenViewModel(context: Context) : ViewModel() {
+class HomeScreenViewModel(private val context: Context) : ViewModel() {
 
     private lateinit var lecturesOfTheDayLiveList: LiveData<List<TimeTable>>
-
+    private lateinit var weekday: Weekday
+    private lateinit var monthDate: String
     init {
         lecturesOfTheDayLiveList =
             LectureRepository(context, getWeekday()).getLecturesByWeekday(getWeekday())
@@ -22,7 +23,7 @@ class HomeScreenViewModel(context: Context) : ViewModel() {
     }
 
     public fun getMonthDate(): String {
-        var monthDate: String = ""
+        monthDate=""
         when (Calendar.MONTH) {
             2 -> {
                 monthDate = "January, " + (Calendar.DAY_OF_MONTH + 2)
@@ -65,7 +66,7 @@ class HomeScreenViewModel(context: Context) : ViewModel() {
     }
 
     public fun getWeekday(): Weekday {
-        lateinit var weekday: Weekday
+
         when (Calendar.DAY_OF_WEEK) {
             1 -> {
                 weekday = Weekday.Monday
