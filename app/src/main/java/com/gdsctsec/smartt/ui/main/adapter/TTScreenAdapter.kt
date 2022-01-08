@@ -36,7 +36,7 @@ class TTScreenAdapter(val context: Context, val list: List<TTScreendata>) :
     override fun onBindViewHolder(holder: TTScreenViewHolder, position: Int) {
         val data: TTScreendata = list[position]
         holder.weekdayTextView.text = context.resources.getString(data.weekDay)
-        holder.lecturesTextView.text = context.resources.getString(data.lecturesNum)
+        holder.lecturesTextView.text = data.lecturesNum.toString()+" lectures"
         holder.card.background.setTint(ContextCompat.getColor(context, data.colorId))
         val weekNum=when(holder.weekdayTextView.text){
             "Monday"-> 1
