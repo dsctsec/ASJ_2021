@@ -22,6 +22,7 @@ class SubjectsAdapter(val subjectList: MutableList<String>, val timeList: Mutabl
              itemview.setOnClickListener(this)
         }
 
+
         override fun onClick(v: View?) {
             val position = adapterPosition
             if(position != RecyclerView.NO_POSITION){
@@ -33,6 +34,7 @@ class SubjectsAdapter(val subjectList: MutableList<String>, val timeList: Mutabl
     interface OnItemclicklistener{
         fun onItemClick(position: Int)
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
         return SubjectViewHolder(

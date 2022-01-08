@@ -47,7 +47,7 @@ class EditScreenActivity : AppCompatActivity() {
                 val startTime = intent.getStringExtra("Lecture_start_Time").toString()
                 val endTime = intent.getStringExtra("Lecture_End_time").toString()
                 val lecture = intent.getStringExtra("Lecture_Choosen_subject").toString()
-                val weekDay = intent.getStringExtra("HomeScreenFragment").toString()
+                val weekDay = intent.getStringExtra("Lecture_Weekday").toString()
 
                 Toast.makeText(this, "$startTime $endTime $lecture", Toast.LENGTH_SHORT).show()
                 lectureEditText.setText(lecture)
@@ -90,7 +90,7 @@ class EditScreenActivity : AppCompatActivity() {
             var day: String = dayTextInputEditText.text.toString()
             var starttime: String = starttimeTextView.text.toString()
             var endtime: String = endtimeTextView.text.toString()
-            if(choice == "homescreenfragment"){
+            if(choice != "homescreenfragment"){
                 viewModel.addlecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime))
             }
             else{
