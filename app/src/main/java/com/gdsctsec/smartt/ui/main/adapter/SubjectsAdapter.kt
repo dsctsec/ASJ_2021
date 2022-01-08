@@ -16,7 +16,6 @@ class SubjectsAdapter(val subjectsList: MutableList<String>, val timeList: Mutab
         val timeTextView: TextView = view.findViewById(R.id.home_lecture_timing)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
         return SubjectViewHolder(
             LayoutInflater.from(parent.context)
@@ -32,6 +31,7 @@ class SubjectsAdapter(val subjectsList: MutableList<String>, val timeList: Mutab
 
         holder.subjectTextView.text = subjectsList.get(position)
         holder.timeTextView.text = timeList.get(position)
+
 
         when (position % 6) {
             0 -> {

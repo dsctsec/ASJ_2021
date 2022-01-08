@@ -10,13 +10,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
+import com.gdsctsec.smartt.SwipeGesture
+import com.gdsctsec.smartt.data.TimeTable
+import com.gdsctsec.smartt.data.Weekday
 import com.gdsctsec.smartt.ui.main.adapter.SubjectsAdapter
 import com.gdsctsec.smartt.viewmodel.HomeScreenViewModel
 import com.gdsctsec.smartt.viewmodel.HomeScreenViewModelFactory
@@ -79,17 +84,30 @@ class HomeScreenFragment : Fragment() {
 
         val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
         val subjectList: MutableList<String> = mutableListOf("No Lectures as of now")
+        val lectureObjectList: MutableList<TimeTable> =
+            mutableListOf(TimeTable(-1, "", "", "", Weekday.Monday))
+
+        //1 means list is not empty and 0 means isEmpty
+        var dataIsThere = 1
 
         val adapter = SubjectsAdapter(subjectList, timeList)
 
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(HomeScreenViewModel::class.java)
+        val viewModel =
+            ViewModelProvider(this, viewModelFactory).get(HomeScreenViewModel::class.java)
         viewModel.getLiveLectureData().observe(requireActivity(), Observer {
-            if(it.size!=0){
-                for(i in 0..it.size-1){
+            if (it.size != 0) {
+                dataIsThere = 1
+                subjectList.clear()
+                timeList.clear()
+                lectureObjectList.clear()
+                for (i in 0..it.size - 1) {
                     subjectList.add(i, it.get(i).lec)
-                    timeList.add(i, (it.get(i).startTime+" - "+it.get(i).endTime))
+                    timeList.add(i, (it.get(i).startTime + " - " + it.get(i).endTime))
+                    lectureObjectList.add(it.get(i))
                 }
                 adapter!!.notifyDataSetChanged()
+            } else {
+                dataIsThere = 0
             }
         })
 
@@ -97,5 +115,25 @@ class HomeScreenFragment : Fragment() {
         recyclerView = view.findViewById(R.id.home_recyclerView)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+
+        val swipeDelete = object : SwipeGesture() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+
+                if (dataIsThere==0) {
+                    Toast.makeText(requireActivity(), "Deleted Lecture", Toast.LENGTH_SHORT).show()
+                }else{
+                    viewModel.removeLecture(lectureObjectList.get(position))
+                    lectureObjectList.removeAt(position)
+                    subjectList.removeAt(position)
+                    timeList.removeAt(position)
+                    Toast.makeText(requireActivity(), "Deleted Lecture", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeDelete)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 }
