@@ -9,6 +9,7 @@ import com.gdsctsec.smartt.data.local.dao.LectureDao
 import com.gdsctsec.smartt.util.CoroutineUtil
 
 class LectureRepository(val context: Context, var weekday: Weekday) {
+
     private lateinit var db: AppDatabase
     private lateinit var lectureDao: LectureDao
     private lateinit var lectures: LiveData<List<TimeTable>>
