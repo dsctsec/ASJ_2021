@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
         val fabgotoEditscreen: FloatingActionButton = findViewById(R.id.fab_editTTscreen)
         bottomNavigationView.menu.get(1).isEnabled = false;
