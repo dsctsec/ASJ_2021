@@ -9,23 +9,28 @@ import com.gdsctsec.smartt.data.repository.LectureRepository
 import java.util.*
 
 class HomeScreenViewModel(private val context: Context) : ViewModel() {
-    private lateinit var repository: LectureRepository
-    private lateinit var lecturesOfTheDayLiveList: LiveData<List<TimeTable>>
+
+    private var repository: LectureRepository
+    private var lecturesOfTheDayLiveList: LiveData<List<TimeTable>>
+
     private lateinit var weekday: Weekday
     private lateinit var monthDate: String
 
     init {
-        repository = LectureRepository(context,getWeekday())
+
+        repository = LectureRepository(context, getWeekday())
+
         lecturesOfTheDayLiveList =
             repository.getLecturesByWeekday(getWeekday())
     }
+
 
     public fun getLiveLectureData(): LiveData<List<TimeTable>> {
         return lecturesOfTheDayLiveList
     }
 
     public fun getMonthDate(): String {
-        monthDate=""
+        monthDate = ""
         when (Calendar.MONTH) {
             2 -> {
                 monthDate = "January, " + (Calendar.DAY_OF_MONTH + 2)
@@ -95,8 +100,38 @@ class HomeScreenViewModel(private val context: Context) : ViewModel() {
         return weekday
     }
 
-    public fun removeLecture(lecture: TimeTable){
+
+    public fun getWeekDayString(): String {
+        var day = ""
+        when (Calendar.DAY_OF_WEEK) {
+            1 -> {
+                day = "Monday"
+            }
+            2 -> {
+                day = "Monday"
+            }
+            3 -> {
+                day = "Tuesday"
+            }
+            4 -> {
+                day = "Wednesday"
+            }
+            5 -> {
+                day = "Thursday"
+            }
+            6 -> {
+                day = "Friday"
+            }
+            7 -> {
+                day = "Saturday"
+            }
+        }
+        return day
+    }
+
+    public fun removeLecture(lecture: TimeTable) {
         repository.deleteLecture(lecture.id)
     }
+
 
 }
