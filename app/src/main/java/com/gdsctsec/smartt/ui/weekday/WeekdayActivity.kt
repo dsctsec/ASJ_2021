@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,28 +30,59 @@ class WeekdayActivity : AppCompatActivity() {
         val lecNumberCountTextView: TextView = findViewById(R.id.lecture_number_text_view)
         val addNewLectureEventFloatingActionButton: FloatingActionButton = findViewById(R.id.lecture_add_floating_action_button)
 
+
+        val intent=intent
+        val weekDay=intent.getStringExtra("weekday")
+        val weekNum=intent.getStringExtra("weeknum")
+
+        val viewModelFactory= weekDay?.let { WeekdayActivityViewModel(this, it) }
+        val viewModel= ViewModelProvider(this,viewModelFactory).get(WeekdayActivityViewModel::class.java)
+
+
         //recycler View Adapter
-        val timeList: List<String> = listOf(
+        val timeList: MutableList<String> = mutableListOf(
             "10:00 - 12:00",
             "12:00 - 14:00",
             "14:00 - 16:00",
             "16:00 - 18:00",
             "08:00 - 10:00"
         )
-        val subjectList: List<String> =
-            listOf("Biology", "Math", "Java", "Science", "Python")
+        val subjectList: MutableList<String> =
+            mutableListOf("Biology", "Math", "Java", "Science", "Python")
+
+        if (viewModel != null) {
+            viewModel.getLiveLecturesData().observe(this, Observer {
+                if (it.size!=0){
+                    for (i in it.indices){
+                        timeList.add(i,it.get(i).startTime+"-"+it.get(i).endTime)
+                        subjectList.add(i,it.get(i).lec)
+                    }
+                }
+            })
+        }
+
+
+
         lecturesRecyclerView.adapter = WeekdayAdapter(timeList, subjectList)
         lecturesRecyclerView.layoutManager = LinearLayoutManager(this)
 
         lecNumberCountTextView.text = timeList.size.toString() + " Lectures"
+
+        //getting the intent and the day color to be displayed by the weeknum int
+
+
+
+
+        dayColor(Integer.parseInt(weekNum))
 
         //Image visibility
         if (timeList.isNotEmpty()) imageViewCalendarImageWhenEmpty.visibility =
             View.GONE else imageViewCalendarImageWhenEmpty.visibility =
             View.GONE
 
-        //ViewModel
-        var viewModel = ViewModelProvider(this).get(WeekdayActivityViewModel::class.java)
+//        //ViewModel
+//        var viewModel = ViewModelProvider(this).get(WeekdayActivityViewModel::class.java)
+
 
 
         //Floating Button OnClick
@@ -63,6 +96,8 @@ class WeekdayActivity : AppCompatActivity() {
         val dayTextView: TextView = findViewById(R.id.day_text_view)
 
         val backgroundTintAwareDrawable = DrawableCompat.wrap(dayColorChangingToolbar.background)
+
+
 
         when (day) {
             1 -> {
