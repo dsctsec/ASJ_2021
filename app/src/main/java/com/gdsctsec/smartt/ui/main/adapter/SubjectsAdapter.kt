@@ -1,6 +1,7 @@
 package com.gdsctsec.smartt.ui.main.adapter
 
-
+import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.OnReceiveContentListener
 import android.view.View
@@ -10,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
 
-class SubjectsAdapter(val subjectsList: MutableList<String>, val timeList: MutableList<String>,private val listener: OnItemclicklistener) :
+class SubjectsAdapter(val subjectList: MutableList<String>, val timeList: MutableList<String>,private val listener: OnItemclicklistener) :
     RecyclerView.Adapter<SubjectsAdapter.SubjectViewHolder>() {
 
   inner class SubjectViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview),View.OnClickListener {
@@ -41,12 +42,12 @@ class SubjectsAdapter(val subjectsList: MutableList<String>, val timeList: Mutab
     }
 
     override fun getItemCount(): Int {
-        return subjectsList.size
+        return subjectList.size
     }
 
     override fun onBindViewHolder(holder: SubjectViewHolder, position: Int) {
 
-        holder.subjectTextView.text = subjectsList.get(position)
+        holder.subjectTextView.text = subjectList.get(position)
         holder.timeTextView.text = timeList.get(position)
 
 
