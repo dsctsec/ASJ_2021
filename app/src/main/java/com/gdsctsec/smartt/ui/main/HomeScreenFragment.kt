@@ -37,15 +37,10 @@ import com.gdsctsec.smartt.viewmodel.HomeScreenViewModelFactory
 
 class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
     private lateinit var weekDay :String
-    val subjectList: MutableList<String> =
-        mutableListOf("Biology", "Math", "Java", "Science", "Python")
-    val timeList: MutableList<String> = mutableListOf(
-        "10:00 - 12:00",
-        "12:00 - 14:00",
-        "14:00 - 16:00",
-        "16:00 - 18:00",
-        "08:00 - 10:00"
-    )
+    val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
+    val subjectList: MutableList<String> = mutableListOf("No Lectures as of now")
+    val lectureObjectList: MutableList<TimeTable> =
+        mutableListOf(TimeTable(-1, "", "", "", Weekday.Monday))
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
@@ -104,10 +99,7 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         recyclerView.adapter = SubjectsAdapter(subjectList, timeList, this)
 
 
-        val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
-        val subjectList: MutableList<String> = mutableListOf("No Lectures as of now")
-        val lectureObjectList: MutableList<TimeTable> =
-            mutableListOf(TimeTable(-1, "", "", "", Weekday.Monday))
+
 
         //1 means list is not empty and 0 means isEmpty
         var dataIsThere = 1

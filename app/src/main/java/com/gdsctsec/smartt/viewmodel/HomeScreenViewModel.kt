@@ -108,22 +108,22 @@ class HomeScreenViewModel(private val context: Context) : ViewModel() {
                 day = "Monday"
             }
             2 -> {
-                day = "Tuesday"
+                day = "Monday"
             }
             3 -> {
-                day = "Wednesday"
+                day = "Tuesday"
             }
             4 -> {
-                day = "Thursday"
+                day = "Wednesday"
             }
             5 -> {
-                day = "Friday"
+                day = "Thursday"
             }
             6 -> {
-                day = "Saturday"
+                day = "Friday"
             }
             7 -> {
-                day = "Sunday"
+                day = "Saturday"
             }
         }
         return day
