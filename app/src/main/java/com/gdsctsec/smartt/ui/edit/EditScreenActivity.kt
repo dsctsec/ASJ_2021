@@ -1,6 +1,7 @@
 package com.gdsctsec.smartt.ui.edit
 
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +11,14 @@ import android.graphics.Color
 
 import android.text.TextWatcher
 import android.widget.*
+import androidx.lifecycle.ViewModelProvider
 import com.gdsctsec.smartt.R
+import com.gdsctsec.smartt.data.TimeTable
+import com.gdsctsec.smartt.data.Weekday
+import com.gdsctsec.smartt.data.repository.LectureRepository
+import com.gdsctsec.smartt.ui.main.HomeScreenFragment
+import com.gdsctsec.smartt.viewmodel.EditScreenViewModel
+import com.gdsctsec.smartt.viewmodel.EditscreenViewmodelfactory
 
 
 class EditScreenActivity : AppCompatActivity() {
@@ -32,6 +40,26 @@ class EditScreenActivity : AppCompatActivity() {
         dayTextInputEditText = findViewById(R.id.textfield_day)
         saveTextview = findViewById(R.id.textView_save)
         cancelTextView = findViewById(R.id.textView_cancel)
+        val viewModelFactory = EditscreenViewmodelfactory(this)
+        val viewModel = ViewModelProvider(this,viewModelFactory).get(EditScreenViewModel::class.java)
+        val choice : String? = intent.getStringExtra("1")
+            if(choice == "HomeScreenFragment") {
+                val startTime = intent.getStringExtra("Lecture_start_Time").toString()
+                val endTime = intent.getStringExtra("Lecture_End_time").toString()
+                val lecture = intent.getStringExtra("Lecture_Choosen_subject").toString()
+
+                Toast.makeText(this, "$startTime $endTime $lecture", Toast.LENGTH_SHORT).show()
+                lectureEditText.setText(lecture)
+                starttimeTextView.setText(startTime)
+                endtimeTextView.setText(endTime)
+            }
+
+
+
+
+
+
+
         // dropdown
         var days = resources.getStringArray(com.gdsctsec.smartt.R.array.days)
         val ArrayAdapter = ArrayAdapter(
@@ -56,12 +84,19 @@ class EditScreenActivity : AppCompatActivity() {
         }
         saveTextview.setOnClickListener {
             // wil require all strings for saving in database
-            var lecture: String? = lectureEditText.text.toString()
-            var day: String? = dayTextInputEditText.text.toString()
-            var starttime: String? = starttimeTextView.text.toString()
-            var endtime: String? = endtimeTextView.text.toString()
-            viewDisabled(saveTextview)
+            var lecture: String = lectureEditText.text.toString()
+            var day: String = dayTextInputEditText.text.toString()
+            var starttime: String = starttimeTextView.text.toString()
+            var endtime: String = endtimeTextView.text.toString()
+            if(choice == "homescreenfragment"){
+                viewModel.addlecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime))
+            }
+            else{
+                viewModel.updatelecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime))
+            }
+//
 
+            viewDisabled(saveTextview)
         }
 
 
