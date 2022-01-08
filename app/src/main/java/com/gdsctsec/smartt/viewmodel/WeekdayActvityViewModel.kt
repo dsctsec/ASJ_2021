@@ -9,10 +9,12 @@ import com.gdsctsec.smartt.data.repository.LectureRepository
 
 class WeekdayActvityViewModel(val context: Context,private val weekday: String):ViewModel() {
     private var lecturesOfTheDayLiveList: LiveData<List<TimeTable>>
+    private var lectureRepository:LectureRepository
 
     init {
-        lecturesOfTheDayLiveList=LectureRepository(context,Weekday.valueOf(weekday)).getLecturesByWeekday(
-            Weekday.valueOf(weekday))
+        lectureRepository=LectureRepository(context,Weekday.valueOf(weekday))
+        lecturesOfTheDayLiveList=lectureRepository.getLecturesByWeekday(Weekday.valueOf(weekday))
+
     }
 
     public fun getLiveLecturesData():LiveData<List<TimeTable>>{
