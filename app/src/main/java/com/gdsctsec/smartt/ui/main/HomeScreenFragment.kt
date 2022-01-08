@@ -1,10 +1,13 @@
 package com.gdsctsec.smartt.ui.main
 
+import android.content.Intent
 import android.graphics.Color
+import android.icu.text.Transliterator
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,20 +17,30 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
+
+import com.gdsctsec.smartt.data.Weekday
+import com.gdsctsec.smartt.ui.edit.EditScreenActivity
+
 import com.gdsctsec.smartt.SwipeGesture
 import com.gdsctsec.smartt.data.TimeTable
-import com.gdsctsec.smartt.data.Weekday
+
+
 import com.gdsctsec.smartt.ui.main.adapter.SubjectsAdapter
 import com.gdsctsec.smartt.viewmodel.HomeScreenViewModel
 import com.gdsctsec.smartt.viewmodel.HomeScreenViewModelFactory
 
-class HomeScreenFragment : Fragment() {
-
+class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
+    private lateinit var weekDay :String
+    val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
+    val subjectList: MutableList<String> = mutableListOf("No Lectures as of now")
+    val lectureObjectList: MutableList<TimeTable> =
+        mutableListOf(TimeTable(-1, "", "", "", Weekday.Monday))
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
@@ -82,18 +95,22 @@ class HomeScreenFragment : Fragment() {
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 
-        val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
-        val subjectList: MutableList<String> = mutableListOf("No Lectures as of now")
-        val lectureObjectList: MutableList<TimeTable> =
-            mutableListOf(TimeTable(-1, "", "", "", Weekday.Monday))
+        recyclerView = view.findViewById(R.id.home_recyclerView)
+        recyclerView.adapter = SubjectsAdapter(subjectList, timeList, this)
+
+
+
 
         //1 means list is not empty and 0 means isEmpty
         var dataIsThere = 1
 
-        val adapter = SubjectsAdapter(subjectList, timeList)
+        val adapter = SubjectsAdapter(subjectList, timeList,this )
+
 
         val viewModel =
             ViewModelProvider(this, viewModelFactory).get(HomeScreenViewModel::class.java)
+        weekDay = viewModel.getWeekDayString();
+
         viewModel.getLiveLectureData().observe(requireActivity(), Observer {
             if (it.size != 0) {
                 dataIsThere = 1
@@ -114,6 +131,7 @@ class HomeScreenFragment : Fragment() {
         //mutableListOf("subjects")
         recyclerView = view.findViewById(R.id.home_recyclerView)
         recyclerView.adapter = adapter
+
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
 
         val swipeDelete = object : SwipeGesture() {
@@ -135,5 +153,24 @@ class HomeScreenFragment : Fragment() {
 
         val itemTouchHelper = ItemTouchHelper(swipeDelete)
         itemTouchHelper.attachToRecyclerView(recyclerView)
+    }
+
+    override fun onItemClick(position: Int) {
+
+        val chosenSubject = subjectList.get(position)
+        val startTime = timeList.get(position).split(" - ")[0]
+        val endTime = timeList.get(position).split(" - ")[1]
+
+
+        Toast.makeText(context,"$startTime $endTime $chosenSubject",Toast.LENGTH_SHORT).show()
+        val intent = Intent(context,EditScreenActivity::class.java).apply {
+            putExtra("Lecture_Choosen_subject",chosenSubject)
+            putExtra("Lecture_start_Time",startTime)
+            putExtra("Lecture_End_time", endTime)
+            putExtra("Lecture_Weekday", weekDay)
+            putExtra("1","HomeScreenFragment")
+        }
+        startActivity(intent)
+
     }
 }
