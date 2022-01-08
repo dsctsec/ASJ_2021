@@ -29,35 +29,27 @@ class WeekdayActivity : AppCompatActivity() {
         val imageViewCalendarImageWhenEmpty: ImageView = findViewById(R.id.empty_list_image_view)
         val lecturesRecyclerView: RecyclerView = findViewById(R.id.lecture_recycler_view)
         val lecNumberCountTextView: TextView = findViewById(R.id.lecture_number_text_view)
-        val addNewLectureEventFloatingActionButton: FloatingActionButton = findViewById(R.id.lecture_add_floating_action_button)
+        val addNewLectureEventFloatingActionButton: FloatingActionButton =
+            findViewById(R.id.lecture_add_floating_action_button)
 
 
-        val intent=intent
-        val weekDay=intent.getStringExtra("weekday")
-        val weekNum=intent.getStringExtra("weeknum")
+        val intent = intent
+        val weekDay = intent.getStringExtra("weekday")
+        val weekNum = intent.getStringExtra("weeknum")
 
-        val viewModelFactory= WeekdayActivityViewModelFactory(this, weekDay.toString())
-        val viewModel= ViewModelProvider(this,viewModelFactory).get(WeekdayActvityViewModel::class.java)
-
-
+        val viewModelFactory = WeekdayActivityViewModelFactory(this, weekDay.toString())
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(WeekdayActvityViewModel::class.java)
 
 
         //recycler View Adapter
-        val timeList: MutableList<String> = mutableListOf(
-            "10:00 - 12:00",
-            "12:00 - 14:00",
-            "14:00 - 16:00",
-            "16:00 - 18:00",
-            "08:00 - 10:00"
-        )
-        val subjectList: MutableList<String> =
-            mutableListOf("Biology", "Math", "Java", "Science", "Python")
+        val timeList: MutableList<String> = mutableListOf()
+        val subjectList: MutableList<String> = mutableListOf()
 
         viewModel.getLiveLecturesData().observe(this, Observer {
-            if (it.size!=0){
-                for (i in it.indices){
-                    timeList.add(i,it.get(i).startTime+"-"+it.get(i).endTime)
-                    subjectList.add(i,it.get(i).lec)
+            if (it.size != 0) {
+                for (i in it.indices) {
+                    timeList.add(i, it.get(i).startTime + "-" + it.get(i).endTime)
+                    subjectList.add(i, it.get(i).lec)
                 }
             }
         })
@@ -72,17 +64,12 @@ class WeekdayActivity : AppCompatActivity() {
         //getting the intent and the day color to be displayed by the weeknum int
 
 
-
-
         dayColor(Integer.parseInt(weekNum))
 
         //Image visibility
         if (timeList.isNotEmpty()) imageViewCalendarImageWhenEmpty.visibility =
             View.GONE else imageViewCalendarImageWhenEmpty.visibility =
-            View.GONE
-
-//        //ViewModel
-//        var viewModel = ViewModelProvider(this).get(WeekdayActivityViewModel::class.java)
+            View.VISIBLE
 
 
 
@@ -93,7 +80,8 @@ class WeekdayActivity : AppCompatActivity() {
     }
 
     fun dayColor(day: Int) {
-        val dayColorChangingToolbar: Toolbar = findViewById(R.id.weekday_activity_toolbar_top_card_view)
+        val dayColorChangingToolbar: Toolbar =
+            findViewById(R.id.weekday_activity_toolbar_top_card_view)
         val dayTextView: TextView = findViewById(R.id.day_text_view)
 
         val backgroundTintAwareDrawable = DrawableCompat.wrap(dayColorChangingToolbar.background)

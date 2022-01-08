@@ -8,7 +8,7 @@ import com.gdsctsec.smartt.data.Weekday
 import com.gdsctsec.smartt.data.repository.LectureRepository
 
 class WeekdayActvityViewModel(val context: Context,private val weekday: String):ViewModel() {
-    private lateinit var lecturesOfTheDayLiveList: LiveData<List<TimeTable>>
+    private var lecturesOfTheDayLiveList: LiveData<List<TimeTable>>
 
     init {
         lecturesOfTheDayLiveList=LectureRepository(context,Weekday.valueOf(weekday)).getLecturesByWeekday(
