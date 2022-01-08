@@ -41,22 +41,29 @@ class WeekdayActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, viewModelFactory).get(WeekdayActvityViewModel::class.java)
 
 
+
         //recycler View Adapter
         val timeList: MutableList<String> = mutableListOf()
         val subjectList: MutableList<String> = mutableListOf()
 
+        val adapter=WeekdayAdapter(timeList,subjectList)
+
         viewModel.getLiveLecturesData().observe(this, Observer {
             if (it.size != 0) {
+                timeList.clear()
+                subjectList.clear()
                 for (i in it.indices) {
                     timeList.add(i, it.get(i).startTime + "-" + it.get(i).endTime)
                     subjectList.add(i, it.get(i).lec)
                 }
+
+                adapter.notifyDataSetChanged()
             }
         })
 
 
 
-        lecturesRecyclerView.adapter = WeekdayAdapter(timeList, subjectList)
+        lecturesRecyclerView.adapter = adapter
         lecturesRecyclerView.layoutManager = LinearLayoutManager(this)
 
         lecNumberCountTextView.text = timeList.size.toString() + " Lectures"
