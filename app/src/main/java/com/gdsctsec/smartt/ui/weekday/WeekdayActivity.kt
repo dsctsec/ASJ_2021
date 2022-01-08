@@ -10,12 +10,15 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.ui.weekday.adapter.WeekdayAdapter
-import com.gdsctsec.smartt.viewmodel.WeekdayActivityViewModel
+import com.gdsctsec.smartt.viewmodel.WeekdayActivityViewModelFactory
+import com.gdsctsec.smartt.viewmodel.WeekdayActvityViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WeekdayActivity : AppCompatActivity() {
@@ -26,30 +29,55 @@ class WeekdayActivity : AppCompatActivity() {
         val imageViewCalendarImageWhenEmpty: ImageView = findViewById(R.id.empty_list_image_view)
         val lecturesRecyclerView: RecyclerView = findViewById(R.id.lecture_recycler_view)
         val lecNumberCountTextView: TextView = findViewById(R.id.lecture_number_text_view)
-        val addNewLectureEventFloatingActionButton: FloatingActionButton = findViewById(R.id.lecture_add_floating_action_button)
+        val addNewLectureEventFloatingActionButton: FloatingActionButton =
+            findViewById(R.id.lecture_add_floating_action_button)
+
+
+        val intent = intent
+        val weekDay = intent.getStringExtra("weekday")
+        val weekNum = intent.getStringExtra("weeknum")
+
+        val viewModelFactory = WeekdayActivityViewModelFactory(this, weekDay.toString())
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(WeekdayActvityViewModel::class.java)
+
+
 
         //recycler View Adapter
-        val timeList: List<String> = listOf(
-            "10:00 - 12:00",
-            "12:00 - 14:00",
-            "14:00 - 16:00",
-            "16:00 - 18:00",
-            "08:00 - 10:00"
-        )
-        val subjectList: List<String> =
-            listOf("Biology", "Math", "Java", "Science", "Python")
-        lecturesRecyclerView.adapter = WeekdayAdapter(timeList, subjectList)
+        val timeList: MutableList<String> = mutableListOf()
+        val subjectList: MutableList<String> = mutableListOf()
+
+        val adapter=WeekdayAdapter(timeList,subjectList)
+
+        viewModel.getLiveLecturesData().observe(this, Observer {
+            if (it.size != 0) {
+                timeList.clear()
+                subjectList.clear()
+                for (i in it.indices) {
+                    timeList.add(i, it.get(i).startTime + "-" + it.get(i).endTime)
+                    subjectList.add(i, it.get(i).lec)
+                }
+
+                adapter.notifyDataSetChanged()
+            }
+        })
+
+
+
+        lecturesRecyclerView.adapter = adapter
         lecturesRecyclerView.layoutManager = LinearLayoutManager(this)
 
         lecNumberCountTextView.text = timeList.size.toString() + " Lectures"
 
+        //getting the intent and the day color to be displayed by the weeknum int
+
+
+        dayColor(Integer.parseInt(weekNum))
+
         //Image visibility
         if (timeList.isNotEmpty()) imageViewCalendarImageWhenEmpty.visibility =
             View.GONE else imageViewCalendarImageWhenEmpty.visibility =
-            View.GONE
+            View.VISIBLE
 
-        //ViewModel
-        var viewModel = ViewModelProvider(this).get(WeekdayActivityViewModel::class.java)
 
 
         //Floating Button OnClick
@@ -59,10 +87,13 @@ class WeekdayActivity : AppCompatActivity() {
     }
 
     fun dayColor(day: Int) {
-        val dayColorChangingToolbar: Toolbar = findViewById(R.id.weekday_activity_toolbar_top_card_view)
+        val dayColorChangingToolbar: Toolbar =
+            findViewById(R.id.weekday_activity_toolbar_top_card_view)
         val dayTextView: TextView = findViewById(R.id.day_text_view)
 
         val backgroundTintAwareDrawable = DrawableCompat.wrap(dayColorChangingToolbar.background)
+
+
 
         when (day) {
             1 -> {
