@@ -122,13 +122,13 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
                     timeList.add(i, (it.get(i).startTime + " - " + it.get(i).endTime))
                     lectureObjectList.add(it.get(i))
                 }
-                adapter!!.notifyDataSetChanged()
+                adapter.notifyDataSetChanged()
             } else {
                 dataIsThere = 0
                 subjectList.clear()
                 timeList.clear()
                 lectureObjectList.clear()
-                adapter!!.notifyDataSetChanged()
+                adapter.notifyDataSetChanged()
 
             }
         })
