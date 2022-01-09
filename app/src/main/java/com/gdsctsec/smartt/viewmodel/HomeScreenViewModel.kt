@@ -20,6 +20,8 @@ class HomeScreenViewModel(private val context: Context) : ViewModel() {
 
     private var repository: LectureRepository
     private var lecturesOfTheDayLiveList: LiveData<List<TimeTable>>
+    private val reqDayFormat:SimpleDateFormat
+    private val dateOfTheDay:Date
 
     private lateinit var weekday: Weekday
     private lateinit var monthDate: String
@@ -29,6 +31,9 @@ class HomeScreenViewModel(private val context: Context) : ViewModel() {
 
         lecturesOfTheDayLiveList =
             repository.getLecturesByWeekday(getWeekday())
+
+        reqDayFormat = SimpleDateFormat("EEEE", Locale.ENGLISH)
+        dateOfTheDay = Date()
     }
 
     public fun getLiveLectureData(): LiveData<List<TimeTable>> {
@@ -40,8 +45,6 @@ class HomeScreenViewModel(private val context: Context) : ViewModel() {
     public fun getMonthDate(): String {
         monthDate = ""
         val reqDateFormat = SimpleDateFormat("dd")
-        val reqDayFormat = SimpleDateFormat("EEEE", Locale.ENGLISH)
-        val dateOfTheDay = Date()
         monthDate = reqDayFormat.format(dateOfTheDay) + ", " + reqDateFormat.format(dateOfTheDay)
         return monthDate
     }
@@ -50,36 +53,21 @@ class HomeScreenViewModel(private val context: Context) : ViewModel() {
     public fun getWeekday(): Weekday {
         val reqDayFormat = SimpleDateFormat("EEEE", Locale.ENGLISH)
         val dayOfWeek = Date()
-        weekday = Weekday.valueOf(reqDayFormat.format(dayOfWeek).toString())
+
+        if(Weekday.valueOf(reqDayFormat.format(dayOfWeek).toString()) == Weekday.Sunday)
+            weekday = Weekday.Monday
+        else
+            weekday = Weekday.valueOf(reqDayFormat.format(dayOfWeek).toString())
         return weekday
     }
 
 
     public fun getWeekDayString(): String {
-        var day = ""
-        when (Calendar.DAY_OF_WEEK) {
-            1 -> {
-                day = "Monday"
-            }
-            2 -> {
-                day = "Monday"
-            }
-            3 -> {
-                day = "Tuesday"
-            }
-            4 -> {
-                day = "Wednesday"
-            }
-            5 -> {
-                day = "Thursday"
-            }
-            6 -> {
-                day = "Friday"
-            }
-            7 -> {
-                day = "Saturday"
-            }
-        }
+        var day = reqDayFormat.format(dateOfTheDay)
+
+        if (day == "Sunday")
+            day="Monday"
+
         return day
     }
 
