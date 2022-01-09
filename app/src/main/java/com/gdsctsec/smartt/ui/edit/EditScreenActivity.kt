@@ -88,10 +88,10 @@ class EditScreenActivity : AppCompatActivity() {
 
 
         starttimeTextView.setOnClickListener {
-            timePick(starttimeTextView)
+            viewModel.timePick(starttimeTextView)
         }
         endtimeTextView.setOnClickListener {
-            timePick(endtimeTextView)
+            viewModel.timePick(endtimeTextView)
 
         }
         saveTextview.setOnClickListener {
@@ -151,58 +151,7 @@ class EditScreenActivity : AppCompatActivity() {
     }
 
 
-    private fun timePick(v: TextView) {
-        val mTimePickerstart: TimePickerDialog
-        val mcurrentTime = Calendar.getInstance()
-        val hour = mcurrentTime.get(Calendar.HOUR_OF_DAY)
-        val minute = mcurrentTime.get(Calendar.MINUTE)
 
-        mTimePickerstart = TimePickerDialog(this,
-            R.style.MyTimePickerDialogTheme,
-            object : TimePickerDialog.OnTimeSetListener {
-            override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-                v.setText(onTimeSet(hourOfDay, minute))
-            }
-        }, hour, minute, false)
-        mTimePickerstart.show()
-
-    }
-
-    private fun onTimeSet(hourOfDay: Int, minute: Int): String {
-        // Set a variable to hold the current time AM PM Status
-        // Initially we set the variable value to AM
-
-
-        var status = "am"
-        if (hourOfDay > 11) {
-            // If the hour is greater than or equal to 12
-            // Then the current AM PM status is PM
-            status = "pm"
-        }
-
-        // Initialize a new variable to hold 12 hour format hour value
-        val hour_of_12_hour_format: Int
-        hour_of_12_hour_format = if (hourOfDay > 12) {
-
-            // If the hour is greater than or equal to 12
-            // Then we subtract 12 from the hour to make it 12 hour format time
-            hourOfDay - 12
-        } else {
-            hourOfDay
-        }
-
-        // Get the calling activity TextView reference
-
-        // Display the 12 hour format time in app interface
-        if (minute >= 0 && minute <= 9) {
-            val time = "$hour_of_12_hour_format:0$minute $status"
-            return time
-        } else {
-            val time = "$hour_of_12_hour_format:$minute $status"
-            return time
-        }
-
-    }
 
     private val textWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {

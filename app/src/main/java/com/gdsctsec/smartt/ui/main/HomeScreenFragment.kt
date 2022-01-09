@@ -125,6 +125,11 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
                 adapter!!.notifyDataSetChanged()
             } else {
                 dataIsThere = 0
+                subjectList.clear()
+                timeList.clear()
+                lectureObjectList.clear()
+                adapter!!.notifyDataSetChanged()
+
             }
         })
 
