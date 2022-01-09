@@ -26,9 +26,11 @@
         <item name="elevation">0dp</item>
     </style>
 
-    <style name="MyTimePickerTheme" parent="android:Widget.Material.Light.TimePicker">
-        <item name="android:timePickerMode">spinner</item>
+    <style name="MyTimePickerDialogTheme" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">@color/remindi_black</item>
+        <item name="colorAccent">@color/remindi_black</item>
     </style>
+
 
     <style name="HomeFragmentProgressBar">
         <item name="android:indeterminateOnly">false</item>

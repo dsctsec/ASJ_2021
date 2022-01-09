@@ -168,7 +168,8 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
             putExtra("Lecture_start_Time",startTime)
             putExtra("Lecture_End_time", endTime)
             putExtra("Lecture_Weekday", weekDay)
-            putExtra("1","HomeScreenFragment")
+            putExtra("TAG","HomeScreenFragment")
+            putExtra("id",lectureObjectList.get(position).id.toString())
         }
         startActivity(intent)
 
