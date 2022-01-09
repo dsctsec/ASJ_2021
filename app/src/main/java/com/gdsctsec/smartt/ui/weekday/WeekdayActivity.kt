@@ -14,6 +14,7 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
@@ -40,15 +41,15 @@ class WeekdayActivity : AppCompatActivity() {
         val weekNum = intent.getStringExtra("weeknum")
 
         val viewModelFactory = WeekdayActivityViewModelFactory(this, weekDay.toString())
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(WeekdayActvityViewModel::class.java)
-
+        val viewModel =
+            ViewModelProvider(this, viewModelFactory).get(WeekdayActvityViewModel::class.java)
 
 
         //recycler View Adapter
         val timeList: MutableList<String> = mutableListOf()
         val subjectList: MutableList<String> = mutableListOf()
 
-        val adapter=WeekdayAdapter(timeList,subjectList)
+        val adapter = WeekdayAdapter(timeList, subjectList)
 
         viewModel.getLiveLecturesData().observe(this, Observer {
             if (it.size != 0) {
@@ -61,8 +62,7 @@ class WeekdayActivity : AppCompatActivity() {
                 }
 
                 adapter.notifyDataSetChanged()
-            }
-            else{
+            } else {
                 imageViewCalendarImageWhenEmpty.visibility = View.VISIBLE
             }
         })
@@ -73,6 +73,14 @@ class WeekdayActivity : AppCompatActivity() {
         lecturesRecyclerView.layoutManager = LinearLayoutManager(this)
 
         lecNumberCountTextView.text = timeList.size.toString() + " Lectures"
+
+        viewModel.getLectureCountPerWeekday().observe(this, {
+            for (day in it) {
+                if (day.dow.name.equals(weekDay, ignoreCase = true)) {
+                    lecNumberCountTextView.text = day.lecNo.toString() + " Lectures"
+                }
+            }
+        })
 
         //getting the intent and the day color to be displayed by the weeknum int
 
@@ -85,13 +93,12 @@ class WeekdayActivity : AppCompatActivity() {
             View.VISIBLE
 
 
-
         //Floating Button OnClick
         addNewLectureEventFloatingActionButton.setOnClickListener(View.OnClickListener {
-              val intent = Intent(this, EditScreenActivity::class.java).apply {
-                  putExtra("Weekday",weekDay)
-                  putExtra("TAG","WeekdayActivity")
-              }
+            val intent = Intent(this, EditScreenActivity::class.java).apply {
+                putExtra("Weekday", weekDay)
+                putExtra("TAG", "WeekdayActivity")
+            }
             startActivity(intent)
         })
     }
