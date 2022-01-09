@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.ui.main.adapter.TTScreenAdapter
 
-import com.gdsctsec.smartt.ui.main.model.TTScreendata
+import com.gdsctsec.smartt.model.TTScreendata
 import com.gdsctsec.smartt.viewmodel.TTScreenViewModel
 import com.gdsctsec.smartt.viewmodel.TTScreenViewModelFactory
 

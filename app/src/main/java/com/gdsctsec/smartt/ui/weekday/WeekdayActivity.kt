@@ -1,28 +1,23 @@
 package com.gdsctsec.smartt.ui.weekday
 
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
-import com.gdsctsec.smartt.SwipeGesture
+import com.gdsctsec.smartt.util.SwipeGestureUtil
 import com.gdsctsec.smartt.ui.edit.EditScreenActivity
 import com.gdsctsec.smartt.ui.weekday.adapter.WeekdayAdapter
 import com.gdsctsec.smartt.viewmodel.WeekdayActivityViewModelFactory
@@ -110,7 +105,7 @@ class WeekdayActivity : AppCompatActivity() {
             startActivity(intent)
         })
 
-        val swipeDelete = object : SwipeGesture() {
+        val swipeDelete = object : SwipeGestureUtil() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 if (position != RecyclerView.NO_POSITION) {

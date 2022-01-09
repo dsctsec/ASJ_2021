@@ -2,8 +2,6 @@ package com.gdsctsec.smartt.ui.main.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
-import com.gdsctsec.smartt.ui.main.model.TTScreendata
+import com.gdsctsec.smartt.model.TTScreendata
 import com.gdsctsec.smartt.ui.weekday.WeekdayActivity
-import com.google.android.material.card.MaterialCardView
 
 class TTScreenAdapter(val context: Context, val list: List<TTScreendata>) :
     RecyclerView.Adapter<TTScreenAdapter.TTScreenViewHolder>() {
