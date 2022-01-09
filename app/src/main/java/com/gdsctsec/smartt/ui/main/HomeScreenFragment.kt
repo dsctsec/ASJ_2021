@@ -134,9 +134,15 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
                     timeList.add(i, (it.get(i).startTime + " - " + it.get(i).endTime))
                     lectureObjectList.add(it.get(i))
                 }
-                adapter!!.notifyDataSetChanged()
+                adapter.notifyDataSetChanged()
             } else {
                 dataIsThere = 0
+
+                subjectList.clear()
+                timeList.clear()
+                lectureObjectList.clear()
+                adapter.notifyDataSetChanged()
+                
                 recyclerView.visibility = View.GONE
                 noLecturesTextView.visibility = View.VISIBLE
             }
@@ -182,7 +188,9 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
             putExtra("Lecture_start_Time", startTime)
             putExtra("Lecture_End_time", endTime)
             putExtra("Lecture_Weekday", weekDay)
-            putExtra("1", "HomeScreenFragment")
+            putExtra("TAG","HomeScreenFragment")
+            putExtra("id",lectureObjectList.get(position).id.toString())
+
         }
         startActivity(intent)
 

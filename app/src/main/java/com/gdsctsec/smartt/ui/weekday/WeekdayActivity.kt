@@ -36,7 +36,7 @@ class WeekdayActivity : AppCompatActivity() {
 
 
         val intent = intent
-        val weekDay = intent.getStringExtra("weekday")
+        val weekDay = intent.getStringExtra("weekday").toString()
         val weekNum = intent.getStringExtra("weeknum")
 
         val viewModelFactory = WeekdayActivityViewModelFactory(this, weekDay.toString())
@@ -54,12 +54,16 @@ class WeekdayActivity : AppCompatActivity() {
             if (it.size != 0) {
                 timeList.clear()
                 subjectList.clear()
+                imageViewCalendarImageWhenEmpty.visibility = View.INVISIBLE
                 for (i in it.indices) {
                     timeList.add(i, it.get(i).startTime + "-" + it.get(i).endTime)
                     subjectList.add(i, it.get(i).lec)
                 }
 
                 adapter.notifyDataSetChanged()
+            }
+            else{
+                imageViewCalendarImageWhenEmpty.visibility = View.VISIBLE
             }
         })
 
@@ -84,10 +88,10 @@ class WeekdayActivity : AppCompatActivity() {
 
         //Floating Button OnClick
         addNewLectureEventFloatingActionButton.setOnClickListener(View.OnClickListener {
-            val intent=Intent(this,EditScreenActivity::class.java).apply {
-                putExtra("weekday",weekDay)
-            }
-
+              val intent = Intent(this, EditScreenActivity::class.java).apply {
+                  putExtra("Weekday",weekDay)
+                  putExtra("TAG","WeekdayActivity")
+              }
             startActivity(intent)
         })
     }
@@ -98,6 +102,7 @@ class WeekdayActivity : AppCompatActivity() {
         val dayTextView: TextView = findViewById(R.id.day_text_view)
 
         val backgroundTintAwareDrawable = DrawableCompat.wrap(dayColorChangingToolbar.background)
+
 
 
         when (day) {
