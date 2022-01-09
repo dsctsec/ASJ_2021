@@ -36,25 +36,25 @@ class TTScreenAdapter(val context: Context, val list: List<TTScreendata>) :
     override fun onBindViewHolder(holder: TTScreenViewHolder, position: Int) {
         val data: TTScreendata = list[position]
         holder.weekdayTextView.text = context.resources.getString(data.weekDay)
-        holder.lecturesTextView.text = data.lecturesNum.toString()+" lectures"
+        holder.lecturesTextView.text = data.lecturesNum.toString() + " lectures"
         holder.card.background.setTint(ContextCompat.getColor(context, data.colorId))
-        val weekNum=when(holder.weekdayTextView.text){
-            "Monday"-> 1
-            "Tuesday"->2
-            "Wednesday"->3
-            "Thursday"->4
-            "Friday"->5
-            "Saturday"->6
-            else-> Log.i("Invalid","Invalid Weekday")
+        val weekNum = when (holder.weekdayTextView.text) {
+            "Monday" -> 1
+            "Tuesday" -> 2
+            "Wednesday" -> 3
+            "Thursday" -> 4
+            "Friday" -> 5
+            "Saturday" -> 6
+            else -> Log.i("Invalid", "Invalid Weekday")
         }
 
         holder.card.setOnClickListener {
-           val intent=Intent(context,WeekdayActivity::class.java).apply {
-               putExtra("weekday",holder.weekdayTextView.text)
-                putExtra("weeknum",weekNum.toString())
-           }
+            val intent = Intent(context, WeekdayActivity::class.java).apply {
+                putExtra("weekday", holder.weekdayTextView.text)
+                putExtra("weeknum", weekNum.toString())
+            }
 
-           startActivity(context,intent,null)
+            startActivity(context, intent, null)
         }
     }
 

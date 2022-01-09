@@ -43,7 +43,7 @@
         <entry key="..\:/Users/KRISHANA/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/activity_add_lecture.xml" value="0.5" />
         <entry key="..\:/Users/KRISHANA/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/activity_editscreen.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/KRISHANA/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/activity_main.xml" value="0.12760416666666666" />
-        <entry key="..\:/Users/KRISHANA/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/activity_weekday.xml" value="0.1" />
+        <entry key="..\:/Users/KRISHANA/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/activity_weekday.xml" value="0.22" />
         <entry key="..\:/Users/KRISHANA/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/dropdown.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/KRISHANA/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/fragment_home_screen.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/KRISHANA/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/fragment_t_t_scheduling_screen.xml" value="0.16666666666666666" />
@@ -59,7 +59,9 @@
         <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/home_fragment_list_item.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/lecture_item.xml" value="0.20425724637681159" />
         <entry key="..\:/Users/Puneet/AndroidStudioProjects/ASJ_2021/app/src/main/res/layout/tt_scheduling_item.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/tanay/AndroidStudioProjects/SmarTT/app/src/main/res/layout/activity_weekday.xml" value="0.16354166666666667" />
         <entry key="..\:/Users/tanay/AndroidStudioProjects/SmarTT/app/src/main/res/layout/fragment_t_t_scheduling_screen.xml" value="0.1585144927536232" />
+        <entry key="..\:/Users/tanay/AndroidStudioProjects/SmarTT/app/src/main/res/layout/tt_scheduling_item.xml" value="0.16354166666666667" />
       </map>
     </option>
   </component>
