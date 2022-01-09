@@ -26,4 +26,8 @@ class WeekdayActvityViewModel(val context: Context, private val weekday: String)
     fun getLectureCountPerWeekday(): LiveData<List<LectureCount>> {
         return lectureCountList
     }
+
+    fun deleteLecture(id: Int) {
+        lectureRepository.deleteLecture(id)
+    }
 }
