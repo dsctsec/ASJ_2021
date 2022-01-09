@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmarTT</string>
+    <string name="app_name">Remindi</string>
     <string-array name="days">
         <item>Monday</item>
         <item>Tuesday</item>
