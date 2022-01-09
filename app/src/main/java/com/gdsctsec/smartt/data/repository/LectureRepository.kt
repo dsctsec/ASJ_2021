@@ -6,6 +6,7 @@ import com.gdsctsec.smartt.data.AppDatabase
 import com.gdsctsec.smartt.data.TimeTable
 import com.gdsctsec.smartt.data.Weekday
 import com.gdsctsec.smartt.data.local.dao.LectureDao
+import com.gdsctsec.smartt.model.LectureCount
 import com.gdsctsec.smartt.util.CoroutineUtil
 
 class LectureRepository(val context: Context, var weekday: Weekday) {
@@ -13,10 +14,12 @@ class LectureRepository(val context: Context, var weekday: Weekday) {
     private lateinit var db: AppDatabase
     private lateinit var lectureDao: LectureDao
     private lateinit var lectures: LiveData<List<TimeTable>>
+    private lateinit var lectureCountList: LiveData<List<LectureCount>>
 
     init {
         db = AppDatabase.getInstance(context.applicationContext)
         lectureDao = db.lectureDao()
+        lectureCountList = lectureDao.getLectureCountPerWeekday()
         lectures = lectureDao.getLecturesByWeekday(weekday)
     }
 
@@ -40,5 +43,9 @@ class LectureRepository(val context: Context, var weekday: Weekday) {
         CoroutineUtil.io {
             lectureDao.deleteLecture(id)
         }
+    }
+
+    fun getLectureCountPerWeekday(): LiveData<List<LectureCount>> {
+        return lectureCountList
     }
 }
