@@ -67,6 +67,7 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         val dayDateTextView = view.findViewById<TextView>(R.id.home_day_textview)
         val noLecturesTextView = view.findViewById<TextView>(R.id.zero_lectures_msg_textView)
 
+        @RequiresApi(Build.VERSION_CODES.O)
         dayDateTextView.text = HomeScreenViewModel(requireActivity()).getMonthDate()
         val viewModelFactory = HomeScreenViewModelFactory(requireActivity())
 
@@ -103,10 +104,6 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         titleTextView.append(wordThree)
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-        val sdf = SimpleDateFormat("MM/dd")
-        val dtt = Date()
-        val asdf = SimpleDateFormat("EEEE", Locale.ENGLISH)
-        Toast.makeText(requireActivity(), asdf.format(dtt) + " x" + sdf.format(dtt), Toast.LENGTH_SHORT).show()
 
         recyclerView = view.findViewById(R.id.home_recyclerView)
         recyclerView.adapter = SubjectsAdapter(subjectList, timeList, this)
@@ -120,7 +117,9 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
 
         val viewModel =
             ViewModelProvider(this, viewModelFactory).get(HomeScreenViewModel::class.java)
+        @RequiresApi(Build.VERSION_CODES.O)
         weekDay = viewModel.getWeekDayString();
+
 
         viewModel.getLiveLectureData().observe(requireActivity(), Observer {
             if (it.size != 0) {
@@ -152,7 +151,7 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         val swipeDelete = object : SwipeGesture() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-
+                @RequiresApi(Build.VERSION_CODES.O)
                 if (dataIsThere == 0) {
                     Toast.makeText(requireActivity(), "Deleted Lecture", Toast.LENGTH_SHORT).show()
                 } else {
