@@ -88,7 +88,7 @@ class WeekdayActivity : AppCompatActivity() {
 
         //Floating Button OnClick
         addNewLectureEventFloatingActionButton.setOnClickListener(View.OnClickListener {
-              val intent = Intent(this,EditScreenActivity::class.java).apply {
+              val intent = Intent(this, EditScreenActivity::class.java).apply {
                   putExtra("Weekday",weekDay)
                   putExtra("TAG","WeekdayActivity")
               }
