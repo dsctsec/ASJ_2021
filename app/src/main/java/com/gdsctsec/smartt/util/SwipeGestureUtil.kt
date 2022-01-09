@@ -1,9 +1,9 @@
-package com.gdsctsec.smartt
+package com.gdsctsec.smartt.util
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class SwipeGesture : ItemTouchHelper.Callback() {
+abstract class SwipeGestureUtil : ItemTouchHelper.Callback() {
     override fun getMovementFlags(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder
