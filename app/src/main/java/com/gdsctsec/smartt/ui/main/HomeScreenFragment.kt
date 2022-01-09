@@ -2,7 +2,10 @@ package com.gdsctsec.smartt.ui.main
 
 import android.content.Intent
 import android.graphics.Color
+import android.icu.text.DateFormat
+import android.icu.text.SimpleDateFormat
 import android.icu.text.Transliterator
+import android.os.Build
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -14,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -34,9 +38,12 @@ import com.gdsctsec.smartt.data.TimeTable
 import com.gdsctsec.smartt.ui.main.adapter.SubjectsAdapter
 import com.gdsctsec.smartt.viewmodel.HomeScreenViewModel
 import com.gdsctsec.smartt.viewmodel.HomeScreenViewModelFactory
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
-    private lateinit var weekDay :String
+    private lateinit var weekDay: String
     val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
     val subjectList: MutableList<String> = mutableListOf("No Lectures as of now")
     val lectureObjectList: MutableList<TimeTable> =
@@ -51,13 +58,16 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         return view
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
 
         val titleTextView = view.findViewById<TextView>(R.id.remindi_header)
         val dayDateTextView = view.findViewById<TextView>(R.id.home_day_textview)
+        val noLecturesTextView = view.findViewById<TextView>(R.id.zero_lectures_msg_textView)
 
+        @RequiresApi(Build.VERSION_CODES.O)
         dayDateTextView.text = HomeScreenViewModel(requireActivity()).getMonthDate()
         val viewModelFactory = HomeScreenViewModelFactory(requireActivity())
 
@@ -99,21 +109,23 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         recyclerView.adapter = SubjectsAdapter(subjectList, timeList, this)
 
 
-
-
         //1 means list is not empty and 0 means isEmpty
         var dataIsThere = 1
 
-        val adapter = SubjectsAdapter(subjectList, timeList,this )
+        val adapter = SubjectsAdapter(subjectList, timeList, this)
 
 
         val viewModel =
             ViewModelProvider(this, viewModelFactory).get(HomeScreenViewModel::class.java)
+        @RequiresApi(Build.VERSION_CODES.O)
         weekDay = viewModel.getWeekDayString();
+
 
         viewModel.getLiveLectureData().observe(requireActivity(), Observer {
             if (it.size != 0) {
                 dataIsThere = 1
+                recyclerView.visibility = View.VISIBLE
+                noLecturesTextView.visibility = View.GONE
                 subjectList.clear()
                 timeList.clear()
                 lectureObjectList.clear()
@@ -125,11 +137,14 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
                 adapter.notifyDataSetChanged()
             } else {
                 dataIsThere = 0
+
                 subjectList.clear()
                 timeList.clear()
                 lectureObjectList.clear()
                 adapter.notifyDataSetChanged()
-
+                
+                recyclerView.visibility = View.GONE
+                noLecturesTextView.visibility = View.VISIBLE
             }
         })
 
@@ -142,10 +157,10 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         val swipeDelete = object : SwipeGesture() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-
-                if (dataIsThere==0) {
+                @RequiresApi(Build.VERSION_CODES.O)
+                if (dataIsThere == 0) {
                     Toast.makeText(requireActivity(), "Deleted Lecture", Toast.LENGTH_SHORT).show()
-                }else{
+                } else {
                     viewModel.removeLecture(lectureObjectList.get(position))
                     lectureObjectList.removeAt(position)
                     subjectList.removeAt(position)
@@ -167,14 +182,15 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         val endTime = timeList.get(position).split(" - ")[1]
 
 
-        Toast.makeText(context,"$startTime $endTime $chosenSubject",Toast.LENGTH_SHORT).show()
-        val intent = Intent(context,EditScreenActivity::class.java).apply {
-            putExtra("Lecture_Choosen_subject",chosenSubject)
-            putExtra("Lecture_start_Time",startTime)
+        Toast.makeText(context, "$startTime $endTime $chosenSubject", Toast.LENGTH_SHORT).show()
+        val intent = Intent(context, EditScreenActivity::class.java).apply {
+            putExtra("Lecture_Choosen_subject", chosenSubject)
+            putExtra("Lecture_start_Time", startTime)
             putExtra("Lecture_End_time", endTime)
             putExtra("Lecture_Weekday", weekDay)
             putExtra("TAG","HomeScreenFragment")
             putExtra("id",lectureObjectList.get(position).id.toString())
+
         }
         startActivity(intent)
 

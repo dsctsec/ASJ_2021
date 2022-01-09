@@ -1,131 +1,73 @@
 package com.gdsctsec.smartt.viewmodel
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.gdsctsec.smartt.data.TimeTable
 import com.gdsctsec.smartt.data.Weekday
 import com.gdsctsec.smartt.data.repository.LectureRepository
+import java.text.SimpleDateFormat
+import java.time.DayOfWeek
+import java.time.Month
+import java.time.format.TextStyle
 import java.util.*
 
+@RequiresApi(Build.VERSION_CODES.O)
 class HomeScreenViewModel(private val context: Context) : ViewModel() {
 
     private var repository: LectureRepository
     private var lecturesOfTheDayLiveList: LiveData<List<TimeTable>>
+    private val reqDayFormat:SimpleDateFormat
+    private val dateOfTheDay:Date
 
     private lateinit var weekday: Weekday
     private lateinit var monthDate: String
 
     init {
-
         repository = LectureRepository(context, getWeekday())
 
         lecturesOfTheDayLiveList =
             repository.getLecturesByWeekday(getWeekday())
-    }
 
+        reqDayFormat = SimpleDateFormat("EEEE", Locale.ENGLISH)
+        dateOfTheDay = Date()
+    }
 
     public fun getLiveLectureData(): LiveData<List<TimeTable>> {
         return lecturesOfTheDayLiveList
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
     public fun getMonthDate(): String {
         monthDate = ""
-        when (Calendar.MONTH) {
-            2 -> {
-                monthDate = "January, " + (Calendar.DAY_OF_MONTH + 2)
-            }
-            3 -> {
-                monthDate = "February, " + (Calendar.DAY_OF_MONTH + 2)
-            }
-            4 -> {
-                monthDate = "March, " + (Calendar.DAY_OF_MONTH + 2)
-            }
-            5 -> {
-                monthDate = "April, " + (Calendar.DAY_OF_MONTH + 2)
-            }
-            6 -> {
-                monthDate = "May, " + (Calendar.DAY_OF_MONTH + 2)
-            }
-            7 -> {
-                monthDate = "June, " + (Calendar.DAY_OF_MONTH + 2)
-            }
-            8 -> {
-                monthDate = "July, " + (Calendar.DAY_OF_MONTH + 2)
-            }
-            9 -> {
-                monthDate = "August, " + (Calendar.DAY_OF_MONTH + 2)
-            }
-            10 -> {
-                monthDate = "September, " + (Calendar.DAY_OF_MONTH + 2)
-            }
-            11 -> {
-                monthDate = "October, " + (Calendar.DAY_OF_MONTH + 2)
-            }
-            12 -> {
-                monthDate = "November, " + (Calendar.DAY_OF_MONTH + 2)
-            }
-            1 -> {
-                monthDate = "December, " + Calendar.DAY_OF_MONTH + 2
-            }
-        }
+        val reqDateFormat = SimpleDateFormat("dd")
+        monthDate = reqDayFormat.format(dateOfTheDay) + ", " + reqDateFormat.format(dateOfTheDay)
         return monthDate
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     public fun getWeekday(): Weekday {
+        val reqDayFormat = SimpleDateFormat("EEEE", Locale.ENGLISH)
+        val dayOfWeek = Date()
 
-        when (Calendar.DAY_OF_WEEK) {
-            1 -> {
-                weekday = Weekday.Monday
-            }
-            2 -> {
-                weekday = Weekday.Monday
-            }
-            3 -> {
-                weekday = Weekday.Tuesday
-            }
-            4 -> {
-                weekday = Weekday.Wednesday
-            }
-            5 -> {
-                weekday = Weekday.Thursday
-            }
-            6 -> {
-                weekday = Weekday.Friday
-            }
-            7 -> {
-                weekday = Weekday.Saturday
-            }
-        }
+        if(Weekday.valueOf(reqDayFormat.format(dayOfWeek).toString()) == Weekday.Sunday)
+            weekday = Weekday.Monday
+        else
+            weekday = Weekday.valueOf(reqDayFormat.format(dayOfWeek).toString())
         return weekday
     }
 
 
     public fun getWeekDayString(): String {
-        var day = ""
-        when (Calendar.DAY_OF_WEEK) {
-            1 -> {
-                day = "Monday"
-            }
-            2 -> {
-                day = "Monday"
-            }
-            3 -> {
-                day = "Tuesday"
-            }
-            4 -> {
-                day = "Wednesday"
-            }
-            5 -> {
-                day = "Thursday"
-            }
-            6 -> {
-                day = "Friday"
-            }
-            7 -> {
-                day = "Saturday"
-            }
-        }
+        var day = reqDayFormat.format(dateOfTheDay)
+
+        if (day == "Sunday")
+            day="Monday"
+
         return day
     }
 

@@ -107,6 +107,15 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"/>
 
+        <TextView
+            android:id="@+id/zero_lectures_msg_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Lectures as of now :-)"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textAlignment="center"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_recyclerView"
             android:layout_width="match_parent"
