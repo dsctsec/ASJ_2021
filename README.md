@@ -1,5 +1,4 @@
-# Android-Study-Jams
-Remindi - Lecture Reminder
+# Remindi - Lecture Reminder
 
 ## App Images
 <table>
@@ -14,22 +13,27 @@ Remindi - Lecture Reminder
   </tr>
 </table>
 
-## Problem Statement: 
+## Problem Statement
+
 Being in college one thing we all can agree on is that we miss our lectures. The idea is to create an App to keep us up-to date with upcomming lectures with an amazing UI experience.
 
-## Proposed Solution:
+## Proposed Solution
+
 A simple yet elegant solution is to sent reminders on phone by helping us to plan our future steps.
 "Remindi" shows user with the day's lectures and also the week's schedule in thier hand.
     	  	
-## Functionality & Concepts used:
-- The App has a very beautiful and a simple interactive interface which helps us to easily navigate and plan for us. Following are few android concepts used to achieve the functionalities in app: 
+## Functionality & Concepts used
+
+The App has a very beautiful and a simple interactive interface which helps us to easily navigate and plan for us. Following are few android concepts used to achieve the functionalities in app: 
 - Constraint Layout: Most of the activities in the app uses a flexible constraint layout, which is easy to handle for different screen sizes.
 - Simple & Easy Views Design: It was a text heavy applications with a few other elements like Progress indicator and others to build views.
 - RecyclerView : To present the list of different route busses we used the efficient recyclerview.
 - LiveData & Room Database : We are also using LiveData to update & observe any changes in the Lecture Database. So if any changes are made in our database it will be reflected into our UI.
 
-## Application Link & Future Scope:
+## Application Link & Future Scope
 
-The app is currently in the Alpha testing phase, You can access the app: [0.0.1](https://github.com/dsctsec/ASJ_2021/releases/tag/0.0.1).
+The app is currently in the Alpha testing phase. 
+
+- You can access the app: [0.0.1](https://github.com/dsctsec/ASJ_2021/releases/tag/0.0.1).
 
 The app can include attendance management module and a central server to store lecture time and details.
