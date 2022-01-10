@@ -1,17 +1,14 @@
 package com.gdsctsec.smartt.viewmodel
 
-import android.app.Application
 import android.app.TimePickerDialog
 import android.content.Context
 import android.widget.TextView
 import android.widget.TimePicker
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.data.TimeTable
 import com.gdsctsec.smartt.data.Weekday
 import com.gdsctsec.smartt.data.repository.LectureRepository
-import com.gdsctsec.smartt.ui.edit.EditScreenActivity
 import java.util.*
 
 

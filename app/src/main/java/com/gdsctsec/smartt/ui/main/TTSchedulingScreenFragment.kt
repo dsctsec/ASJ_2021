@@ -12,7 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
@@ -23,7 +25,7 @@ import com.gdsctsec.smartt.viewmodel.TTScreenViewModel
 import com.gdsctsec.smartt.viewmodel.TTScreenViewModelFactory
 
 
-class TTSchedulingScreenFragment : Fragment() {
+class TTSchedulingScreenFragment : Fragment(), TTScreenAdapter.OnItemclicklistener {
 
     lateinit var ttScreenRecyclerView: RecyclerView;
     lateinit var dataList: MutableList<TTScreendata>
@@ -35,7 +37,11 @@ class TTSchedulingScreenFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_t_t_scheduling_screen, container, false);
     }
@@ -46,7 +52,10 @@ class TTSchedulingScreenFragment : Fragment() {
         ttScreenRecyclerView = view.findViewById(R.id.tt_items_recycler_view);
         titleTextView = view.findViewById(R.id.remindi_header)
         val viewModelFactory = TTScreenViewModelFactory(requireContext())
-        viewModel = ViewModelProvider(requireActivity(), viewModelFactory).get(TTScreenViewModel::class.java)
+        viewModel = ViewModelProvider(
+            requireActivity(),
+            viewModelFactory
+        ).get(TTScreenViewModel::class.java)
 
         val word: Spannable = SpannableString("Rem")
         word.setSpan(
@@ -90,7 +99,7 @@ class TTSchedulingScreenFragment : Fragment() {
             TTScreendata(R.string.saturday, noOfLectures[5], R.color.color_saturday)
         )
         dataList.addAll(mDataList)
-        val adapter = TTScreenAdapter(requireContext(), dataList)
+        val adapter = TTScreenAdapter(requireContext(), dataList, this)
         ttScreenRecyclerView.layoutManager = GridLayoutManager(context, 2)
         ttScreenRecyclerView.adapter = adapter
 
@@ -130,5 +139,40 @@ class TTSchedulingScreenFragment : Fragment() {
                 Log.e("TT screen data", "empty!")
             }
         })
+    }
+
+    override fun onItemClick(position: Int) {
+
+
+
+
+        val weekday = getString(dataList[position].weekDay)
+
+        val dayNum =when (weekday) {
+            "Monday" -> 1
+            "Tuesday" -> 2
+            "Wednesday" -> 3
+            "Thursday" -> 4
+            "Friday" -> 5
+            "Saturday" -> 6
+            else -> Log.i("Invalid", "Invalid Weekday")
+        }
+
+
+
+        Log.e("Check",weekday+" "+dayNum)
+
+        Log.e("id check", R.id.TTSchedulingScreenFragment.toString())
+        val bundle= bundleOf("weekday" to weekday, "weeknum" to dayNum)
+
+       val navController= Navigation.findNavController(requireActivity(),R.id.nav_host_fragment)
+        navController.navigate(R.id.action_TTSchedulingScreenFragment_to_weekdayActivity,bundle)
+
+//        val action =
+//            TTSchedulingScreenFragmentDirections.actionTTSchedulingScreenFragmentToWeekdayActivity()
+//
+//        findNavController().navigate(action)
+
+
     }
 }

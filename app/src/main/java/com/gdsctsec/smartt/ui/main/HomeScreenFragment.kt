@@ -15,15 +15,19 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
 
 import com.gdsctsec.smartt.data.Weekday
-import com.gdsctsec.smartt.ui.edit.EditScreenActivity
+import com.gdsctsec.smartt.ui.edit.EditScreenFragment
 
 import com.gdsctsec.smartt.util.SwipeGestureUtil
 import com.gdsctsec.smartt.data.TimeTable
@@ -35,6 +39,7 @@ import com.gdsctsec.smartt.viewmodel.HomeScreenViewModelFactory
 
 class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
     private lateinit var weekDay: String
+     lateinit var navController:NavController
     val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
     val subjectList: MutableList<String> = mutableListOf("No Lectures as of now")
     val lectureObjectList: MutableList<TimeTable> =
@@ -46,6 +51,11 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home_screen, container, false)
+
+        val navHostFragment =
+            requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+
         return view
     }
 
@@ -57,6 +67,8 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         val titleTextView = view.findViewById<TextView>(R.id.remindi_header)
         val dayDateTextView = view.findViewById<TextView>(R.id.home_day_textview)
         val noLecturesTextView = view.findViewById<TextView>(R.id.zero_lectures_msg_textView)
+
+
 
         @RequiresApi(Build.VERSION_CODES.O)
         dayDateTextView.text = HomeScreenViewModel(requireActivity()).getMonthDate()
@@ -96,6 +108,7 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 
+
         recyclerView = view.findViewById(R.id.home_recyclerView)
         recyclerView.adapter = SubjectsAdapter(subjectList, timeList, this)
 
@@ -133,7 +146,7 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
                 timeList.clear()
                 lectureObjectList.clear()
                 adapter.notifyDataSetChanged()
-                
+
                 recyclerView.visibility = View.GONE
                 noLecturesTextView.visibility = View.VISIBLE
             }
@@ -174,16 +187,21 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
 
 
         Toast.makeText(context, "$startTime $endTime $chosenSubject", Toast.LENGTH_SHORT).show()
-        val intent = Intent(context, EditScreenActivity::class.java).apply {
-            putExtra("Lecture_Choosen_subject", chosenSubject)
-            putExtra("Lecture_start_Time", startTime)
-            putExtra("Lecture_End_time", endTime)
-            putExtra("Lecture_Weekday", weekDay)
-            putExtra("TAG","HomeScreenFragment")
-            putExtra("id",lectureObjectList.get(position).id.toString())
 
-        }
-        startActivity(intent)
+
+
+        val bundle = bundleOf(
+            "Lecture_Choosen_subject" to chosenSubject,
+            "Lecture_start_Time" to startTime,
+            "Lecture_End_time" to endTime,
+            "Lecture_Weekday" to weekDay,
+            "TAG" to "HomeScreenFragment",
+            "id" to lectureObjectList.get(position).id.toString()
+        )
+
+
+        //Navigation.findNavController(requireActivity(),R.id.nav_host_fragment).navigate(R.id.action_homeScreenFragment_to_editScreenFragment,bundle)
+       navController.navigate(R.id.action_homeScreenFragment_to_editScreenFragment,bundle)
 
     }
 }
