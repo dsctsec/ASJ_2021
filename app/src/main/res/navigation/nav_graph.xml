@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeScreenFragment">
+
+    <fragment
+        android:id="@+id/homeScreenFragment"
+        android:name="com.gdsctsec.smartt.ui.main.HomeScreenFragment"
+        android:label="fragment_home_screen"
+        tools:layout="@layout/fragment_home_screen">
+        <action
+            android:id="@+id/action_homeScreenFragment_to_editScreenFragment"
+            app:destination="@id/editScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/TTSchedulingScreenFragment"
+        android:name="com.gdsctsec.smartt.ui.main.TTSchedulingScreenFragment"
+        android:label="fragment_t_t_scheduling_screen"
+        tools:layout="@layout/fragment_t_t_scheduling_screen">
+        <action
+            android:id="@+id/action_TTSchedulingScreenFragment_to_weekdayActivity"
+            app:destination="@id/weekdayActivity" />
+        <action
+            android:id="@+id/action_TTSchedulingScreenFragment_to_editScreenFragment"
+            app:destination="@id/editScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weekdayActivity"
+        android:name="com.gdsctsec.smartt.ui.weekday.WeekdayFragment"
+        android:label="fragment_weekday"
+        tools:layout="@layout/fragment_weekday">
+        <action
+            android:id="@+id/action_weekdayActivity_to_editScreenFragment"
+            app:destination="@id/editScreenFragment" />
+        <argument
+            android:name="weekday"
+            app:argType="string" />
+        <argument
+            android:name="weeknum"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/editScreenFragment"
+        android:name="com.gdsctsec.smartt.ui.edit.EditScreenFragment"
+        android:label="fragment_editscreen"
+        tools:layout="@layout/fragment_editscreen" >
+        <action
+            android:id="@+id/action_editScreenFragment_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment" />
+    </fragment>
+</navigation>
