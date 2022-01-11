@@ -25,11 +25,11 @@ A simple yet elegant solution is to sent reminders on phone by helping us to pla
 ## Functionality & Concepts used
 
 The App has a very beautiful and a simple interactive interface which helps us to easily navigate and plan for us. Following are few android concepts used to achieve the functionalities in app: 
-- Constraint Layout: Most of the activities in the app uses a flexible constraint layout, which is easy to handle for different screen sizes.
-- Simple & Easy Views Design: It was a text heavy applications with a few other elements like Progress indicator and others to build views.
-- RecyclerView: To present the list of different route busses we used the efficient recyclerview.
-- LiveData & Room Database: We are also using LiveData to update & observe any changes in the Lecture Database. So if any changes are made in our database it will be reflected into our UI.
-- Navigation: Jetpack's Navigation component is used for easier navigation between fragments and passing easy data with SafeArgs to the next fragments.
+- **Constraint Layout:** Most of the activities in the app uses a flexible constraint layout, which is easy to handle for different screen sizes.
+- **Simple & Easy Views Design:** It was a text heavy applications with a few other elements like Progress indicator and others to build views.
+- **RecyclerView:** To present the list of different route busses we used the efficient recyclerview.
+- **LiveData & Room Database:** We are also using LiveData to update & observe any changes in the Lecture Database. So if any changes are made in our database it will be reflected into our UI.
+- **Navigation:** Jetpack's Navigation component is used for easier navigation between fragments and passing easy data with SafeArgs to the next fragments.
 
 ## Application Link & Future Scope
 
