@@ -19,10 +19,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.edit.EditScreenActivity"
+            android:name=".ui.edit.EditScreenFragment"
             android:exported="true" />
         <activity
-            android:name=".ui.weekday.WeekdayActivity"
+            android:name=".ui.weekday.WeekdayFragment"
             android:exported="true" />
         <activity
             android:name=".ui.main.MainActivity"
