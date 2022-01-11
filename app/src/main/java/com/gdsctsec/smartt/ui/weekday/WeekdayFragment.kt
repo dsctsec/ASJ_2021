@@ -1,6 +1,5 @@
 package com.gdsctsec.smartt.ui.weekday
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,25 +16,26 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.util.SwipeGestureUtil
-import com.gdsctsec.smartt.ui.edit.EditScreenFragment
 import com.gdsctsec.smartt.ui.main.MainActivity
 import com.gdsctsec.smartt.ui.weekday.adapter.WeekdayAdapter
 import com.gdsctsec.smartt.viewmodel.WeekdayActivityViewModelFactory
 import com.gdsctsec.smartt.viewmodel.WeekdayActvityViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class WeekdayFragment : Fragment() {
+class WeekdayFragment : Fragment(), WeekdayAdapter.OnItemClickListener {
     lateinit var dayColorChangingToolbar: Toolbar
     lateinit var imageViewCalendarImageWhenEmpty: ImageView
     lateinit var lecturesRecyclerView: RecyclerView
     lateinit var lecNumberCountTextView: TextView
     lateinit var addNewLectureEventFloatingActionButton: FloatingActionButton
     lateinit var dayTextView: TextView
+    lateinit var weekDay:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +64,7 @@ class WeekdayFragment : Fragment() {
         dayColorChangingToolbar = view.findViewById(R.id.weekday_activity_toolbar_top_card_view)
         dayTextView = view.findViewById(R.id.day_text_view)
 
-        val weekDay = arguments?.getString("weekday")
+        weekDay = arguments?.getString("weekday")!!
         val weekNum = arguments?.getInt("weeknum")
 
         Log.e("Values", weekDay + " " + weekNum)
@@ -79,7 +79,7 @@ class WeekdayFragment : Fragment() {
         val subjectList: MutableList<String> = mutableListOf()
         val idList = mutableListOf<Int>()
 
-        val adapter = WeekdayAdapter(timeList, subjectList)
+        val adapter = WeekdayAdapter(timeList,subjectList,idList,this)
 
         viewModel.getLiveLecturesData().observe(requireActivity(), Observer {
             if (it.size != 0) {
@@ -132,7 +132,7 @@ class WeekdayFragment : Fragment() {
 
             val bundle = bundleOf(
                 "Weekday" to weekDay,
-                "TAG" to "WeekdayActivity",
+                "TAG" to "WeekdayActivityAdd",
                 "Source" to R.id.weekdayActivity
             )
             it.findNavController()
@@ -163,11 +163,7 @@ class WeekdayFragment : Fragment() {
     }
 
     fun dayColor(day: Int) {
-
-
         val backgroundTintAwareDrawable = DrawableCompat.wrap(dayColorChangingToolbar.background)
-
-
 
         when (day) {
             1 -> {
@@ -218,5 +214,18 @@ class WeekdayFragment : Fragment() {
         }
     }
 
+    override fun onItemClick(position: Int, lecTime: String, subject: String, id: Int) {
+        Log.e("WF", "clicked!")
+        val bundle = bundleOf(
+            "Weekday" to weekDay,
+            "TAG" to "WeekdayActivityEdit",
+            "Source" to R.id.weekdayActivity,
+            "LectureTime" to lecTime,
+            "Subject" to subject,
+            "id" to id
+        )
 
+        val navController = findNavController()
+        navController.navigate(R.id.action_weekdayActivity_to_editScreenFragment, bundle)
+    }
 }
