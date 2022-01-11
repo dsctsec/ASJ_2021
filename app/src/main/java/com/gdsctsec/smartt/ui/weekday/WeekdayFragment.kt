@@ -44,25 +44,30 @@ class WeekdayFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view:View=inflater.inflate(R.layout.fragment_weekday,container,false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view: View = inflater.inflate(R.layout.fragment_weekday, container, false)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        imageViewCalendarImageWhenEmpty= view.findViewById(R.id.empty_list_image_view)
-        lecturesRecyclerView= view.findViewById(R.id.lecture_recycler_view)
-        lecNumberCountTextView= view.findViewById(R.id.lecture_number_text_view)
-        addNewLectureEventFloatingActionButton= view.findViewById(R.id.lecture_add_floating_action_button)
-        dayColorChangingToolbar=view.findViewById(R.id.weekday_activity_toolbar_top_card_view)
-        dayTextView= view.findViewById(R.id.day_text_view)
+        imageViewCalendarImageWhenEmpty = view.findViewById(R.id.empty_list_image_view)
+        lecturesRecyclerView = view.findViewById(R.id.lecture_recycler_view)
+        lecNumberCountTextView = view.findViewById(R.id.lecture_number_text_view)
+        addNewLectureEventFloatingActionButton =
+            view.findViewById(R.id.lecture_add_floating_action_button)
+        dayColorChangingToolbar = view.findViewById(R.id.weekday_activity_toolbar_top_card_view)
+        dayTextView = view.findViewById(R.id.day_text_view)
 
         val weekDay = arguments?.getString("weekday")
         val weekNum = arguments?.getInt("weeknum")
 
-        Log.e("Values",weekDay+" "+weekNum)
+        Log.e("Values", weekDay + " " + weekNum)
 
         val viewModelFactory = WeekdayActivityViewModelFactory(requireContext(), weekDay.toString())
         val viewModel =
@@ -125,8 +130,13 @@ class WeekdayFragment : Fragment() {
         //Floating Button OnClick
         addNewLectureEventFloatingActionButton.setOnClickListener(View.OnClickListener {
 
-            val bundle= bundleOf("Weekday" to weekDay, "TAG" to "WeekdayActivity","Source" to R.id.weekdayActivity)
-            it.findNavController().navigate(R.id.action_weekdayActivity_to_editScreenFragment,bundle)
+            val bundle = bundleOf(
+                "Weekday" to weekDay,
+                "TAG" to "WeekdayActivity",
+                "Source" to R.id.weekdayActivity
+            )
+            it.findNavController()
+                .navigate(R.id.action_weekdayActivity_to_editScreenFragment, bundle)
 
         })
 
@@ -146,8 +156,13 @@ class WeekdayFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(lecturesRecyclerView)
     }
 
-    fun dayColor(day: Int) {
+    override fun onResume() {
+        super.onResume()
+        Log.e("onResume", "WF")
+        (requireActivity() as MainActivity).hideBottomNavigation()
+    }
 
+    fun dayColor(day: Int) {
 
 
         val backgroundTintAwareDrawable = DrawableCompat.wrap(dayColorChangingToolbar.background)

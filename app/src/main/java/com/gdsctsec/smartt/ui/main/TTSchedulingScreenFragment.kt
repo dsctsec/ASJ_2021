@@ -141,14 +141,18 @@ class TTSchedulingScreenFragment : Fragment(), TTScreenAdapter.OnItemclicklisten
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.e("onResume","TT"+requireActivity() as MainActivity)
+        (requireActivity() as MainActivity).showBottomNavigation()
+    }
+
     override fun onItemClick(position: Int) {
-
-
 
 
         val weekday = getString(dataList[position].weekDay)
 
-        val dayNum =when (weekday) {
+        val dayNum = when (weekday) {
             "Monday" -> 1
             "Tuesday" -> 2
             "Wednesday" -> 3
@@ -160,13 +164,13 @@ class TTSchedulingScreenFragment : Fragment(), TTScreenAdapter.OnItemclicklisten
 
 
 
-        Log.e("Check",weekday+" "+dayNum)
+        Log.e("Check", weekday + " " + dayNum)
 
         Log.e("id check", R.id.TTSchedulingScreenFragment.toString())
-        val bundle= bundleOf("weekday" to weekday, "weeknum" to dayNum)
+        val bundle = bundleOf("weekday" to weekday, "weeknum" to dayNum)
 
-       val navController= Navigation.findNavController(requireActivity(),R.id.nav_host_fragment)
-        navController.navigate(R.id.action_TTSchedulingScreenFragment_to_weekdayActivity,bundle)
+        val navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+        navController.navigate(R.id.action_TTSchedulingScreenFragment_to_weekdayActivity, bundle)
 
 //        val action =
 //            TTSchedulingScreenFragmentDirections.actionTTSchedulingScreenFragmentToWeekdayActivity()

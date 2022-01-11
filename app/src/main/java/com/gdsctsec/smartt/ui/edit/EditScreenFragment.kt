@@ -171,6 +171,12 @@ class EditScreenFragment : Fragment() {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.e("onResume","ESF")
+        (requireActivity() as MainActivity).hideBottomNavigation()
+    }
+
 
 
     private fun  btnDisabled(v : TextView){
