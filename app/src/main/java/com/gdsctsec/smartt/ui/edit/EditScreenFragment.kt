@@ -74,11 +74,25 @@ class EditScreenFragment : Fragment() {
             endtimeTextView.setText(endTime)
             dayTextInputEditText.setText(weekDay)
         }
-        if(choice == "WeekdayActivity"){
+        if(choice == "WeekdayActivityAdd"){
             val weekDay = arguments?.getString("Weekday")
             dayTextInputEditText.setText(weekDay)
             dayTextInputEditText.dropDownHeight = 0
             viewDisabled(dayTextInputEditText)
+        }
+
+        if (choice == "WeekdayActivityEdit") {
+            val weekday = arguments?.getString("Weekday")
+            val subject = arguments?.getString("Subject")
+            val time = arguments?.getString("LectureTime")
+            id = arguments?.getInt("id")!!
+            val startTime = time?.substring(0, time.indexOf("-"))
+            val endTime = time?.substring(time.indexOf("-") + 1)
+
+            lectureEditText.setText(subject)
+            starttimeTextView.text = startTime
+            endtimeTextView.text=endTime
+            dayTextInputEditText.setText(weekday)
         }
 
 
@@ -111,10 +125,12 @@ class EditScreenFragment : Fragment() {
             var day: String = dayTextInputEditText.text.toString()
             var starttime: String = starttimeTextView.text.toString()
             var endtime: String = endtimeTextView.text.toString()
-            if(!choice.equals("HomeScreenFragment")){
+
+            if (choice.equals("WeekdayActivityEdit")){
+                viewModel.updatelecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime, id = id))
+            }else if(!choice.equals("HomeScreenFragment")){
                 viewModel.addlecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime))
                 Toast.makeText(requireContext(), "adding", Toast.LENGTH_SHORT).show()
-
             }
             else{
                 viewModel.updatelecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime, id = id))
