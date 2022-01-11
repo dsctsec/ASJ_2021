@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -177,6 +178,12 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
 
         val itemTouchHelper = ItemTouchHelper(swipeDelete)
         itemTouchHelper.attachToRecyclerView(recyclerView)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e("onResume","HSF")
+        (requireActivity() as MainActivity).showBottomNavigation()
     }
 
     override fun onItemClick(position: Int) {
