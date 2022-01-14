@@ -1,5 +1,8 @@
 package com.gdsctsec.smartt.ui.main
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
@@ -16,6 +19,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -35,17 +39,29 @@ import com.gdsctsec.smartt.data.TimeTable
 
 
 import com.gdsctsec.smartt.ui.main.adapter.SubjectsAdapter
+import com.gdsctsec.smartt.ui.notifications.alarms.AlertReceiver
+
 import com.gdsctsec.smartt.viewmodel.HomeScreenViewModel
 import com.gdsctsec.smartt.viewmodel.HomeScreenViewModelFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
     private lateinit var weekDay: String
      lateinit var navController:NavController
+     var alarmManager:AlarmManager?=null
+    private var _lecture:String="english"
+    val lecture:String get() = _lecture
+
+
     val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
     val subjectList: MutableList<String> = mutableListOf("No Lectures as of now")
     val lectureObjectList: MutableList<TimeTable> =
         mutableListOf(TimeTable(-1, "", "", "", Weekday.Monday))
     private lateinit var recyclerView: RecyclerView
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -136,8 +152,11 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
                 lectureObjectList.clear()
                 for (i in 0..it.size - 1) {
                     subjectList.add(i, it.get(i).lec)
+                    _lecture=it.get(i).lec
                     timeList.add(i, (it.get(i).startTime + " - " + it.get(i).endTime))
+                    Log.e("Time",it.get(i).startTime)
                     lectureObjectList.add(it.get(i))
+
                 }
                 adapter.notifyDataSetChanged()
             } else {
@@ -180,6 +199,17 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
+//    private fun getTimeInMillis(startTime: String): Long? {
+//        val sdf=SimpleDateFormat("hh:mm a")
+//        val date: Date? =sdf.parse(startTime)
+//
+//        Log.e("milli",date?.time.toString())
+//        return date?.time
+//
+//
+//    }
+
+
     override fun onResume() {
         super.onResume()
         Log.e("onResume","HSF")
@@ -211,4 +241,6 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
        navController.navigate(R.id.action_homeScreenFragment_to_editScreenFragment,bundle)
 
     }
+
+
 }

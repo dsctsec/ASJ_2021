@@ -1,5 +1,9 @@
 package com.gdsctsec.smartt.ui.edit
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 
@@ -23,8 +27,12 @@ import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.data.TimeTable
 import com.gdsctsec.smartt.data.Weekday
 import com.gdsctsec.smartt.ui.main.MainActivity
+import com.gdsctsec.smartt.ui.main.lectureNew
+import com.gdsctsec.smartt.ui.notifications.alarms.AlertReceiver
+import com.gdsctsec.smartt.ui.notifications.getLecture
 import com.gdsctsec.smartt.viewmodel.EditScreenViewModel
 import com.gdsctsec.smartt.viewmodel.EditscreenViewmodelfactory
+import java.text.SimpleDateFormat
 
 
 class EditScreenFragment : Fragment() {
@@ -34,8 +42,11 @@ class EditScreenFragment : Fragment() {
     private lateinit var dayTextInputEditText: AutoCompleteTextView
     private lateinit var saveTextview: TextView
     private lateinit var cancelTextView: TextView
-
-
+    private lateinit var alarmManager: AlarmManager
+    private var _lecture:String="english"
+    private var _random:Int=0
+    val random:Int get() = _random
+    val lecture:String get() = _lecture
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,10 +124,10 @@ class EditScreenFragment : Fragment() {
 
 
         starttimeTextView.setOnClickListener {
-            viewModel.timePick(starttimeTextView)
+            viewModel.timePick(starttimeTextView,1)
         }
         endtimeTextView.setOnClickListener {
-            viewModel.timePick(endtimeTextView)
+            viewModel.timePick(endtimeTextView,0)
 
         }
         saveTextview.setOnClickListener {
@@ -128,9 +139,15 @@ class EditScreenFragment : Fragment() {
 
             if (choice.equals("WeekdayActivityEdit")){
                 viewModel.updatelecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime, id = id))
+
             }else if(!choice.equals("HomeScreenFragment")){
                 viewModel.addlecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime))
                 Toast.makeText(requireContext(), "adding", Toast.LENGTH_SHORT).show()
+                    getLecture(lecture)
+                    Log.e("TimeInMillis",viewModel.c.timeInMillis.toString())
+                    startAlarmManager(viewModel.c,viewModel.random)
+
+
             }
             else{
                 viewModel.updatelecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime, id = id))
@@ -163,6 +180,8 @@ class EditScreenFragment : Fragment() {
 
 
 
+
+
         cancelTextView.setOnClickListener {
             dayTextInputEditText.height = WRAP_CONTENT
             viewEnabled(dayTextInputEditText)
@@ -186,6 +205,18 @@ class EditScreenFragment : Fragment() {
 
         return view
     }
+
+    private fun startAlarmManager(time:Calendar,random:Int){
+        alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent= Intent(context, AlertReceiver::class.java)
+        intent.putExtra("requestCode",random.toString())
+        Log.e("Random",random.toString())
+        val pendingIntent= PendingIntent.getBroadcast(context,random,intent,0)
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP,time.timeInMillis,pendingIntent)
+    }
+
+
+
 
     override fun onResume() {
         super.onResume()
