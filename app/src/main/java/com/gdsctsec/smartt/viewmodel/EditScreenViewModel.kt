@@ -2,6 +2,7 @@ package com.gdsctsec.smartt.viewmodel
 
 import android.app.TimePickerDialog
 import android.content.Context
+import android.util.Log
 import android.widget.TextView
 import android.widget.TimePicker
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +12,9 @@ import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.data.TimeTable
 import com.gdsctsec.smartt.data.Weekday
 import com.gdsctsec.smartt.data.repository.LectureRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 
@@ -19,8 +22,10 @@ class EditScreenViewModel(private val context: Context) : ViewModel() {
     val repository = LectureRepository(context, Weekday.Monday)
     fun addlecture(lecture: TimeTable): MutableLiveData<Long> {
         val id = MutableLiveData<Long>()
+
         viewModelScope.launch {
             val lectureId = repository.addLecture(lecture)
+            Log.e("ESVM",lectureId.toString())
             id.postValue(lectureId)
         }
         return id
