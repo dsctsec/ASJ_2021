@@ -1,5 +1,9 @@
 package com.gdsctsec.smartt.ui.edit
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 
@@ -25,6 +29,7 @@ import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.data.TimeTable
 import com.gdsctsec.smartt.data.Weekday
 import com.gdsctsec.smartt.ui.main.MainActivity
+import com.gdsctsec.smartt.ui.notifications.alarms.AlertReceiver
 import com.gdsctsec.smartt.viewmodel.EditScreenViewModel
 import com.gdsctsec.smartt.viewmodel.EditscreenViewmodelfactory
 
@@ -36,6 +41,7 @@ class EditScreenFragment : Fragment() {
     private lateinit var dayTextInputEditText: AutoCompleteTextView
     private lateinit var saveTextview: TextView
     private lateinit var cancelTextView: TextView
+    private lateinit var alarmManager: AlarmManager
 
 
 
@@ -115,10 +121,10 @@ class EditScreenFragment : Fragment() {
 
 
         starttimeTextView.setOnClickListener {
-            viewModel.timePick(starttimeTextView)
+            viewModel.timePick(starttimeTextView,1)
         }
         endtimeTextView.setOnClickListener {
-            viewModel.timePick(endtimeTextView)
+            viewModel.timePick(endtimeTextView,0)
 
         }
         saveTextview.setOnClickListener {
@@ -130,18 +136,29 @@ class EditScreenFragment : Fragment() {
 
             if (choice.equals("WeekdayActivityEdit")){
                 viewModel.updatelecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime, id = id))
-            }else if(!choice.equals("HomeScreenFragment")){
+
+            }
+           else if(!choice.equals("HomeScreenFragment")){
                 Log.e("adding lecture","..")
-                var addedLectureId:Long
+                var addedLectureId:Long=0L
+
                 viewModel.addlecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime)).observe(viewLifecycleOwner,{
-                    Log.e("new lecture id",it.toString())
+                    Log.e("new",it.toString())
                     addedLectureId=it
+                    Log.e("lectureId",addedLectureId.toString())
+                    startAlarmManager(viewModel.calendar,addedLectureId)
                 })
                 Toast.makeText(requireContext(), "adding", Toast.LENGTH_SHORT).show()
+                Log.e("Millis",viewModel.calendar.timeInMillis.toString())
+                Log.e("addedlectureid",addedLectureId.toString())
+
             }
             else{
                 viewModel.updatelecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime, id = id))
                 Toast.makeText(requireContext(), "updating", Toast.LENGTH_SHORT).show()
+
+                    startAlarmManager(viewModel.calendar, id.toLong())
+
             }
 //
             dayTextInputEditText.height = WRAP_CONTENT
@@ -198,6 +215,15 @@ class EditScreenFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun startAlarmManager(time:Calendar,id:Long){
+        alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent= Intent(context, AlertReceiver::class.java)
+        intent.putExtra("requestCode",id.toString())
+        Log.e("id of lecture",id.toString())
+        val pendingIntent= PendingIntent.getBroadcast(context, id.toInt(),intent,0)
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP,time.timeInMillis,pendingIntent)
     }
 
     override fun onResume() {
