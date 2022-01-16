@@ -55,8 +55,10 @@ class MainActivity : AppCompatActivity() {
 
 
             if (bottomNavigationView.selectedItemId == R.id.homeScreenFragment) {
+                Log.e("Navigating from","Home")
                 findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeScreenFragment_to_editScreenFragment)
             } else {
+                Log.e("Navigating from","TTS")
                 val bundle= bundleOf("Source" to R.id.TTSchedulingScreenFragment)
                findNavController(R.id.nav_host_fragment).navigate(R.id.action_TTSchedulingScreenFragment_to_editScreenFragment,bundle)
             }

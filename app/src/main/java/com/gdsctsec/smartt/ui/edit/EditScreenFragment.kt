@@ -9,6 +9,8 @@ import android.text.Editable
 
 import java.util.*
 import android.graphics.Color
+import android.os.Handler
+import android.os.Looper
 
 import android.text.TextWatcher
 import android.util.Log
@@ -134,22 +136,29 @@ class EditScreenFragment : Fragment() {
 
             if (choice.equals("WeekdayActivityEdit")){
                 viewModel.updatelecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime, id = id))
+
             }
-            else if(!choice.equals("HomeScreenFragment")){
+           else if(!choice.equals("HomeScreenFragment")){
+                Log.e("adding lecture","..")
                 var addedLectureId:Long=0L
+
                 viewModel.addlecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime)).observe(viewLifecycleOwner,{
                     Log.e("new",it.toString())
                     addedLectureId=it
                     Log.e("lectureId",addedLectureId.toString())
-
+                    startAlarmManager(viewModel.calendar,addedLectureId)
                 })
                 Toast.makeText(requireContext(), "adding", Toast.LENGTH_SHORT).show()
                 Log.e("Millis",viewModel.calendar.timeInMillis.toString())
-                startAlarmManager(viewModel.calendar,addedLectureId)
+                Log.e("addedlectureid",addedLectureId.toString())
+
             }
             else{
                 viewModel.updatelecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime, id = id))
                 Toast.makeText(requireContext(), "updating", Toast.LENGTH_SHORT).show()
+
+                    startAlarmManager(viewModel.calendar, id.toLong())
+
             }
 //
             dayTextInputEditText.height = WRAP_CONTENT
@@ -157,15 +166,21 @@ class EditScreenFragment : Fragment() {
 
             val navController= Navigation.findNavController(requireActivity(),R.id.nav_host_fragment)
 //
-            if (sourceId==R.id.weekdayActivity){
-                navController.popBackStack(R.id.weekdayActivity,false)
-            }
-            else if(sourceId==R.id.TTSchedulingScreenFragment){
-                navController.popBackStack(R.id.TTSchedulingScreenFragment,false)
-            }
-            else {
-                Log.e("check","id checking "+sourceId)
-                navController.popBackStack(R.id.homeScreenFragment, false)
+            if (sourceId == R.id.weekdayActivity) {
+                navController.popBackStack(R.id.weekdayActivity, false)
+            } else if (sourceId == R.id.TTSchedulingScreenFragment) {
+                //to delay the fragment killing by 1 millisecond
+                // so that the view model gets enough time to update the screen with data
+                Handler(Looper.getMainLooper()).postDelayed({
+                    navController.popBackStack(R.id.TTSchedulingScreenFragment, false)
+                }, 1)
+            } else {
+                //to delay the fragment killing by 1 millisecond
+                // so that the view model gets enough time to update the screen with data
+                Log.e("check", "id checking " + sourceId)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    navController.popBackStack(R.id.homeScreenFragment, false)
+                }, 1)
             }
 
             (requireActivity() as MainActivity).showBottomNavigation()
@@ -206,7 +221,7 @@ class EditScreenFragment : Fragment() {
         alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent= Intent(context, AlertReceiver::class.java)
         intent.putExtra("requestCode",id.toString())
-        Log.e("Random",id.toString())
+        Log.e("id of lecture",id.toString())
         val pendingIntent= PendingIntent.getBroadcast(context, id.toInt(),intent,0)
         alarmManager.setExact(AlarmManager.RTC_WAKEUP,time.timeInMillis,pendingIntent)
     }

@@ -2,6 +2,7 @@ package com.gdsctsec.smartt.viewmodel
 
 import android.app.TimePickerDialog
 import android.content.Context
+import android.util.Log
 import android.widget.TextView
 import android.widget.TimePicker
 import androidx.lifecycle.MutableLiveData
@@ -11,31 +12,39 @@ import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.data.TimeTable
 import com.gdsctsec.smartt.data.Weekday
 import com.gdsctsec.smartt.data.repository.LectureRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 
 
+private val _lectureNew:MutableMap<Int,String> = mutableMapOf()
 
 class EditScreenViewModel(private val context: Context) : ViewModel() {
-    private lateinit var _calendar:Calendar
-    private val _lectureNew:MutableMap<Int,String> = mutableMapOf()
+    private var _calendar:Calendar= Calendar.getInstance()
+
     val lectureNew:MutableMap<Int,String> get() = _lectureNew
     val calendar:Calendar get() = _calendar
 
     val repository = LectureRepository(context, Weekday.Monday)
     fun addlecture(lecture: TimeTable): MutableLiveData<Long> {
         val id = MutableLiveData<Long>()
+
         viewModelScope.launch {
             val lectureId = repository.addLecture(lecture)
+            Log.e("ESVM",lectureId.toString())
             id.postValue(lectureId)
+            lectureNew.put(lectureId.toInt(),lecture.lec)
         }
-        id.value?.let { lectureNew.put(it.toInt(),lecture.lec) }
+
         return id
     }
 
     fun updatelecture(lecture: TimeTable) {
         repository.updateLecture(lecture)
+        Log.e("updatedID",lecture.id.toString())
+        lectureNew.put(lecture.id,lecture.lec)
     }
 
     fun timePick(v: TextView,startTime:Int) {
@@ -50,7 +59,6 @@ class EditScreenViewModel(private val context: Context) : ViewModel() {
                 override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
                     v.setText(onTimeSet(hourOfDay, minute))
                     if (startTime==1) {
-                        _calendar = Calendar.getInstance()
                         _calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
                         _calendar.set(Calendar.MINUTE, minute)
                     }

@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 
 import com.gdsctsec.smartt.ui.notifications.NotificationHelper
-import com.gdsctsec.smartt.ui.notifications.getLecture
+
 import com.gdsctsec.smartt.viewmodel.EditScreenViewModel
 
 
@@ -18,7 +18,7 @@ class AlertReceiver() : BroadcastReceiver() {
         val notificationHelper = NotificationHelper(context)
         val key = intent?.getStringExtra("requestCode")?.toInt()
         val nb = notificationHelper.getNotifications(
-            "lecture alert", "Time for math lecture"
+            "lecture alert", "Time for ${context?.let { EditScreenViewModel(it).lectureNew.get(key) }} lecture"
         )
         notificationHelper.notificationManager?.notify(id, nb.build())
     }
