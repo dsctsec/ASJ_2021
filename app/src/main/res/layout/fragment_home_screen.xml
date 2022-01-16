@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="25dp"
-                    android:text="3/10"
+                    android:text="0/0"
                     android:textColor="@color/silverchalice"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -77,20 +77,21 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_margin="10dp"
                     style="@style/HomeFragmentProgressBar"
-                    android:progress="20"
+                    android:progress="0"
                     android:rotation="-90" />
 
                 <TextView
                     android:id="@+id/home_tasks_progress_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@+id/home_fragment_tasks_progress_bar"
+                    android:layout_marginEnd="44dp"
+                    android:text="0%"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/home_fragment_tasks_progress_bar"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="20%"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="40dp"
-                    android:textSize="20sp"/>
+                    app:layout_constraintTop_toTopOf="@+id/home_fragment_tasks_progress_bar"
+                    app:layout_constraintVertical_bias="0.438" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
