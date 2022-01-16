@@ -51,21 +51,13 @@ class HomeScreenViewModel(private val context: Context) : ViewModel() {
     public fun getWeekday(): Weekday {
         val reqDayFormat = SimpleDateFormat("EEEE", Locale.ENGLISH)
         val dayOfWeek = Date()
-
-        if (Weekday.valueOf(reqDayFormat.format(dayOfWeek).toString()) == Weekday.Sunday)
-            weekday = Weekday.Monday
-        else
-            weekday = Weekday.valueOf(reqDayFormat.format(dayOfWeek).toString())
+        weekday = Weekday.valueOf(reqDayFormat.format(dayOfWeek).toString())
         return weekday
     }
 
 
     public fun getWeekDayString(): String {
         var day = reqDayFormat.format(dateOfTheDay)
-
-        if (day == "Sunday")
-            day = "Monday"
-
         return day
     }
 
