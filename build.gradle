@@ -2,8 +2,8 @@
 buildscript {
 
     repositories {
-        google()
         mavenCentral()
+        google()
     }
     dependencies {
         def nav_version = "2.3.5"

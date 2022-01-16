@@ -15,7 +15,14 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
+
+
 class EditScreenViewModel(private val context: Context) : ViewModel() {
+    private lateinit var _calendar:Calendar
+    private val _lectureNew:MutableMap<Int,String> = mutableMapOf()
+    val lectureNew:MutableMap<Int,String> get() = _lectureNew
+    val calendar:Calendar get() = _calendar
+
     val repository = LectureRepository(context, Weekday.Monday)
     fun addlecture(lecture: TimeTable): MutableLiveData<Long> {
         val id = MutableLiveData<Long>()
@@ -23,6 +30,7 @@ class EditScreenViewModel(private val context: Context) : ViewModel() {
             val lectureId = repository.addLecture(lecture)
             id.postValue(lectureId)
         }
+        id.value?.let { lectureNew.put(it.toInt(),lecture.lec) }
         return id
     }
 
@@ -30,7 +38,7 @@ class EditScreenViewModel(private val context: Context) : ViewModel() {
         repository.updateLecture(lecture)
     }
 
-    fun timePick(v: TextView) {
+    fun timePick(v: TextView,startTime:Int) {
         val mTimePickerstart: TimePickerDialog
         val mcurrentTime = Calendar.getInstance()
         val hour = mcurrentTime.get(Calendar.HOUR_OF_DAY)
@@ -41,6 +49,11 @@ class EditScreenViewModel(private val context: Context) : ViewModel() {
             object : TimePickerDialog.OnTimeSetListener {
                 override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
                     v.setText(onTimeSet(hourOfDay, minute))
+                    if (startTime==1) {
+                        _calendar = Calendar.getInstance()
+                        _calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                        _calendar.set(Calendar.MINUTE, minute)
+                    }
                 }
             }, hour, minute, false
         )
