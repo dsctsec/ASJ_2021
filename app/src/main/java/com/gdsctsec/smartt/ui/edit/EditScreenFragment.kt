@@ -5,6 +5,8 @@ import android.text.Editable
 
 import java.util.*
 import android.graphics.Color
+import android.os.Handler
+import android.os.Looper
 
 import android.text.TextWatcher
 import android.util.Log
@@ -129,6 +131,7 @@ class EditScreenFragment : Fragment() {
             if (choice.equals("WeekdayActivityEdit")){
                 viewModel.updatelecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime, id = id))
             }else if(!choice.equals("HomeScreenFragment")){
+                Log.e("adding lecture","..")
                 var addedLectureId:Long
                 viewModel.addlecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime)).observe(viewLifecycleOwner,{
                     Log.e("new lecture id",it.toString())
@@ -146,15 +149,21 @@ class EditScreenFragment : Fragment() {
 
             val navController= Navigation.findNavController(requireActivity(),R.id.nav_host_fragment)
 //
-            if (sourceId==R.id.weekdayActivity){
-                navController.popBackStack(R.id.weekdayActivity,false)
-            }
-            else if(sourceId==R.id.TTSchedulingScreenFragment){
-                navController.popBackStack(R.id.TTSchedulingScreenFragment,false)
-            }
-            else {
-                Log.e("check","id checking "+sourceId)
-                navController.popBackStack(R.id.homeScreenFragment, false)
+            if (sourceId == R.id.weekdayActivity) {
+                navController.popBackStack(R.id.weekdayActivity, false)
+            } else if (sourceId == R.id.TTSchedulingScreenFragment) {
+                //to delay the fragment killing by 1 millisecond
+                // so that the view model gets enough time to update the screen with data
+                Handler(Looper.getMainLooper()).postDelayed({
+                    navController.popBackStack(R.id.TTSchedulingScreenFragment, false)
+                }, 1)
+            } else {
+                //to delay the fragment killing by 1 millisecond
+                // so that the view model gets enough time to update the screen with data
+                Log.e("check", "id checking " + sourceId)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    navController.popBackStack(R.id.homeScreenFragment, false)
+                }, 1)
             }
 
             (requireActivity() as MainActivity).showBottomNavigation()
