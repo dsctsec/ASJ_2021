@@ -129,7 +129,11 @@ class EditScreenFragment : Fragment() {
             if (choice.equals("WeekdayActivityEdit")){
                 viewModel.updatelecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime, id = id))
             }else if(!choice.equals("HomeScreenFragment")){
-                viewModel.addlecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime))
+                var addedLectureId:Long
+                viewModel.addlecture(TimeTable(lec = lecture, weekday = Weekday.valueOf(day) , startTime = starttime, endTime = endtime)).observe(viewLifecycleOwner,{
+                    Log.e("new lecture id",it.toString())
+                    addedLectureId=it
+                })
                 Toast.makeText(requireContext(), "adding", Toast.LENGTH_SHORT).show()
             }
             else{

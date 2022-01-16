@@ -4,23 +4,33 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.widget.TextView
 import android.widget.TimePicker
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.gdsctsec.smartt.R
 import com.gdsctsec.smartt.data.TimeTable
 import com.gdsctsec.smartt.data.Weekday
 import com.gdsctsec.smartt.data.repository.LectureRepository
+import kotlinx.coroutines.launch
 import java.util.*
 
 
-class EditScreenViewModel(private val context: Context): ViewModel() {
+class EditScreenViewModel(private val context: Context) : ViewModel() {
     val repository = LectureRepository(context, Weekday.Monday)
-    fun addlecture(lecture : TimeTable){
-        repository.addLecture(lecture)
-}
-    fun updatelecture(lecture: TimeTable){
+    fun addlecture(lecture: TimeTable): MutableLiveData<Long> {
+        val id = MutableLiveData<Long>()
+        viewModelScope.launch {
+            val lectureId = repository.addLecture(lecture)
+            id.postValue(lectureId)
+        }
+        return id
+    }
+
+    fun updatelecture(lecture: TimeTable) {
         repository.updateLecture(lecture)
     }
-     fun timePick(v: TextView) {
+
+    fun timePick(v: TextView) {
         val mTimePickerstart: TimePickerDialog
         val mcurrentTime = Calendar.getInstance()
         val hour = mcurrentTime.get(Calendar.HOUR_OF_DAY)
@@ -32,7 +42,8 @@ class EditScreenViewModel(private val context: Context): ViewModel() {
                 override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
                     v.setText(onTimeSet(hourOfDay, minute))
                 }
-            }, hour, minute, false)
+            }, hour, minute, false
+        )
         mTimePickerstart.show()
 
     }
