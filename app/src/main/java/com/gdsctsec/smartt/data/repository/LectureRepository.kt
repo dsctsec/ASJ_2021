@@ -8,6 +8,8 @@ import com.gdsctsec.smartt.data.Weekday
 import com.gdsctsec.smartt.data.local.dao.LectureDao
 import com.gdsctsec.smartt.model.LectureCount
 import com.gdsctsec.smartt.util.CoroutineUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class LectureRepository(val context: Context, var weekday: Weekday) {
 
@@ -27,10 +29,8 @@ class LectureRepository(val context: Context, var weekday: Weekday) {
         return lectures
     }
 
-    fun addLecture(lecture: TimeTable) {
-        CoroutineUtil.io {
-            lectureDao.addLecture(lecture)
-        }
+    suspend fun addLecture(lecture: TimeTable): Long = withContext(Dispatchers.IO) {
+        lectureDao.addLecture(lecture)
     }
 
     fun updateLecture(lecture: TimeTable) {

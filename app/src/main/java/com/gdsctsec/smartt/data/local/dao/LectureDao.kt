@@ -11,7 +11,7 @@ import com.gdsctsec.smartt.model.LectureCount
 interface LectureDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addLecture(lec: TimeTable)
+    suspend fun addLecture(lec: TimeTable):Long
 
     @Update
     suspend fun updateLecture(lec: TimeTable)
