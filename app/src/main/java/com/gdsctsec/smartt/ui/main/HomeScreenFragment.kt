@@ -91,10 +91,6 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
 
         val lectureProgressTextView = view.findViewById<TextView>(R.id.home_tasks_progress_textview)
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//
-//        }
-
         numberOfLecturesTextView.setText("0/" + subjectList.size)
 
         @RequiresApi(Build.VERSION_CODES.O)
@@ -150,7 +146,6 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         weekDay = viewModel.getWeekDayString();
 
         val presentTime = Date()
-//        checkIsOver((SimpleDateFormat("HH").format(presentTime)).toInt())
 
         viewModel.getLiveLectureData().observe(requireActivity(), Observer {
             if (it.size != 0) {
@@ -168,13 +163,18 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
                     timeList.add(i, (it.get(i).startTime + " - " + it.get(i).endTime))
                     lectureObjectList.add(it.get(i))
                     lectureEndTime.add(endTimeConverter(it.get(i).endTime))
-                    if (endTimeConverter(it.get(i).endTime) > SimpleDateFormat("HH").format(Calendar.getInstance().time)
-                            .toInt()
-                    ) {
-                        lectureCompleteList.add(i, false)
-                    } else {
+                    if (endTimeConverter(it.get(i).endTime) < SimpleDateFormat("HH").format(
+                            Calendar.getInstance().time
+                        ).toInt()
+                        || (endTimeConverter(it.get(i).endTime) <= SimpleDateFormat("HH").format(
+                            Calendar.getInstance().time).toInt()
+                                &&
+                                minutesConverter(it.get(i).endTime) <= SimpleDateFormat("mm").format(
+                            Calendar.getInstance().time).toInt())) {
                         lectureCompleteList.add(i, true)
                         count++
+                    } else {
+                        lectureCompleteList.add(i, false)
                     }
                 }
 
@@ -228,7 +228,6 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
     }
 
     suspend fun checkIsOver(time: Int) {
-//        val presentTime = Date()
         for (x in 0..lectureEndTime.size - 1) {
             if (time > lectureEndTime.get(x)) {
                 lectureCompleteList.set(x, true)
@@ -245,8 +244,15 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         } else {
             x = (time.split(":")[0]).toInt()
         }
-        Log.d("convertedTime", "$x")
+        Log.d("convertedTimeHours", "$x")
         return x;
+    }
+
+    private fun minutesConverter(minutes: String): Int {
+        var x = -1
+        x = (minutes.split(":")[1].split(" ")[0]).toInt()
+        Log.d("convertedTimeMinutes", "$x")
+        return x
     }
 
     override fun onResume() {
