@@ -1,5 +1,8 @@
 package com.gdsctsec.smartt.ui.main
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
@@ -36,6 +39,7 @@ import com.gdsctsec.smartt.data.TimeTable
 
 
 import com.gdsctsec.smartt.ui.main.adapter.SubjectsAdapter
+import com.gdsctsec.smartt.ui.notifications.alarms.AlertReceiver
 import com.gdsctsec.smartt.viewmodel.HomeScreenViewModel
 import com.gdsctsec.smartt.viewmodel.HomeScreenViewModelFactory
 import kotlinx.coroutines.Dispatchers
@@ -51,7 +55,8 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
 
     private lateinit var weekDay: String
 
-    private lateinit var navController: NavController
+    lateinit var navController:NavController
+    private lateinit var alarmManager: AlarmManager
 
     val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
     val subjectList: MutableList<String> = mutableListOf("No Lectures as of now")
@@ -216,6 +221,8 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
                 if (dataIsThere == 0) {
                     Toast.makeText(requireActivity(), "Deleted Lecture", Toast.LENGTH_SHORT).show()
                 } else {
+                    Log.e("deletedID",lectureObjectList.get(position).id.toString())
+                    cancelAlarm(lectureObjectList.get(position).id)
                     viewModel.removeLecture(lectureObjectList.get(position))
                     lectureObjectList.removeAt(position)
                     subjectList.removeAt(position)
@@ -256,6 +263,13 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         x = (minutes.split(":")[1].split(" ")[0]).toInt()
         Log.d("convertedTimeMinutes", "$x")
         return x
+
+    private fun cancelAlarm(id: Int) {
+        alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent= Intent(context, AlertReceiver::class.java)
+        val pendingIntent= PendingIntent.getBroadcast(context, id,intent,0)
+        alarmManager.cancel(pendingIntent)
+
     }
 
     override fun onResume() {
