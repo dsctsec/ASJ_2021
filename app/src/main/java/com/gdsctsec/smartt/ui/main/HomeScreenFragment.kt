@@ -167,10 +167,13 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
                             Calendar.getInstance().time
                         ).toInt()
                         || (endTimeConverter(it.get(i).endTime) <= SimpleDateFormat("HH").format(
-                            Calendar.getInstance().time).toInt()
+                            Calendar.getInstance().time
+                        ).toInt()
                                 &&
                                 minutesConverter(it.get(i).endTime) <= SimpleDateFormat("mm").format(
-                            Calendar.getInstance().time).toInt())) {
+                            Calendar.getInstance().time
+                        ).toInt())
+                    ) {
                         lectureCompleteList.add(i, true)
                         count++
                     } else {

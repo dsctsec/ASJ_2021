@@ -71,7 +71,7 @@ class HomeScreenViewModel(private val context: Context) : ViewModel() {
         return hour
     }
 
-    public fun getMinute():Int{
+    public fun getMinute(): Int {
         val dataObj = Date()
         val minute = SimpleDateFormat("mm").format(dataObj).toInt()
         return minute

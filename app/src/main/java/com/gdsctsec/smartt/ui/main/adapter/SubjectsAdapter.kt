@@ -61,62 +61,79 @@ class SubjectsAdapter(
         holder.subjectTextView.text = subjectList.get(position)
         holder.timeTextView.text = timeList.get(position)
 
+        val activeColorList = mutableListOf<Int>(
+            ContextCompat.getColor(
+                holder.itemView.context,
+                R.color.faint_pink
+            ), ContextCompat.getColor(
+                holder.itemView.context,
+                R.color.faint_yellow
+            ), ContextCompat.getColor(
+                holder.itemView.context,
+                R.color.faint_neon_blue
+            ), ContextCompat.getColor(
+                holder.itemView.context,
+                R.color.faint_dark_blue
+            ), ContextCompat.getColor(
+                holder.itemView.context,
+                R.color.faint_blue
+            ), ContextCompat.getColor(
+                holder.itemView.context,
+                R.color.faint_red
+            )
+
+        )
+
+        val passiveColorList = mutableListOf<Int>(
+            ContextCompat.getColor(
+                holder.itemView.context,
+                R.color.faint_pink_alpha
+            ), ContextCompat.getColor(
+                holder.itemView.context,
+                R.color.faint_yellow_alpha
+            ), ContextCompat.getColor(
+                holder.itemView.context,
+                R.color.faint_neon_blue_alpha
+            ), ContextCompat.getColor(
+                holder.itemView.context,
+                R.color.faint_dark_blue_alpha
+            ), ContextCompat.getColor(
+                holder.itemView.context,
+                R.color.faint_blue_alpha
+            ), ContextCompat.getColor(
+                holder.itemView.context,
+                R.color.faint_red_alpha
+            )
+
+        )
+
         if (isOverList.get(position) == false) {
-            when (position % 6) {
-                0 -> {
-                    holder.itemView.background.setTint(
-                        ContextCompat.getColor(
-                            holder.itemView.context,
-                            R.color.faint_pink
-                        )
-                    )
-                }
 
-                1 -> {
-                    holder.itemView.background.setTint(
-                        ContextCompat.getColor(
-                            holder.itemView.context,
-                            R.color.faint_yellow
-                        )
-                    )
-                }
+            holder.timeTextView.setTextColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.black
+                )
+            )
 
-                2 -> {
-                    holder.itemView.background.setTint(
-                        ContextCompat.getColor(
-                            holder.itemView.context,
-                            R.color.faint_neon_blue
-                        )
-                    )
-                }
+            holder.subjectTextView.setTextColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.black
+                )
+            )
 
-                3 -> {
-                    holder.itemView.background.setTint(
-                        ContextCompat.getColor(
-                            holder.itemView.context,
-                            R.color.faint_dark_blue
-                        )
-                    )
-                }
+            holder.logo.setColorFilter(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.black
+                )
+            )
 
-                4 -> {
-                    holder.itemView.background.setTint(
-                        ContextCompat.getColor(
-                            holder.itemView.context,
-                            R.color.faint_blue
-                        )
-                    )
-                }
+            holder.itemView.background.setTint(
+                activeColorList.get(position % 6)
+            )
 
-                5 -> {
-                    holder.itemView.background.setTint(
-                        ContextCompat.getColor(
-                            holder.itemView.context,
-                            R.color.faint_red
-                        )
-                    )
-                }
-            }
         } else {
 
             holder.timeTextView.setTextColor(
@@ -140,61 +157,9 @@ class SubjectsAdapter(
                 )
             )
 
-            when (position % 6) {
-                0 -> {
-                    holder.itemView.background.setTint(
-                        ContextCompat.getColor(
-                            holder.itemView.context,
-                            R.color.faint_pink_alpha
-                        )
-                    )
-                }
-
-                1 -> {
-                    holder.itemView.background.setTint(
-                        ContextCompat.getColor(
-                            holder.itemView.context,
-                            R.color.faint_yellow_alpha
-                        )
-                    )
-                }
-
-                2 -> {
-                    holder.itemView.background.setTint(
-                        ContextCompat.getColor(
-                            holder.itemView.context,
-                            R.color.faint_neon_blue_alpha
-                        )
-                    )
-                }
-
-                3 -> {
-                    holder.itemView.background.setTint(
-                        ContextCompat.getColor(
-                            holder.itemView.context,
-                            R.color.faint_dark_blue_alpha
-                        )
-                    )
-                }
-
-                4 -> {
-                    holder.itemView.background.setTint(
-                        ContextCompat.getColor(
-                            holder.itemView.context,
-                            R.color.faint_blue_alpha
-                        )
-                    )
-                }
-
-                5 -> {
-                    holder.itemView.background.setTint(
-                        ContextCompat.getColor(
-                            holder.itemView.context,
-                            R.color.faint_red_alpha
-                        )
-                    )
-                }
-            }
+            holder.itemView.background.setTint(
+                passiveColorList.get(position % 6)
+            )
 
         }
     }
