@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -41,15 +42,29 @@ import com.gdsctsec.smartt.ui.main.adapter.SubjectsAdapter
 import com.gdsctsec.smartt.ui.notifications.alarms.AlertReceiver
 import com.gdsctsec.smartt.viewmodel.HomeScreenViewModel
 import com.gdsctsec.smartt.viewmodel.HomeScreenViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import org.w3c.dom.Text
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.roundToInt
 
 class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
+
     private lateinit var weekDay: String
-     lateinit var navController:NavController
+
+    lateinit var navController:NavController
     private lateinit var alarmManager: AlarmManager
+
     val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
     val subjectList: MutableList<String> = mutableListOf("No Lectures as of now")
     val lectureObjectList: MutableList<TimeTable> =
         mutableListOf(TimeTable(-1, "", "", "", Weekday.Monday))
+    val lectureCompleteList: MutableList<Boolean> = mutableListOf(false)
+    val lectureEndTime: MutableList<Int> = mutableListOf(-1)
+
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
@@ -73,8 +88,15 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         val titleTextView = view.findViewById<TextView>(R.id.remindi_header)
         val dayDateTextView = view.findViewById<TextView>(R.id.home_day_textview)
         val noLecturesTextView = view.findViewById<TextView>(R.id.zero_lectures_msg_textView)
+        val numberOfLecturesTextView =
+            view.findViewById<TextView>(R.id.home_numberOf_tasks_day_textview)
 
+        val lectureProgressBar =
+            view.findViewById<ProgressBar>(R.id.home_fragment_tasks_progress_bar)
 
+        val lectureProgressTextView = view.findViewById<TextView>(R.id.home_tasks_progress_textview)
+
+        numberOfLecturesTextView.setText("0/" + subjectList.size)
 
         @RequiresApi(Build.VERSION_CODES.O)
         dayDateTextView.text = HomeScreenViewModel(requireActivity()).getMonthDate()
@@ -113,16 +135,14 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         titleTextView.append(wordThree)
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-
-
         recyclerView = view.findViewById(R.id.home_recyclerView)
-        recyclerView.adapter = SubjectsAdapter(subjectList, timeList, this)
+        recyclerView.adapter = SubjectsAdapter(subjectList, timeList, lectureCompleteList, this)
 
 
         //1 means list is not empty and 0 means isEmpty
         var dataIsThere = 1
 
-        val adapter = SubjectsAdapter(subjectList, timeList, this)
+        val adapter = SubjectsAdapter(subjectList, timeList, lectureCompleteList, this)
 
 
         val viewModel =
@@ -130,22 +150,53 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         @RequiresApi(Build.VERSION_CODES.O)
         weekDay = viewModel.getWeekDayString();
 
+        val presentTime = Date()
 
         viewModel.getLiveLectureData().observe(requireActivity(), Observer {
             if (it.size != 0) {
+                var count = 0
                 dataIsThere = 1
                 recyclerView.visibility = View.VISIBLE
                 noLecturesTextView.visibility = View.GONE
                 subjectList.clear()
                 timeList.clear()
                 lectureObjectList.clear()
+                lectureCompleteList.clear()
+
                 for (i in 0..it.size - 1) {
                     subjectList.add(i, it.get(i).lec)
                     timeList.add(i, (it.get(i).startTime + " - " + it.get(i).endTime))
                     lectureObjectList.add(it.get(i))
+                    lectureEndTime.add(endTimeConverter(it.get(i).endTime))
+                    if (endTimeConverter(it.get(i).endTime) < SimpleDateFormat("HH").format(
+                            Calendar.getInstance().time
+                        ).toInt()
+                        || (endTimeConverter(it.get(i).endTime) <= SimpleDateFormat("HH").format(
+                            Calendar.getInstance().time
+                        ).toInt()
+                                &&
+                                minutesConverter(it.get(i).endTime) <= SimpleDateFormat("mm").format(
+                            Calendar.getInstance().time
+                        ).toInt())
+                    ) {
+                        lectureCompleteList.add(i, true)
+                        count++
+                    } else {
+                        lectureCompleteList.add(i, false)
+                    }
                 }
+
+                numberOfLecturesTextView.setText(count.toString() + " / " + subjectList.size)
+
+                lectureProgressBar.setProgress(
+                    ((count.toDouble() / (subjectList.size).toDouble()) * 100.0).roundToInt(),
+                    true
+                )
+                lectureProgressTextView.setText((((count.toDouble() / (subjectList.size).toDouble()) * 100.0).roundToInt()).toString() + "%")
+
                 adapter.notifyDataSetChanged()
             } else {
+
                 dataIsThere = 0
 
                 subjectList.clear()
@@ -158,7 +209,6 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
             }
         })
 
-        //mutableListOf("subjects")
         recyclerView = view.findViewById(R.id.home_recyclerView)
         recyclerView.adapter = adapter
 
@@ -187,16 +237,44 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
+    suspend fun checkIsOver(time: Int) {
+        for (x in 0..lectureEndTime.size - 1) {
+            if (time > lectureEndTime.get(x)) {
+                lectureCompleteList.set(x, true)
+            }
+        }
+    }
+
+    private fun endTimeConverter(time: String): Int {
+        var x = -1
+        if (time.takeLast(2) == "pm" && (time.split(":")[0]) != "12") {
+            x = (time.split(":")[0]).toInt() + 12
+        } else if (time.takeLast(2) == "am" && time == "12") {
+            x = 24
+        } else {
+            x = (time.split(":")[0]).toInt()
+        }
+        Log.d("convertedTimeHours", "$x")
+        return x;
+    }
+
+    private fun minutesConverter(minutes: String): Int {
+        var x = -1
+        x = (minutes.split(":")[1].split(" ")[0]).toInt()
+        Log.d("convertedTimeMinutes", "$x")
+        return x
+
     private fun cancelAlarm(id: Int) {
         alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent= Intent(context, AlertReceiver::class.java)
         val pendingIntent= PendingIntent.getBroadcast(context, id,intent,0)
         alarmManager.cancel(pendingIntent)
+
     }
 
     override fun onResume() {
         super.onResume()
-        Log.e("onResume","HSF")
+        Log.e("onResume", "HSF")
         (requireActivity() as MainActivity).showBottomNavigation()
     }
 
@@ -210,7 +288,6 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         Toast.makeText(context, "$startTime $endTime $chosenSubject", Toast.LENGTH_SHORT).show()
 
 
-
         val bundle = bundleOf(
             "Lecture_Choosen_subject" to chosenSubject,
             "Lecture_start_Time" to startTime,
@@ -220,9 +297,9 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
             "id" to lectureObjectList.get(position).id.toString()
         )
 
-
         //Navigation.findNavController(requireActivity(),R.id.nav_host_fragment).navigate(R.id.action_homeScreenFragment_to_editScreenFragment,bundle)
-       navController.navigate(R.id.action_homeScreenFragment_to_editScreenFragment,bundle)
+        navController.navigate(R.id.action_homeScreenFragment_to_editScreenFragment, bundle)
 
     }
+
 }
