@@ -55,7 +55,7 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
 
     private lateinit var weekDay: String
 
-    lateinit var navController:NavController
+    lateinit var navController: NavController
     private lateinit var alarmManager: AlarmManager
 
     val timeList: MutableList<String> = mutableListOf("0:00 - 0:00")
@@ -221,7 +221,7 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
                 if (dataIsThere == 0) {
                     Toast.makeText(requireActivity(), "Deleted Lecture", Toast.LENGTH_SHORT).show()
                 } else {
-                    Log.e("deletedID",lectureObjectList.get(position).id.toString())
+                    Log.e("deletedID", lectureObjectList.get(position).id.toString())
                     cancelAlarm(lectureObjectList.get(position).id)
                     viewModel.removeLecture(lectureObjectList.get(position))
                     lectureObjectList.removeAt(position)
@@ -263,11 +263,12 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         x = (minutes.split(":")[1].split(" ")[0]).toInt()
         Log.d("convertedTimeMinutes", "$x")
         return x
+    }
 
     private fun cancelAlarm(id: Int) {
         alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent= Intent(context, AlertReceiver::class.java)
-        val pendingIntent= PendingIntent.getBroadcast(context, id,intent,0)
+        val intent = Intent(context, AlertReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0)
         alarmManager.cancel(pendingIntent)
 
     }
@@ -279,7 +280,6 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
     }
 
     override fun onItemClick(position: Int) {
-
         val chosenSubject = subjectList.get(position)
         val startTime = timeList.get(position).split(" - ")[0]
         val endTime = timeList.get(position).split(" - ")[1]
@@ -301,5 +301,4 @@ class HomeScreenFragment : Fragment(), SubjectsAdapter.OnItemclicklistener {
         navController.navigate(R.id.action_homeScreenFragment_to_editScreenFragment, bundle)
 
     }
-
 }
